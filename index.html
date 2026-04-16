@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <!-- 모바일 접근성 개선: user-scalable=no 제거, zoom 허용 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🗽 Chan&Seul in NY</title>
     <!-- Tailwind CSS -->
@@ -33,23 +34,22 @@
         .custom-checkbox:checked + .checkbox-box { background-color: #2563eb; border-color: #2563eb; }
         .custom-checkbox:checked + .checkbox-box svg { display: block; }
 
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 누락되었던 애니메이션 CSS 추가 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate3d(0, 15px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
         }
-        .animate-fade-in-up {
-            animation: fade-in-up 0.35s ease-out both;
-        }
+        .animate-fade-in-up { animation: fadeInUp 0.4s ease-out forwards; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden text-gray-800 break-keep">
 
     <!-- 모바일 오버레이 -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden transition-opacity cursor-pointer" onclick="toggleSidebar()"></div>
+    <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden transition-opacity cursor-pointer"></div>
 
     <!-- 사이드바 네비게이션 -->
     <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0">
-        <button onclick="toggleSidebar()" class="absolute top-5 right-4 lg:hidden text-gray-400 hover:text-gray-800 focus:outline-none p-2">
+        <button id="btn-sidebar-close" class="absolute top-5 right-4 lg:hidden text-gray-400 hover:text-gray-800 focus:outline-none p-2">
             <i class="fas fa-times text-2xl"></i>
         </button>
         <div class="p-6 border-b border-gray-100 mt-2 lg:mt-0">
@@ -60,20 +60,20 @@
             </h1>
             <div class="h-1 w-12 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full mt-4 mb-2"></div>
         </div>
-        <nav class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-2">
-            <button onclick="switchTab('part1')" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
+        <nav id="main-nav" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-2">
+            <button data-tab-target="part1" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🗓️</span> 한눈에 보는 일정
             </button>
-            <button onclick="switchTab('part2')" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
+            <button data-tab-target="part2" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">📝</span> 일자별 상세 브리핑
             </button>
-            <button onclick="switchTab('part3')" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
+            <button data-tab-target="part3" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🍽️</span> 도파민 맛집 리스트
             </button>
-            <button onclick="switchTab('part4')" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
+            <button data-tab-target="part4" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🎒</span> 필수 준비물 체크
             </button>
-            <button onclick="switchTab('part5')" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
+            <button data-tab-target="part5" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">💼</span> 실시간 통합 장부
             </button>
         </nav>
@@ -88,7 +88,7 @@
                 <span class="text-2xl">🗽</span>
                 <span class="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 tracking-tight text-lg">Chan&Seul in NY</span>
             </div>
-            <button onclick="toggleSidebar()" class="text-gray-700 hover:text-blue-600 p-2 focus:outline-none">
+            <button id="btn-sidebar-open" class="text-gray-700 hover:text-blue-600 p-2 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </header>
@@ -103,7 +103,7 @@
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">카톡에 바로 공유하기 좋은 6박 8일 퀵 뷰!</p>
                     
                     <div class="space-y-4 sm:space-y-6">
-                        <!-- Day 1 -->
+                        <!-- Day 1 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">✈️ 1일 차 (6/27, 토): [화려한 입성!] 갤러거 스테이크 첫 끼 & 선셋 야경!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -120,21 +120,21 @@
                             </ul>
                         </div>
 
-                        <!-- Day 2 -->
+                        <!-- Day 2 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
-                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🖼️ 2일 차 (6/28, 일): [여유 & 럭셔리!] 미드타운 명품 동선 & 킨스 스테이크!</h3>
+                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🖼️ 2일 차 (6/28, 일): [여유 & 럭셔리!] 미드타운 명품 동선 & 수타면 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:30 AM</span> <span class="leading-relaxed">🥞 카네기 다이너 (미국식 정통 팬케이크 조식)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">09:00 AM</span> <span class="leading-relaxed">🎈 써밋(SUMMIT) 전망대 (거울 방과 은빛 풍선 인생샷 - 9시 오픈런!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">11:30 AM</span> <span class="leading-relaxed">🍛 <b>대그 타이 (Dagg Thai)</b> (미드타운에서 즐기는 힙한 타이 요리 런치!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">12:30 PM</span> <span class="leading-relaxed">🛍️ 5번가 명품 거리 핵심 공략! <b>(성당, 티파니, 레고 스토어)</b></span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">03:00 PM</span> <span class="leading-relaxed">🖼️ 모마(MoMA) 미술관 (쾌적한 오후 시간대 우아한 도장 깨기)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥩 <b>킨스 스테이크하우스 (Keens)</b> (130년 역사, 압도적 양고기 디너!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥟 <b>쿵푸 키친 (Kungfu Kitchen)</b> (육즙 팡팡 샤오롱바오 & 수타면 디너!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🧸 타임스퀘어 메가 스토어 (디즈니, M&M 등 한정템 가벼운 아이쇼핑)</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 3 -->
+                        <!-- Day 3 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🚢 3일 차 (6/29, 월): [크루즈 낭만] 첼시 핫플 & 콘반 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -152,9 +152,9 @@
                             </ul>
                         </div>
 
-                        <!-- Day 4 -->
+                        <!-- Day 4 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
-                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🌉 4일 차 (6/30, 화): [브루클린 낭만] 페리 감성 & 쿵푸 키친!</h3>
+                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🌉 4일 차 (6/30, 화): [브루클린 낭만] 페리 감성 & 전설의 피터루거!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 AM</span> <span class="leading-relaxed">🇰🇷 아침부터 보글보글! 포트 라면으로 붓기 쫙 빼기</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 AM</span> <span class="leading-relaxed">📸 덤보(DUMBO) 오픈런! & 브루클린 브릿지 산책</span></li>
@@ -166,12 +166,12 @@
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">03:30 PM</span> <span class="leading-relaxed">🛥️ 두 번째 페리 탑승! (월스트리트 다이렉트 뱃놀이!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:00 PM</span> <span class="leading-relaxed">🐂 월스트리트 황소, 트리니티 교회 & 오큘러스</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">05:00 PM</span> <span class="leading-relaxed">🖤 9/11 메모리얼 파크 (거대한 폭포 앞 추모의 시간)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 PM</span> <span class="leading-relaxed">🥟 <b>쿵푸 키친 (Kungfu Kitchen)</b> (육즙 팡팡 샤오롱바오 & 수타면 디너!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 PM</span> <span class="leading-relaxed">🥩 <b>킨스 스테이크하우스 (Keens)</b> (130년 역사, 압도적 양고기 디너!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:30 PM</span> <span class="leading-relaxed">🏨 숙소 복귀 및 꿀휴식</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 5 -->
+                        <!-- Day 5 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">⛴️ 5일 차 (7/1, 수): [공중 산책 & 미식] 업타운 다이닝 & 트램, 그리고 LIC!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -187,7 +187,7 @@
                             </ul>
                         </div>
 
-                        <!-- Day 6 -->
+                        <!-- Day 6 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🛍️ 6일 차 (7/2, 목): [소호 런웨이] ALD 웨이팅 & 소호 필수 브랜드 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -199,12 +199,11 @@
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">02:45 PM</span> <span class="leading-relaxed">💳 <b>소호 핫플 폭풍 쇼핑</b> 🛍️ (스투시, KITH, Glossier, 살로몬, A.P.C 등)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:30 PM</span> <span class="leading-relaxed">🖼️ <b>MoMA 디자인 스토어</b> (감각적인 굿즈 구경 & 교양 충전!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥪 <b>카츠 델리 (Katz's Deli)</b> (산더미 파스트라미 샌드위치 황금 저녁!)</span></li>
-                                <li class="bg-gray-50 p-2 rounded border border-gray-200 mt-1 mb-1"><span class="font-bold w-24 inline-block text-gray-600 sm:w-24 shrink-0 pt-0.5">🚨 [플랜B]</span> <span class="leading-relaxed text-gray-700">🍜 <b>라쿠 (Raku)</b> (수타 우동이 땡길 때 런치로 대체 가능!)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 mt-2"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🚌 대망의 피날레! 빅버스 나이트 투어 (타임스퀘어 출발! 오픈탑 야경 감상 🌃)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🚌 대망의 피날레! 빅버스 나이트 투어 (타임스퀘어 출발! 오픈탑 야경 감상 🌃)</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 7 -->
+                        <!-- Day 7 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">👋 7일 차 (7/3, 금): [영화 피날레] 자전거 & 숨겨진 아지트 버거 & 마지막 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -227,15 +226,15 @@
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 2.</span> 일자별 상세 브리핑</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">어디서 뭘 시켜야 하는지, 동선은 어떻게 타야 꿀인지 싹 다 정리한 현장 밀착 가이드북!</p>
 
-                    <!-- 버튼 영역 (Sticky) -->
-                    <div class="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-md py-3 mb-6 sm:mb-8 -mx-4 px-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-gray-200">
-                        <button onclick="window.scrollToDay('day1')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 1</button>
-                        <button onclick="window.scrollToDay('day2')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 2</button>
-                        <button onclick="window.scrollToDay('day3')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 3</button>
-                        <button onclick="window.scrollToDay('day4')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 4</button>
-                        <button onclick="window.scrollToDay('day5')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 5</button>
-                        <button onclick="window.scrollToDay('day6')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 6</button>
-                        <button onclick="window.scrollToDay('day7')" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 7</button>
+                    <!-- 버튼 영역 (이벤트 위임 활용) -->
+                    <div id="sticky-day-nav" class="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-md py-3 mb-6 sm:mb-8 -mx-4 px-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-gray-200">
+                        <button data-day-target="day1" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 1</button>
+                        <button data-day-target="day2" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 2</button>
+                        <button data-day-target="day3" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 3</button>
+                        <button data-day-target="day4" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 4</button>
+                        <button data-day-target="day5" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 5</button>
+                        <button data-day-target="day6" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 6</button>
+                        <button data-day-target="day7" class="shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">Day 7</button>
                     </div>
 
                     <div class="space-y-12">
@@ -364,7 +363,7 @@
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:30 PM [5번가 명품 거리 핵심 스팟 공략! ⛪🛍️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 점심 식사 후 ➡️ 도보 이동 ➡️ 5번가(5th Ave) 명품거리</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">5번가를 따라 걸으며 세계 최고의 명품 거리를 즐깁니다. 단순히 걷기만 하는 게 아니라, 핵심 스팟들을 집중 공략합니다!</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">5번가(5th Ave)를 따라 걸으며 세계 최고의 명품 거리를 즐깁니다. 단순히 걷기만 하는 게 아니라, 핵심 스팟들을 집중 공략합니다!</p>
                                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-3 rounded text-xs sm:text-sm text-yellow-900 space-y-2">
                                         <p>💡 <b>5번가 핵심 공략 가이드:</b></p>
                                         <ul class="list-disc pl-5 font-semibold">
@@ -489,11 +488,11 @@
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 로스터리 ➡️ 도보 3분 이동 ➡️ 콘반 (311 W 17th St)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">요즘 뉴욕에서 제일 핫한 카츠(돈까스) 맛집 <b>'콘반(Konban NYC)'</b>은 스타벅스 로스터리에서 두 블록 떨어진 17번가에 있습니다. 로스터리 구경 후 도보로 단 3분만 걸어가서 겉은 바삭하고 속은 육즙이 가득한 프리미엄 카츠 정식을 즐기며 첼시 투어를 완벽하게 마무리합니다!</p>
                                 </div>
-                                <!-- 플랜 B: 킨 라멘 -->
+                                <!-- 플랜 B: 북창동 순두부 / 킨 라멘 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 위장 리셋! 킨 라멘 🍜</h4>
-                                    <p class="text-gray-600 leading-relaxed mb-2">카츠 대신 뜨끈한 국물로 피로를 풀고 싶다면 34번가에 위치한 '킨 라멘'으로 가서 진한 돈코츠 라멘을 즐기세요!</p>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 위장 리셋! 북창동 순두부 or 킨 라멘 🍜</h4>
+                                    <p class="text-gray-600 leading-relaxed mb-2">카츠 대신 뜨끈한 국물로 피로를 풀고 싶다면 32번가 코리아타운 'BCD(북창동 순두부)'나 34번가의 '킨 라멘'으로 가서 위장을 달래주세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
@@ -766,6 +765,9 @@
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [대망의 피날레! 빅버스 나이트 투어 🚌🌃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 카츠 델리 ➡️ 🚕 우버 탑승 ➡️ 타임스퀘어 출발지 (M&M 스토어 부근)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">야간이고 무거운 쇼핑 짐도 많으니 편하게 우버를 타고 타임스퀘어 나이트 투어 출발지로 이동합니다. 2층 오픈탑 버스 맨 앞자리 명당에 편하게 앉아 찬란하게 빛나는 뉴욕의 야경을 두 눈에 가득 담으며 영화 같은 뉴욕의 마지막 밤을 만끽합니다!</p>
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-2 rounded text-xs sm:text-sm text-yellow-800">
+                                        💡 <b>가이드의 꿀팁:</b> 2층 맨 앞쪽이나 오른쪽 라인 자리가 사진 찍기 좋습니다. 밤에 달리는 오픈탑 버스는 강바람, 빌딩 바람이 매우 차가우니 <b>반드시 바람막이나 가디건</b>을 챙겨 입고 타세요!
+                                    </div>
                                 </div>
                                 <!-- 플랜 B: 라쿠 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
@@ -870,7 +872,7 @@
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">킨스 스테이크</div>
                                     <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">130년 역사, 파이프 감성. 압도적 두께의 <b>'머튼 찹(양고기)'</b>과 <b>'통베이컨'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">2일 차 저녁</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">2일 & 4일 차 저녁</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4 flex items-center gap-2">피터루거 <span class="text-[10px] sm:text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold whitespace-nowrap">⚠️ 현금/직불카드</span></div>
@@ -1079,7 +1081,7 @@
                     <p class="text-sm sm:text-base text-gray-500 mb-4">가방 싸실 때 핸드폰으로 편하게 톡톡 눌러서 체크하세요!</p>
                     
                     <div class="flex justify-end mb-4">
-                        <button onclick="resetChecklist()" class="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-red-50 hover:border-red-300 hover:text-red-500 transition font-semibold shadow-sm">
+                        <button id="btn-reset-check" class="text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-red-50 hover:border-red-300 hover:text-red-500 transition font-semibold shadow-sm">
                             ↺ 전체 체크 초기화
                         </button>
                     </div>
@@ -1121,406 +1123,384 @@
     </div>
 
     <script>
-        (() => {
-            let expenses = [];
-            let checklist = [];
+        // --- XSS 방지 이스케이프 함수 ---
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return str;
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
 
-            // v30: 저장 안정성, 데이터 검증, DOM 렌더링 보강
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_v30';
-            const STORAGE_KEY_CHECK = 'nycChecklist_v30';
-
-            const defaultExpenses = [
-                { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
-                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
-            ];
-
-            const defaultChecklist = [
-                { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드 (교통카드 겸용)', checked: false },
-                { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드 (피터루거: 신용카드 불가, 현금/직불만 됨)', checked: false },
-                { category: '💳 결제/서류', desc: '여권, ESTA 확인증, 각종 바우처 (오프라인 캡처본)', checked: false },
-                { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 생명줄)', checked: false },
-                { category: '📱 전자기기', desc: '애플페이 세팅 (지갑 없이 편하게)', checked: false },
-                { category: '📱 전자기기', desc: '110V 돼지코 어댑터 & 넉넉한 보조배터리', checked: false },
-                { category: '📱 전자기기', desc: '필수 앱: Uber, NYC Ferry, OpenTable/Resy 예약, Circle Line 예약', checked: false },
-                { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
-                { category: '📸 의류/잡화', desc: '써밋 전망대용 바지/점프수트 (치마 절대 금지)', checked: false },
-                { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 눕방용 예쁜 돗자리', checked: false },
-                { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건 (에어컨 냉동고 대비)', checked: false },
-                { category: '🥘 식량/간식', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 (해물 베이스 반입 가능!)', checked: false },
-                { category: '🥘 식량/간식', desc: '휴대용 라면포트 (호텔에서 보글보글 끓여 먹기 위한 필수 꿀템!)', checked: false },
-                { category: '🥘 식량/간식', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반 (수화물 캔/팩 포장 필수)', checked: false }
-            ];
-
-            function cloneData(data) {
-                return JSON.parse(JSON.stringify(data));
+        // --- 안전한 스토리지 저장 함수 ---
+        function safeSetStorage(key, data) {
+            try {
+                localStorage.setItem(key, JSON.stringify(data));
+            } catch (e) {
+                console.error("스토리지 저장 실패 (용량 초과 또는 보안 설정 문제):", e);
             }
+        }
 
-            function toSafeString(value) {
-                return typeof value === 'string' ? value : String(value ?? '');
+        // --- 사이드바 토글 ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (sidebar) sidebar.classList.toggle('-translate-x-full');
+            if (overlay) overlay.classList.toggle('hidden');
+        }
+
+        // --- 탭 전환 로직 완벽 최적화 ---
+        function switchTab(tabId) {
+            // 1. 모든 탭 숨김 및 버튼 비활성화
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // 2. 타겟 탭 표시 및 타겟 버튼 활성화
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+                targetTab.classList.add('block');
             }
-
-            function normalizeExpense(item) {
-                if (!item || typeof item !== 'object' || Array.isArray(item)) return null;
-
-                const desc = toSafeString(item.desc).trim();
-                if (!desc) return null;
-
-                const day = toSafeString(item.day).trim() || '기타';
-                const category = toSafeString(item.category).trim() || '기타';
-                const rawAmount = typeof item.amount === 'number' ? item.amount : Number(item.amount);
-                const amount = Number.isFinite(rawAmount) ? rawAmount : 0;
-
-                return { day, category, desc, amount };
+            
+            const targetBtn = document.getElementById('btn-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
             }
+            
+            // 3. 메인 컨텐츠 영역 스크롤 최상단으로 리셋
+            const contentArea = document.getElementById('content-area');
+            if (contentArea) contentArea.scrollTop = 0;
 
-            function normalizeChecklistItem(item) {
-                if (!item || typeof item !== 'object' || Array.isArray(item)) return null;
-
-                const desc = toSafeString(item.desc).trim();
-                if (!desc) return null;
-
-                const category = toSafeString(item.category).trim() || '기타';
-                return { category, desc, checked: Boolean(item.checked) };
-            }
-
-            function readStorageArray(key, fallback, normalizer) {
-                try {
-                    const raw = localStorage.getItem(key);
-                    if (!raw) return cloneData(fallback);
-
-                    const parsed = JSON.parse(raw);
-                    if (!Array.isArray(parsed)) return cloneData(fallback);
-                    if (parsed.length === 0) return [];
-
-                    const normalized = parsed.map(normalizer).filter(Boolean);
-                    return normalized.length > 0 ? normalized : cloneData(fallback);
-                } catch (error) {
-                    console.warn(`[storage] Failed to read ${key}`, error);
-                    return cloneData(fallback);
-                }
-            }
-
-            function safeWriteStorage(key, value) {
-                try {
-                    localStorage.setItem(key, JSON.stringify(value));
-                    return true;
-                } catch (error) {
-                    console.warn(`[storage] Failed to write ${key}`, error);
-                    return false;
-                }
-            }
-
-            function persistExpenses() {
-                safeWriteStorage(STORAGE_KEY_EXPENSE, expenses);
-            }
-
-            function persistChecklist() {
-                safeWriteStorage(STORAGE_KEY_CHECK, checklist);
-            }
-
-            function formatKrw(num) {
-                if (typeof num !== 'number' || Number.isNaN(num)) return '0';
-                return num.toLocaleString('ko-KR');
-            }
-
-            function getCategoryBadgeElement(cat) {
-                const map = {
-                    '식비': 'bg-red-100 text-red-700',
-                    '교통': 'bg-gray-200 text-gray-700',
-                    '쇼핑': 'bg-purple-100 text-purple-700',
-                    '간식': 'bg-yellow-100 text-yellow-700',
-                    '항공': 'bg-blue-100 text-blue-700',
-                    '숙소': 'bg-indigo-100 text-indigo-700',
-                    '투어': 'bg-green-100 text-green-700',
-                };
-                const cls = map[cat] || 'bg-gray-100 text-gray-700';
-                const badge = document.createElement('span');
-                badge.className = `${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0`;
-                badge.textContent = cat;
-                return badge;
-            }
-
-            function createEmptyState(text) {
-                const empty = document.createElement('div');
-                empty.className = 'p-6 text-center text-gray-400';
-                empty.textContent = text;
-                return empty;
-            }
-
-            window.toggleSidebar = function toggleSidebar() {
+            // 4. 모바일 환경일 경우 탭 클릭 시 사이드바 자동 닫기
+            if (window.innerWidth < 1024) {
                 const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebar-overlay');
-                if (sidebar) sidebar.classList.toggle('-translate-x-full');
-                if (overlay) overlay.classList.toggle('hidden');
-            };
-
-            window.switchTab = function switchTab(tabId) {
-                document.querySelectorAll('.tab-content').forEach((el) => {
-                    el.classList.add('hidden');
-                    el.classList.remove('block');
-                });
-
-                document.querySelectorAll('.tab-btn').forEach((el) => {
-                    el.classList.remove('active');
-                });
-
-                const targetTab = document.getElementById(tabId);
-                if (targetTab) {
-                    targetTab.classList.remove('hidden');
-                    targetTab.classList.add('block');
-                }
-
-                const targetBtn = document.getElementById(`btn-${tabId}`);
-                if (targetBtn) {
-                    targetBtn.classList.add('active');
-                }
-
-                const contentArea = document.getElementById('content-area');
-                if (contentArea) contentArea.scrollTop = 0;
-
-                if (window.innerWidth < 1024) {
-                    const sidebar = document.getElementById('sidebar');
+                if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.add('-translate-x-full');
                     const overlay = document.getElementById('sidebar-overlay');
-                    if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                        sidebar.classList.add('-translate-x-full');
-                    }
-                    if (overlay && !overlay.classList.contains('hidden')) {
-                        overlay.classList.add('hidden');
-                    }
+                    if (overlay) overlay.classList.add('hidden');
                 }
-            };
+            }
+        }
 
-            window.scrollToDay = function scrollToDay(dayId) {
-                const contentArea = document.getElementById('content-area');
-                const part2Tab = document.getElementById('part2');
-                if (!contentArea || !part2Tab) return;
+        // --- 스크롤 위치 계산 완벽 최적화 (시간 의존성 제거) ---
+        function scrollToDay(dayId) {
+            const contentArea = document.getElementById('content-area');
+            const part2Tab = document.getElementById('part2');
+            
+            if (!contentArea || !part2Tab) return;
 
-                const executeScroll = () => {
-                    const el = document.getElementById(dayId);
-                    if (!el) return;
-
-                    const stickyHeader = part2Tab.querySelector('.sticky');
-                    const headerOffset = stickyHeader ? stickyHeader.offsetHeight + 12 : 70;
+            // 스크롤 실행을 담당하는 내부 함수
+            const executeScroll = () => {
+                const el = document.getElementById(dayId);
+                if (el) {
+                    const headerOffset = 70; // 스티키 헤더 보정치
                     const elementPosition = el.getBoundingClientRect().top;
-                    const contentPosition = contentArea.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + contentArea.scrollTop - contentPosition - headerOffset;
-
-                    contentArea.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
-                };
-
-                if (part2Tab.classList.contains('hidden')) {
-                    window.switchTab('part2');
-                    requestAnimationFrame(() => requestAnimationFrame(executeScroll));
-                    return;
+                    const offsetPosition = elementPosition + contentArea.scrollTop - contentArea.getBoundingClientRect().top - headerOffset;
+                    contentArea.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
-
-                requestAnimationFrame(executeScroll);
             };
+            
+            // 상세 브리핑 탭이 닫혀있다면 강제 전환 후, 강제 리플로우를 발생시켜 레이아웃을 즉시 계산하고 스크롤
+            if (part2Tab.classList.contains('hidden')) {
+                switchTab('part2');
+                // DOM 레이아웃 강제 재계산 (시간 딜레이 없는 완벽한 방법)
+                void contentArea.offsetHeight; 
+                executeScroll();
+            } else {
+                executeScroll();
+            }
+        }
 
-            function renderChecklist() {
-                const container = document.getElementById('checklist-body');
-                if (!container) return;
-                container.replaceChildren();
+        // --- 데이터 ---
+        let expenses = [];
+        let checklist = [];
 
-                const grouped = checklist.reduce((acc, item, idx) => {
-                    const category = item.category || '기타';
-                    if (!acc[category]) acc[category] = [];
-                    acc[category].push({ ...item, originalIndex: idx });
-                    return acc;
-                }, {});
+        // v30: 모든 버그, 비효율성, 오타가 수정된 완벽 클린 버전 캐시 키
+        const STORAGE_KEY_EXPENSE = 'nycExpenses_v30';
+        const STORAGE_KEY_CHECK   = 'nycChecklist_v30';
 
-                if (Object.keys(grouped).length === 0) {
-                    container.appendChild(createEmptyState('등록된 준비물이 없습니다.'));
-                    return;
-                }
+        const defaultExpenses = [
+            { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
+            { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
+        ];
 
-                const fragment = document.createDocumentFragment();
+        const defaultChecklist = [
+            { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드 (교통카드 겸용)', checked: false },
+            { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드 (피터루거: 신용카드 불가, 현금/직불만 됨)', checked: false },
+            { category: '💳 결제/서류', desc: '여권, ESTA 확인증, 각종 바우처 (오프라인 캡처본)', checked: false },
+            { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 생명줄)', checked: false },
+            { category: '📱 전자기기', desc: '애플페이 세팅 (지갑 없이 편하게)', checked: false },
+            { category: '📱 전자기기', desc: '110V 돼지코 어댑터 & 넉넉한 보조배터리', checked: false },
+            { category: '📱 전자기기', desc: '필수 앱: Uber, NYC Ferry, OpenTable/Resy 예약, Circle Line 예약', checked: false },
+            { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
+            { category: '📸 의류/잡화', desc: '써밋 전망대용 바지/점프수트 (치마 절대 금지)', checked: false },
+            { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 눕방용 예쁜 돗자리', checked: false },
+            { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건 (에어컨 냉동고 대비)', checked: false },
+            { category: '🥘 식량/간식', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 (해물 베이스 반입 가능!)', checked: false },
+            { category: '🥘 식량/간식', desc: '휴대용 라면포트 (호텔에서 보글보글 끓여 먹기 위한 필수 꿀템!)', checked: false },
+            { category: '🥘 식량/간식', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반 (수화물 캔/팩 포장 필수)', checked: false }
+        ];
 
-                Object.entries(grouped).forEach(([category, items]) => {
-                    const groupDiv = document.createElement('div');
-                    groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+        // --- 데이터 초기화 및 배열 검증 ---
+        function initData() {
+            try {
+                const expData = JSON.parse(localStorage.getItem(STORAGE_KEY_EXPENSE));
+                expenses = Array.isArray(expData) ? expData : [...defaultExpenses];
+            } catch { 
+                expenses = [...defaultExpenses]; 
+            }
+            
+            try {
+                const chkData = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECK));
+                checklist = Array.isArray(chkData) ? chkData : [...defaultChecklist];
+            } catch { 
+                checklist = [...defaultChecklist]; 
+            }
 
-                    const header = document.createElement('div');
-                    header.className = 'bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-blue-800 text-sm sm:text-base border-b border-blue-100';
-                    header.textContent = category;
-                    groupDiv.appendChild(header);
+            renderLedgers();
+            renderChecklist();
+        }
 
-                    const listDiv = document.createElement('div');
-                    listDiv.className = 'divide-y divide-gray-100';
+        // --- 포맷팅 유틸 ---
+        function formatKrw(num) {
+            if (typeof num !== 'number' || isNaN(num)) return '0';
+            return num.toLocaleString('ko-KR');
+        }
 
-                    items.forEach((item) => {
-                        const row = document.createElement('div');
-                        row.className = `p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition ${item.checked ? 'bg-gray-50' : 'hover:bg-gray-50'}`;
+        function getCategoryBadge(cat) {
+            const map = {
+                '식비': 'bg-red-100 text-red-700',
+                '교통': 'bg-gray-200 text-gray-700',
+                '쇼핑': 'bg-purple-100 text-purple-700',
+                '간식': 'bg-yellow-100 text-yellow-700',
+                '항공': 'bg-blue-100 text-blue-700',
+                '숙소': 'bg-indigo-100 text-indigo-700',
+                '투어': 'bg-green-100 text-green-700',
+            };
+            const cls = map[cat] || 'bg-gray-100 text-gray-700';
+            return `<span class="${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0">${escapeHTML(cat)}</span>`;
+        }
 
-                        const label = document.createElement('label');
-                        label.className = 'flex items-center justify-center cursor-pointer group shrink-0 mt-0.5 sm:mt-0';
+        // --- 체크리스트 최초 렌더링 ---
+        function renderChecklist() {
+            const container = document.getElementById('checklist-body');
+            if (!container) return;
+            container.innerHTML = '';
 
-                        const checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.className = 'custom-checkbox opacity-0 absolute h-0 w-0';
-                        checkbox.checked = item.checked;
-                        checkbox.addEventListener('change', () => {
-                            window.toggleCheck(item.originalIndex);
-                        });
+            const grouped = checklist.reduce((acc, item, idx) => {
+                if (!acc[item.category]) acc[item.category] = [];
+                acc[item.category].push({ ...item, originalIndex: idx });
+                return acc;
+            }, {});
 
-                        const checkboxBox = document.createElement('div');
-                        checkboxBox.className = 'checkbox-box bg-white border-2 rounded w-5 h-5 sm:w-6 sm:h-6 flex flex-shrink-0 justify-center items-center border-gray-300 group-hover:border-blue-500 transition';
+            if (Object.keys(grouped).length === 0) {
+                container.innerHTML = '<div class="p-6 text-center text-gray-400">등록된 준비물이 없습니다.</div>';
+                return;
+            }
 
-                        const svgNS = 'http://www.w3.org/2000/svg';
-                        const svg = document.createElementNS(svgNS, 'svg');
-                        svg.setAttribute('class', 'hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none');
-                        svg.setAttribute('viewBox', '0 0 17 12');
-                        svg.setAttribute('fill', 'none');
-                        svg.setAttribute('stroke', 'currentColor');
-                        svg.setAttribute('stroke-width', '3');
-                        svg.setAttribute('stroke-linecap', 'round');
-                        svg.setAttribute('stroke-linejoin', 'round');
+            for (const [category, items] of Object.entries(grouped)) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+                
+                const header = document.createElement('div');
+                header.className = 'bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-blue-800 text-sm sm:text-base border-b border-blue-100';
+                header.innerText = category;
+                groupDiv.appendChild(header);
 
-                        const polyline = document.createElementNS(svgNS, 'polyline');
-                        polyline.setAttribute('points', '1 5 6 10 16 1');
-                        svg.appendChild(polyline);
-                        checkboxBox.appendChild(svg);
+                const listDiv = document.createElement('div');
+                listDiv.className = 'divide-y divide-gray-100';
 
-                        label.appendChild(checkbox);
-                        label.appendChild(checkboxBox);
+                items.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition hover:bg-gray-50';
+                    const textCls = item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold';
+                    const checkedAttr = item.checked ? 'checked' : '';
+                    
+                    row.innerHTML = `
+                        <label class="flex items-center justify-center cursor-pointer group shrink-0 mt-0.5 sm:mt-0">
+                            <!-- 인라인 이벤트 제거 및 데이터 속성 삽입 -->
+                            <input type="checkbox" class="custom-checkbox opacity-0 absolute h-0 w-0" data-index="${item.originalIndex}" ${checkedAttr}>
+                            <div class="checkbox-box bg-white border-2 rounded w-5 h-5 sm:w-6 sm:h-6 flex flex-shrink-0 justify-center items-center border-gray-300 group-hover:border-blue-500 transition">
+                                <svg class="hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 6 10 16 1"></polyline></svg>
+                            </div>
+                        </label>
+                        <!-- 텍스트 XSS 이스케이프 및 데이터 속성 삽입 -->
+                        <div class="check-text text-sm sm:text-base leading-relaxed ${textCls} select-none cursor-pointer" data-index="${item.originalIndex}">${escapeHTML(item.desc)}</div>
+                    `;
+                    listDiv.appendChild(row);
+                });
+                
+                groupDiv.appendChild(listDiv);
+                container.appendChild(groupDiv);
+            }
+        }
 
-                        const desc = document.createElement('div');
-                        desc.className = `text-sm sm:text-base leading-relaxed select-none ${item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold'}`;
-                        desc.textContent = item.desc;
-                        desc.addEventListener('click', () => {
-                            window.toggleCheck(item.originalIndex);
-                        });
+        // --- 장부 렌더링 ---
+        function renderLedgers() {
+            const container = document.getElementById('expense-list');
+            if (!container) return;
+            container.innerHTML = '';
 
-                        row.appendChild(label);
-                        row.appendChild(desc);
-                        listDiv.appendChild(row);
-                    });
+            let totalKrw = 0;
 
-                    groupDiv.appendChild(listDiv);
-                    fragment.appendChild(groupDiv);
+            const grouped = expenses.reduce((acc, exp) => {
+                const key = exp.day || '기타';
+                if (!acc[key]) acc[key] = [];
+                acc[key].push(exp);
+                return acc;
+            }, {});
+
+            if (Object.keys(grouped).length === 0) {
+                container.innerHTML = '<div class="p-6 text-center text-gray-400">지출 내역이 없습니다.</div>';
+                return;
+            }
+
+            for (const [day, items] of Object.entries(grouped)) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+                
+                const header = document.createElement('div');
+                header.className = 'bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200';
+                header.innerText = day;
+                groupDiv.appendChild(header);
+
+                let dayTotal = 0;
+                const listDiv = document.createElement('div');
+                listDiv.className = 'divide-y divide-gray-100';
+
+                items.forEach(exp => {
+                    const amount = typeof exp.amount === 'number' && !isNaN(exp.amount) ? exp.amount : 0;
+                    dayTotal += amount;
+                    totalKrw += amount;
+                    
+                    const row = document.createElement('div');
+                    row.className = 'p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition';
+                    // XSS 보안 처리 적용
+                    row.innerHTML = `
+                        <div class="flex items-start sm:items-center gap-3">
+                            <div class="shrink-0 mt-0.5 sm:mt-0">${getCategoryBadge(exp.category)}</div>
+                            <div class="text-sm sm:text-base font-semibold text-gray-800 leading-snug">${escapeHTML(exp.desc)}</div>
+                        </div>
+                        <div class="text-right font-mono font-bold ${amount === 0 ? 'text-gray-400' : 'text-gray-900'} text-base sm:text-lg sm:w-32 shrink-0">₩${formatKrw(amount)}</div>
+                    `;
+                    listDiv.appendChild(row);
                 });
 
-                container.appendChild(fragment);
+                groupDiv.appendChild(listDiv);
+
+                const subtotal = document.createElement('div');
+                subtotal.className = 'p-4 sm:p-5 bg-blue-50/50 flex justify-between items-center border-t border-blue-100';
+                subtotal.innerHTML = `
+                    <span class="text-sm font-bold text-blue-800">소계</span>
+                    <span class="font-mono font-bold text-blue-700 text-lg">₩${formatKrw(dayTotal)}</span>
+                `;
+                groupDiv.appendChild(subtotal);
+                
+                container.appendChild(groupDiv);
             }
 
-            window.toggleCheck = function toggleCheck(index) {
-                if (!Number.isInteger(index) || !checklist[index]) return;
-                checklist[index] = { ...checklist[index], checked: !checklist[index].checked };
-                persistChecklist();
-                renderChecklist();
-            };
+            const summaryEl = document.getElementById('summary-total');
+            if (summaryEl) summaryEl.innerText = formatKrw(totalKrw);
+            safeSetStorage(STORAGE_KEY_EXPENSE, expenses);
+        }
 
-            window.resetChecklist = function resetChecklist() {
-                if (!confirm('모든 체크를 초기화할까요?')) return;
-                checklist = checklist.map((item) => ({ ...item, checked: false }));
-                persistChecklist();
-                renderChecklist();
-            };
+        // --- 이벤트 리스너 등록 (인라인 속성 제거 대체) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initData();
 
-            function renderLedgers() {
-                const container = document.getElementById('expense-list');
-                if (!container) return;
-                container.replaceChildren();
+            // 사이드바 토글 버튼 (헤더, 오버레이, 닫기 버튼)
+            const sidebarToggleBtns = [
+                document.getElementById('btn-sidebar-open'),
+                document.getElementById('btn-sidebar-close'),
+                document.getElementById('sidebar-overlay')
+            ];
+            sidebarToggleBtns.forEach(btn => {
+                if (btn) btn.addEventListener('click', toggleSidebar);
+            });
 
-                let totalKrw = 0;
-                const grouped = expenses.reduce((acc, exp) => {
-                    const key = exp.day || '기타';
-                    if (!acc[key]) acc[key] = [];
-                    acc[key].push(exp);
-                    return acc;
-                }, {});
+            // 네비게이션 탭 버튼 (이벤트 위임)
+            const mainNav = document.getElementById('main-nav');
+            if (mainNav) {
+                mainNav.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.tab-btn');
+                    if (btn && btn.dataset.tabTarget) {
+                        switchTab(btn.dataset.tabTarget);
+                    }
+                });
+            }
 
-                if (Object.keys(grouped).length === 0) {
-                    container.appendChild(createEmptyState('지출 내역이 없습니다.'));
-                    const summaryEl = document.getElementById('summary-total');
-                    if (summaryEl) summaryEl.textContent = '0';
-                    return;
-                }
+            // 데일리 스크롤 버튼 (이벤트 위임)
+            const stickyNav = document.getElementById('sticky-day-nav');
+            if (stickyNav) {
+                stickyNav.addEventListener('click', (e) => {
+                    const btn = e.target.closest('button');
+                    if (btn && btn.dataset.dayTarget) {
+                        scrollToDay(btn.dataset.dayTarget);
+                    }
+                });
+            }
 
-                const fragment = document.createDocumentFragment();
+            // 체크리스트 초기화 버튼
+            const resetBtn = document.getElementById('btn-reset-check');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (!confirm('모든 체크를 초기화할까요?')) return;
+                    checklist = checklist.map(item => ({ ...item, checked: false }));
+                    renderChecklist();
+                    safeSetStorage(STORAGE_KEY_CHECK, checklist);
+                });
+            }
 
-                Object.entries(grouped).forEach(([day, items]) => {
-                    const groupDiv = document.createElement('div');
-                    groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+            // 체크리스트 상태 변경 (이벤트 위임 & DOM 직접 수정 최적화)
+            const checklistBody = document.getElementById('checklist-body');
+            if (checklistBody) {
+                // 체크박스 클릭 처리
+                checklistBody.addEventListener('change', (e) => {
+                    if (e.target.matches('.custom-checkbox')) {
+                        const index = parseInt(e.target.dataset.index, 10);
+                        if (!isNaN(index) && checklist[index]) {
+                            const isChecked = e.target.checked;
+                            checklist[index].checked = isChecked;
+                            safeSetStorage(STORAGE_KEY_CHECK, checklist);
 
-                    const header = document.createElement('div');
-                    header.className = 'bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200';
-                    header.textContent = day;
-                    groupDiv.appendChild(header);
-
-                    let dayTotal = 0;
-                    const listDiv = document.createElement('div');
-                    listDiv.className = 'divide-y divide-gray-100';
-
-                    items.forEach((exp) => {
-                        const amount = typeof exp.amount === 'number' && !Number.isNaN(exp.amount) ? exp.amount : 0;
-                        dayTotal += amount;
-                        totalKrw += amount;
-
-                        const row = document.createElement('div');
-                        row.className = 'p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition';
-
-                        const left = document.createElement('div');
-                        left.className = 'flex items-start sm:items-center gap-3';
-
-                        const badgeWrap = document.createElement('div');
-                        badgeWrap.className = 'shrink-0 mt-0.5 sm:mt-0';
-                        badgeWrap.appendChild(getCategoryBadgeElement(exp.category || '기타'));
-
-                        const desc = document.createElement('div');
-                        desc.className = 'text-sm sm:text-base font-semibold text-gray-800 leading-snug';
-                        desc.textContent = exp.desc;
-
-                        left.appendChild(badgeWrap);
-                        left.appendChild(desc);
-
-                        const amountEl = document.createElement('div');
-                        amountEl.className = `text-right font-mono font-bold ${amount === 0 ? 'text-gray-400' : 'text-gray-900'} text-base sm:text-lg sm:w-32 shrink-0`;
-                        amountEl.textContent = `₩${formatKrw(amount)}`;
-
-                        row.appendChild(left);
-                        row.appendChild(amountEl);
-                        listDiv.appendChild(row);
-                    });
-
-                    groupDiv.appendChild(listDiv);
-
-                    const subtotal = document.createElement('div');
-                    subtotal.className = 'p-4 sm:p-5 bg-blue-50/50 flex justify-between items-center border-t border-blue-100';
-
-                    const subtotalLabel = document.createElement('span');
-                    subtotalLabel.className = 'text-sm font-bold text-blue-800';
-                    subtotalLabel.textContent = '소계';
-
-                    const subtotalAmount = document.createElement('span');
-                    subtotalAmount.className = 'font-mono font-bold text-blue-700 text-lg';
-                    subtotalAmount.textContent = `₩${formatKrw(dayTotal)}`;
-
-                    subtotal.appendChild(subtotalLabel);
-                    subtotal.appendChild(subtotalAmount);
-                    groupDiv.appendChild(subtotal);
-
-                    fragment.appendChild(groupDiv);
+                            // 전체 렌더링을 하지 않고 텍스트의 디자인 클래스만 직접 토글
+                            const textDiv = e.target.closest('label').nextElementSibling;
+                            if (textDiv && textDiv.classList.contains('check-text')) {
+                                if (isChecked) {
+                                    textDiv.classList.add('text-gray-400', 'line-through');
+                                    textDiv.classList.remove('text-gray-800', 'font-semibold');
+                                } else {
+                                    textDiv.classList.remove('text-gray-400', 'line-through');
+                                    textDiv.classList.add('text-gray-800', 'font-semibold');
+                                }
+                            }
+                        }
+                    }
                 });
 
-                container.appendChild(fragment);
-
-                const summaryEl = document.getElementById('summary-total');
-                if (summaryEl) summaryEl.textContent = formatKrw(totalKrw);
+                // 텍스트 클릭 시 체크박스 토글 처리
+                checklistBody.addEventListener('click', (e) => {
+                    if (e.target.matches('.check-text')) {
+                        const index = e.target.dataset.index;
+                        const checkbox = document.querySelector(`input.custom-checkbox[data-index="${index}"]`);
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    }
+                });
             }
-
-            function initData() {
-                expenses = readStorageArray(STORAGE_KEY_EXPENSE, defaultExpenses, normalizeExpense);
-                checklist = readStorageArray(STORAGE_KEY_CHECK, defaultChecklist, normalizeChecklistItem);
-
-                persistExpenses();
-                persistChecklist();
-                renderLedgers();
-                renderChecklist();
-            }
-
-            document.addEventListener('DOMContentLoaded', initData);
-        })();
+        });
     </script>
 </body>
 </html>
