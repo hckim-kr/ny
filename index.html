@@ -32,6 +32,10 @@
             color: white !important;
             border-color: #2563eb !important;
         }
+        .day-btn:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
 
         /* 커스텀 스크롤바 */
         #content-area::-webkit-scrollbar { width: 6px; }
@@ -67,7 +71,7 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden transition-opacity cursor-pointer" aria-hidden="true"></div>
 
     <!-- 사이드바 네비게이션 -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션" aria-hidden="true">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션">
         <button id="btn-sidebar-close" class="absolute top-5 right-4 lg:hidden text-gray-400 hover:text-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded p-2" aria-label="메뉴 닫기">
             <i class="fas fa-times text-2xl" aria-hidden="true"></i>
         </button>
@@ -79,20 +83,20 @@
             </h1>
             <div class="h-1 w-12 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full mt-4 mb-2"></div>
         </div>
-        <nav id="main-nav" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-2" role="tablist">
-            <button data-tab-target="part1" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="true" aria-controls="part1">
+        <nav id="main-nav" class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-2" role="tablist" aria-orientation="vertical">
+            <button type="button" data-tab-target="part1" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="true" aria-controls="part1" tabindex="0">
                 <span class="text-xl w-8 text-center mr-2" aria-hidden="true">🗓️</span> 한눈에 보는 일정
             </button>
-            <button data-tab-target="part2" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part2">
+            <button type="button" data-tab-target="part2" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part2" tabindex="-1">
                 <span class="text-xl w-8 text-center mr-2" aria-hidden="true">📝</span> 일자별 상세 브리핑
             </button>
-            <button data-tab-target="part3" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part3">
+            <button type="button" data-tab-target="part3" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part3" tabindex="-1">
                 <span class="text-xl w-8 text-center mr-2" aria-hidden="true">🍽️</span> 도파민 맛집 리스트
             </button>
-            <button data-tab-target="part4" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part4">
+            <button type="button" data-tab-target="part4" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part4" tabindex="-1">
                 <span class="text-xl w-8 text-center mr-2" aria-hidden="true">🎒</span> 필수 준비물 체크
             </button>
-            <button data-tab-target="part5" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part5">
+            <button type="button" data-tab-target="part5" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none" role="tab" aria-selected="false" aria-controls="part5" tabindex="-1">
                 <span class="text-xl w-8 text-center mr-2" aria-hidden="true">💼</span> 실시간 통합 장부
             </button>
         </nav>
@@ -249,19 +253,19 @@
                 </section>
 
                 <!-- ================== PART 2: 일자별 상세 브리핑 ================== -->
-                <section id="part2" class="tab-content hidden relative">
+                <section id="part2" class="tab-content hidden relative" role="tabpanel" aria-labelledby="btn-part2">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 2.</span> 일자별 상세 브리핑</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">어디서 뭘 시켜야 하는지, 동선은 어떻게 타야 꿀인지 싹 다 정리한 현장 밀착 가이드북!</p>
 
                     <!-- 버튼 영역 (Scroll Spy 연동) -->
                     <div id="sticky-day-nav" class="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-md py-3 mb-6 sm:mb-8 -mx-4 px-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-gray-200">
-                        <button data-day-target="day1" class="day-btn active-day shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 1</button>
-                        <button data-day-target="day2" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 2</button>
-                        <button data-day-target="day3" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 3</button>
-                        <button data-day-target="day4" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 4</button>
-                        <button data-day-target="day5" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 5</button>
-                        <button data-day-target="day6" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 6</button>
-                        <button data-day-target="day7" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 7</button>
+                        <button type="button" data-day-target="day1" class="day-btn active-day shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 1</button>
+                        <button type="button" data-day-target="day2" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 2</button>
+                        <button type="button" data-day-target="day3" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 3</button>
+                        <button type="button" data-day-target="day4" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 4</button>
+                        <button type="button" data-day-target="day5" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 5</button>
+                        <button type="button" data-day-target="day6" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 6</button>
+                        <button type="button" data-day-target="day7" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 7</button>
                     </div>
 
                     <div class="space-y-12">
@@ -702,13 +706,6 @@
                                         🍽️ <b>주문 꿀팁:</b> 메뉴판에는 없지만 <b>'Secret Menu'로 트러플 파스타(Truffle Pasta)</b>를 주문할 수 있습니다! 무조건 시켜보세요. 화덕에서 갓 구운 <b>'Margherita Pizza'</b>와 함께라면 예술입니다. 술을 시키지 않고 시원한 레모네이드나 소다만 곁들여도 분위기 내기 완벽한 곳입니다! (팁 20%)
                                     </div>
                                 </div>
-                                <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또 🌳]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 바로 앞 ➡️ 워싱턴 스퀘어 파크</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
-                                </div>
-                                
                                 <!-- 👑 플랜 B: 라이온킹 (독특한 테마 적용) -->
                                 <div class="relative pl-6 border-l-2 border-indigo-400 mt-8 bg-indigo-50/50 p-4 sm:p-5 rounded-r-xl border border-indigo-100">
                                     <div class="absolute w-4 h-4 bg-indigo-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
@@ -723,6 +720,13 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="relative pl-6 border-l-2 border-blue-200">
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또 🌳]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 바로 앞 ➡️ 워싱턴 스퀘어 파크</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
+                                </div>
+                                
                             </div>
                         </div>
 
@@ -760,6 +764,12 @@
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [소호 입성! ALD 웨이팅 & 루비스(Ruby's) 런치 🍝]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 스트랜드 ➡️ 지하철 이동 ➡️ 소호(SoHo) 에임 레온 도르(ALD) 앞</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">소호에 도착하자마자 가장 먼저 <b>'에임 레온 도르(ALD)'</b> 매장으로 가서 태블릿에 웨이팅 이름부터 올리세요! 그리고 바로 길 건너편에 있는 호주식 브런치 맛집 <b>'루비스(Ruby's)'</b>로 직행해 브론테 버거와 쉬림프 파스타로 완벽한 런치를 즐깁니다.</p>
+                                </div>
+                                <!-- 플랜 B: 라쿠 -->
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
@@ -808,12 +818,6 @@
                                         💡 <b>가이드의 꿀팁:</b> 2층 맨 앞쪽이나 오른쪽 라인 자리가 사진 찍기 좋습니다. 밤에 달리는 오픈탑 버스는 강바람, 빌딩 바람이 매우 차가우니 <b>반드시 바람막이나 가디건</b>을 챙겨 입고 타세요!
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 라쿠 -->
-                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
-                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
-                                </div>
                             </div>
                         </div>
 
@@ -839,6 +843,12 @@
                                     <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
                                         🍽️ <b>주문 꿀팁:</b> 기본 <b>'Cheeseburger'</b>에 <b>"The Works"</b>(모든 토핑 추가)로 주문하세요!
                                     </div>
+                                </div>
+                                <!-- 플랜 B: 파이브 가이즈 -->
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 파이브 가이즈 (Five Guys) 🍟</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">버거 조인트 대신 땅콩기름 감자튀김과 육즙 가득한 클래식 버거가 당긴다면? 점심은 가까운 '파이브 가이즈(Five Guys)'로 바꿔 가볍게 해결하세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
@@ -873,11 +883,12 @@
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Dallas BBQ ➡️ 1번 선 지하철 탑승 ➡️ 23 St 하차 ➡️ 트레이더 조스 첼시점 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공항 가기 전 마지막 쇼핑 타임! 숙소(M 소셜)와 같은 1번 선 라인에 있는 **'트레이더 조스 첼시점(675 6th Ave)'**이 동선상 가장 편리합니다. 에브리띵 시즈닝과 에코백을 싹 쓸어 담고 숙소로 돌아가 캐리어에 넣습니다!</p>
                                 </div>
-                                <!-- 플랜 B: 파이브가이즈 / 조스 피자 / 인솜니아 -->
+
+                                <!-- 플랜 B: 조스 피자 / 인솜니아 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 굿바이 도파민, 파이브 가이즈 & 조스 피자 & 인솜니아</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">마트 대신 먹방으로 피날레를 장식하고 싶다면? 땅콩기름 감자튀김 '파이브 가이즈', 스파이더맨 '조스 피자', 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 마지막 도파민을 터뜨리세요!</p>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 조스 피자 & 인솜니아 쿠키 🍕🍪</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">트레이더 조스 쇼핑 대신 마지막 먹방으로 마무리하고 싶다면? 스파이더맨으로 유명한 '조스 피자' 한 조각과, 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 출국 전 도파민을 한 번 더 채우세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
@@ -891,7 +902,7 @@
                 </section>
 
                 <!-- ================== PART 3: 도파민 맛집 리스트 ================== -->
-                <section id="part3" class="tab-content hidden animate-fade-in-up relative">
+                <section id="part3" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part3">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 3.</span> 도파민 맛집 리스트</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">알콜 0%, 도파민 100%! 카테고리별 완벽 정리.</p>
                     
@@ -1115,7 +1126,7 @@
                 </section>
 
                 <!-- ================== PART 4: 필수 준비물 체크 ================== -->
-                <section id="part4" class="tab-content hidden animate-fade-in-up relative">
+                <section id="part4" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part4">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 4.</span> 필수 준비물 체크</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6">가방 싸실 때 핸드폰으로 편하게 톡톡 눌러서 체크하세요!</p>
                     
@@ -1124,7 +1135,7 @@
                 </section>
 
                 <!-- ================== PART 5: 실시간 통합 장부 ================== -->
-                <section id="part5" class="tab-content hidden animate-fade-in-up relative">
+                <section id="part5" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part5">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 5.</span> 실시간 통합 장부</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">모든 지출을 원화(KRW)로 기록하는 공주님 전용 통합 장부!</p>
                     
@@ -1211,7 +1222,8 @@
 
             const state = {
                 expenses: [],
-                checklist: []
+                checklist: [],
+                lastFocused: null
             };
 
             // --- DOM 캐싱 ---
@@ -1235,6 +1247,7 @@
                 DOM.part2Tab = document.getElementById('part2');
 
                 initData();
+                handleViewportChange();
                 attachEventListeners();
                 initScrollSpy();
             });
@@ -1410,50 +1423,122 @@
                 if (DOM.summaryTotal) DOM.summaryTotal.innerText = formatKrw(totalKrw);
             }
 
+            function isMobileViewport() {
+                return window.innerWidth < 1024;
+            }
+
+            function isSidebarOpen() {
+                return DOM.sidebar ? !DOM.sidebar.classList.contains('-translate-x-full') : false;
+            }
+
+            function getFocusableSidebarElements() {
+                if (!DOM.sidebar) return [];
+                return Array.from(DOM.sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+                    .filter(el => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+            }
+
+            function syncSidebarAccessibility() {
+                if (!DOM.sidebar) return;
+                const mobile = isMobileViewport();
+                const open = isSidebarOpen();
+
+                if (mobile) {
+                    DOM.sidebar.setAttribute('aria-hidden', open ? 'false' : 'true');
+                    if (DOM.sidebarOverlay) {
+                        DOM.sidebarOverlay.classList.toggle('hidden', !open);
+                        DOM.sidebarOverlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+                    }
+                    if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.setAttribute('aria-expanded', open ? 'true' : 'false');
+                } else {
+                    DOM.sidebar.classList.remove('-translate-x-full');
+                    DOM.sidebar.setAttribute('aria-hidden', 'false');
+                    if (DOM.sidebarOverlay) {
+                        DOM.sidebarOverlay.classList.add('hidden');
+                        DOM.sidebarOverlay.setAttribute('aria-hidden', 'true');
+                    }
+                    if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            function handleViewportChange() {
+                syncSidebarAccessibility();
+            }
+
+            function openSidebar() {
+                if (!DOM.sidebar || !isMobileViewport()) return;
+                state.lastFocused = document.activeElement;
+                DOM.sidebar.classList.remove('-translate-x-full');
+                syncSidebarAccessibility();
+                requestAnimationFrame(() => {
+                    const focusables = getFocusableSidebarElements();
+                    if (focusables.length) focusables[0].focus();
+                });
+            }
+
+            function closeSidebar({ restoreFocus = true } = {}) {
+                if (!DOM.sidebar || !isMobileViewport()) return;
+                DOM.sidebar.classList.add('-translate-x-full');
+                syncSidebarAccessibility();
+                if (restoreFocus && state.lastFocused && typeof state.lastFocused.focus === 'function') {
+                    requestAnimationFrame(() => state.lastFocused.focus());
+                }
+            }
+
+            function trapSidebarFocus(event) {
+                if (!isMobileViewport() || !isSidebarOpen() || event.key !== 'Tab') return;
+                const focusables = getFocusableSidebarElements();
+                if (!focusables.length) return;
+
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    last.focus();
+                    event.preventDefault();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    first.focus();
+                    event.preventDefault();
+                }
+            }
+
             // --- 상호작용 로직 ---
             function toggleSidebar() {
-                if (DOM.sidebar) {
-                    const isClosed = DOM.sidebar.classList.toggle('-translate-x-full');
-                    DOM.sidebar.setAttribute('aria-hidden', isClosed);
-                    if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.setAttribute('aria-expanded', !isClosed);
-                }
-                if (DOM.sidebarOverlay) {
-                    const isHidden = DOM.sidebarOverlay.classList.toggle('hidden');
-                    DOM.sidebarOverlay.setAttribute('aria-hidden', isHidden);
+                if (!isMobileViewport()) return;
+                if (isSidebarOpen()) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
                 }
             }
 
             function switchTab(tabId) {
-                // 숨김 처리
                 DOM.tabContents.forEach(el => {
                     el.classList.add('hidden');
                     el.classList.remove('block');
                 });
-                
+
                 DOM.tabBtns.forEach(el => {
                     el.classList.remove('active');
                     el.setAttribute('aria-selected', 'false');
+                    el.setAttribute('tabindex', '-1');
                 });
 
-                // 활성화 처리 (강제 리플로우를 제외한 부드러운 전환)
                 const targetTab = document.getElementById(tabId);
                 if (targetTab) {
                     targetTab.classList.remove('hidden');
                     targetTab.classList.add('block');
                 }
-                
-                // data-tab-target을 이용하여 완벽하게 버튼 활성화 동기화
+
                 const targetBtn = document.querySelector(`.tab-btn[data-tab-target="${tabId}"]`);
                 if (targetBtn) {
                     targetBtn.classList.add('active');
                     targetBtn.setAttribute('aria-selected', 'true');
+                    targetBtn.setAttribute('tabindex', '0');
                 }
-                
+
                 if (DOM.contentArea) DOM.contentArea.scrollTop = 0;
 
-                // 모바일 환경 사이드바 자동 닫기
-                if (window.innerWidth < 1024 && DOM.sidebar && !DOM.sidebar.classList.contains('-translate-x-full')) {
-                    toggleSidebar();
+                if (isMobileViewport() && isSidebarOpen()) {
+                    closeSidebar();
                 }
             }
 
@@ -1502,11 +1587,14 @@
                         DOM.contentArea.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                     }
                 };
-                
+
+                DOM.dayBtns.forEach(btn => {
+                    btn.classList.toggle('active-day', btn.dataset.dayTarget === dayId);
+                });
+
                 if (DOM.part2Tab.classList.contains('hidden')) {
                     switchTab('part2');
-                    // 렌더링이 완전히 완료된 후 이동하기 위한 안전장치
-                    requestAnimationFrame(() => setTimeout(executeScroll, 50));
+                    requestAnimationFrame(() => requestAnimationFrame(executeScroll));
                 } else {
                     executeScroll();
                 }
@@ -1514,19 +1602,19 @@
 
             // --- 이벤트 리스너 통합 관리 ---
             function attachEventListeners() {
-                // 1. 사이드바 열기/닫기
-                if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.addEventListener('click', toggleSidebar);
-                if (DOM.btnSidebarClose) DOM.btnSidebarClose.addEventListener('click', toggleSidebar);
-                if (DOM.sidebarOverlay) DOM.sidebarOverlay.addEventListener('click', toggleSidebar);
+                if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.addEventListener('click', openSidebar);
+                if (DOM.btnSidebarClose) DOM.btnSidebarClose.addEventListener('click', () => closeSidebar());
+                if (DOM.sidebarOverlay) DOM.sidebarOverlay.addEventListener('click', () => closeSidebar());
 
-                // 2. 키보드 접근성: ESC 키로 사이드바 닫기
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && DOM.sidebar && !DOM.sidebar.classList.contains('-translate-x-full')) {
-                        toggleSidebar();
+                    if (e.key === 'Escape' && isMobileViewport() && isSidebarOpen()) {
+                        closeSidebar();
                     }
+                    trapSidebarFocus(e);
                 });
 
-                // 3. 메인 네비게이션 탭 (이벤트 위임)
+                window.addEventListener('resize', handleViewportChange);
+
                 if (DOM.mainNav) {
                     DOM.mainNav.addEventListener('click', (e) => {
                         const btn = e.target.closest('.tab-btn');
@@ -1534,9 +1622,33 @@
                             switchTab(btn.dataset.tabTarget);
                         }
                     });
+
+                    DOM.mainNav.addEventListener('keydown', (e) => {
+                        const buttons = Array.from(DOM.tabBtns);
+                        const currentIndex = buttons.indexOf(document.activeElement);
+                        if (currentIndex === -1) return;
+
+                        let nextIndex = null;
+                        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+                        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                        if (e.key === 'Home') nextIndex = 0;
+                        if (e.key === 'End') nextIndex = buttons.length - 1;
+
+                        if (nextIndex !== null) {
+                            buttons[nextIndex].focus();
+                            e.preventDefault();
+                        }
+
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            const btn = document.activeElement.closest('.tab-btn');
+                            if (btn && btn.dataset.tabTarget) {
+                                switchTab(btn.dataset.tabTarget);
+                                e.preventDefault();
+                            }
+                        }
+                    });
                 }
 
-                // 4. 일자별 스크롤 버튼 (이벤트 위임)
                 if (DOM.stickyDayNav) {
                     DOM.stickyDayNav.addEventListener('click', (e) => {
                         const btn = e.target.closest('button');
@@ -1546,9 +1658,7 @@
                     });
                 }
 
-                // 5. 체크리스트 상태 변경 (이벤트 위임 & DOM 탐색 범위 최적화)
                 if (DOM.checklistBody) {
-                    // 체크박스 클릭 처리 (부분 렌더링 최적화)
                     DOM.checklistBody.addEventListener('change', (e) => {
                         if (e.target.matches('.custom-checkbox')) {
                             const index = parseInt(e.target.dataset.index, 10);
@@ -1576,7 +1686,6 @@
                         }
                     });
 
-                    // 텍스트 클릭 시 현재 행(Row) 내부의 체크박스만 찾아 안전하게 토글
                     DOM.checklistBody.addEventListener('click', (e) => {
                         if (e.target.matches('.check-text')) {
                             const rowDiv = e.target.closest('.check-row');
