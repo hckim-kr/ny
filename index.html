@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🗽 Chan&Seul in NY</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,14 @@
         /* 체크박스 애니메이션 */
         .custom-checkbox:checked + .checkbox-box { background-color: #2563eb; border-color: #2563eb; }
         .custom-checkbox:checked + .checkbox-box svg { display: block; }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.35s ease-out both;
+        }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden text-gray-800 break-keep">
@@ -1113,283 +1121,406 @@
     </div>
 
     <script>
-        // --- 사이드바 토글 ---
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            if(sidebar) sidebar.classList.toggle('-translate-x-full');
-            if(overlay) overlay.classList.toggle('hidden');
-        }
+        (() => {
+            let expenses = [];
+            let checklist = [];
 
-        // --- 탭 전환 로직 완벽 최적화 ---
-        function switchTab(tabId) {
-            // 1. 모든 탭 숨김 및 버튼 비활성화
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.add('hidden');
-                el.classList.remove('block');
-            });
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('active');
-            });
+            // v30: 저장 안정성, 데이터 검증, DOM 렌더링 보강
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_v30';
+            const STORAGE_KEY_CHECK = 'nycChecklist_v30';
 
-            // 2. 타겟 탭 표시 및 타겟 버튼 활성화
-            const targetTab = document.getElementById(tabId);
-            if (targetTab) {
-                targetTab.classList.remove('hidden');
-                targetTab.classList.add('block');
+            const defaultExpenses = [
+                { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
+                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
+            ];
+
+            const defaultChecklist = [
+                { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드 (교통카드 겸용)', checked: false },
+                { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드 (피터루거: 신용카드 불가, 현금/직불만 됨)', checked: false },
+                { category: '💳 결제/서류', desc: '여권, ESTA 확인증, 각종 바우처 (오프라인 캡처본)', checked: false },
+                { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 생명줄)', checked: false },
+                { category: '📱 전자기기', desc: '애플페이 세팅 (지갑 없이 편하게)', checked: false },
+                { category: '📱 전자기기', desc: '110V 돼지코 어댑터 & 넉넉한 보조배터리', checked: false },
+                { category: '📱 전자기기', desc: '필수 앱: Uber, NYC Ferry, OpenTable/Resy 예약, Circle Line 예약', checked: false },
+                { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
+                { category: '📸 의류/잡화', desc: '써밋 전망대용 바지/점프수트 (치마 절대 금지)', checked: false },
+                { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 눕방용 예쁜 돗자리', checked: false },
+                { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건 (에어컨 냉동고 대비)', checked: false },
+                { category: '🥘 식량/간식', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 (해물 베이스 반입 가능!)', checked: false },
+                { category: '🥘 식량/간식', desc: '휴대용 라면포트 (호텔에서 보글보글 끓여 먹기 위한 필수 꿀템!)', checked: false },
+                { category: '🥘 식량/간식', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반 (수화물 캔/팩 포장 필수)', checked: false }
+            ];
+
+            function cloneData(data) {
+                return JSON.parse(JSON.stringify(data));
             }
-            
-            const targetBtn = document.getElementById('btn-' + tabId);
-            if (targetBtn) {
-                targetBtn.classList.add('active');
-            }
-            
-            // 3. 메인 컨텐츠 영역 스크롤 최상단으로 리셋
-            const contentArea = document.getElementById('content-area');
-            if (contentArea) contentArea.scrollTop = 0;
 
-            // 4. 모바일 환경일 경우 탭 클릭 시 사이드바 자동 닫기
-            if (window.innerWidth < 1024) {
+            function toSafeString(value) {
+                return typeof value === 'string' ? value : String(value ?? '');
+            }
+
+            function normalizeExpense(item) {
+                if (!item || typeof item !== 'object' || Array.isArray(item)) return null;
+
+                const desc = toSafeString(item.desc).trim();
+                if (!desc) return null;
+
+                const day = toSafeString(item.day).trim() || '기타';
+                const category = toSafeString(item.category).trim() || '기타';
+                const rawAmount = typeof item.amount === 'number' ? item.amount : Number(item.amount);
+                const amount = Number.isFinite(rawAmount) ? rawAmount : 0;
+
+                return { day, category, desc, amount };
+            }
+
+            function normalizeChecklistItem(item) {
+                if (!item || typeof item !== 'object' || Array.isArray(item)) return null;
+
+                const desc = toSafeString(item.desc).trim();
+                if (!desc) return null;
+
+                const category = toSafeString(item.category).trim() || '기타';
+                return { category, desc, checked: Boolean(item.checked) };
+            }
+
+            function readStorageArray(key, fallback, normalizer) {
+                try {
+                    const raw = localStorage.getItem(key);
+                    if (!raw) return cloneData(fallback);
+
+                    const parsed = JSON.parse(raw);
+                    if (!Array.isArray(parsed)) return cloneData(fallback);
+                    if (parsed.length === 0) return [];
+
+                    const normalized = parsed.map(normalizer).filter(Boolean);
+                    return normalized.length > 0 ? normalized : cloneData(fallback);
+                } catch (error) {
+                    console.warn(`[storage] Failed to read ${key}`, error);
+                    return cloneData(fallback);
+                }
+            }
+
+            function safeWriteStorage(key, value) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(value));
+                    return true;
+                } catch (error) {
+                    console.warn(`[storage] Failed to write ${key}`, error);
+                    return false;
+                }
+            }
+
+            function persistExpenses() {
+                safeWriteStorage(STORAGE_KEY_EXPENSE, expenses);
+            }
+
+            function persistChecklist() {
+                safeWriteStorage(STORAGE_KEY_CHECK, checklist);
+            }
+
+            function formatKrw(num) {
+                if (typeof num !== 'number' || Number.isNaN(num)) return '0';
+                return num.toLocaleString('ko-KR');
+            }
+
+            function getCategoryBadgeElement(cat) {
+                const map = {
+                    '식비': 'bg-red-100 text-red-700',
+                    '교통': 'bg-gray-200 text-gray-700',
+                    '쇼핑': 'bg-purple-100 text-purple-700',
+                    '간식': 'bg-yellow-100 text-yellow-700',
+                    '항공': 'bg-blue-100 text-blue-700',
+                    '숙소': 'bg-indigo-100 text-indigo-700',
+                    '투어': 'bg-green-100 text-green-700',
+                };
+                const cls = map[cat] || 'bg-gray-100 text-gray-700';
+                const badge = document.createElement('span');
+                badge.className = `${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0`;
+                badge.textContent = cat;
+                return badge;
+            }
+
+            function createEmptyState(text) {
+                const empty = document.createElement('div');
+                empty.className = 'p-6 text-center text-gray-400';
+                empty.textContent = text;
+                return empty;
+            }
+
+            window.toggleSidebar = function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
-                if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                    sidebar.classList.add('-translate-x-full');
+                const overlay = document.getElementById('sidebar-overlay');
+                if (sidebar) sidebar.classList.toggle('-translate-x-full');
+                if (overlay) overlay.classList.toggle('hidden');
+            };
+
+            window.switchTab = function switchTab(tabId) {
+                document.querySelectorAll('.tab-content').forEach((el) => {
+                    el.classList.add('hidden');
+                    el.classList.remove('block');
+                });
+
+                document.querySelectorAll('.tab-btn').forEach((el) => {
+                    el.classList.remove('active');
+                });
+
+                const targetTab = document.getElementById(tabId);
+                if (targetTab) {
+                    targetTab.classList.remove('hidden');
+                    targetTab.classList.add('block');
+                }
+
+                const targetBtn = document.getElementById(`btn-${tabId}`);
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                }
+
+                const contentArea = document.getElementById('content-area');
+                if (contentArea) contentArea.scrollTop = 0;
+
+                if (window.innerWidth < 1024) {
+                    const sidebar = document.getElementById('sidebar');
                     const overlay = document.getElementById('sidebar-overlay');
-                    if (overlay) overlay.classList.add('hidden');
+                    if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                    if (overlay && !overlay.classList.contains('hidden')) {
+                        overlay.classList.add('hidden');
+                    }
                 }
-            }
-        }
+            };
 
-        // --- 스크롤 위치 계산 완벽 최적화 (중복 DOM 버그 해결) ---
-        window.scrollToDay = function(dayId) {
-            const contentArea = document.getElementById('content-area');
-            const part2Tab = document.getElementById('part2');
-            
-            if (!contentArea || !part2Tab) return;
+            window.scrollToDay = function scrollToDay(dayId) {
+                const contentArea = document.getElementById('content-area');
+                const part2Tab = document.getElementById('part2');
+                if (!contentArea || !part2Tab) return;
 
-            // 1. 스크롤 실행을 담당하는 내부 함수
-            const executeScroll = () => {
-                const el = document.getElementById(dayId);
-                if (el) {
-                    const headerOffset = 70; // 스티키 헤더 및 여백 보정치
+                const executeScroll = () => {
+                    const el = document.getElementById(dayId);
+                    if (!el) return;
+
+                    const stickyHeader = part2Tab.querySelector('.sticky');
+                    const headerOffset = stickyHeader ? stickyHeader.offsetHeight + 12 : 70;
                     const elementPosition = el.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + contentArea.scrollTop - contentArea.getBoundingClientRect().top - headerOffset;
-                    contentArea.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    const contentPosition = contentArea.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + contentArea.scrollTop - contentPosition - headerOffset;
+
+                    contentArea.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
+                };
+
+                if (part2Tab.classList.contains('hidden')) {
+                    window.switchTab('part2');
+                    requestAnimationFrame(() => requestAnimationFrame(executeScroll));
+                    return;
                 }
+
+                requestAnimationFrame(executeScroll);
             };
-            
-            // 2. 상세 브리핑 탭이 닫혀있다면 열어준 뒤 약간의 딜레이를 두고 스크롤
-            if (part2Tab.classList.contains('hidden')) {
-                switchTab('part2');
-                // DOM 렌더링 사이클 확보를 위해 requestAnimationFrame과 setTimeout 결합
-                requestAnimationFrame(() => {
-                    setTimeout(executeScroll, 50);
+
+            function renderChecklist() {
+                const container = document.getElementById('checklist-body');
+                if (!container) return;
+                container.replaceChildren();
+
+                const grouped = checklist.reduce((acc, item, idx) => {
+                    const category = item.category || '기타';
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push({ ...item, originalIndex: idx });
+                    return acc;
+                }, {});
+
+                if (Object.keys(grouped).length === 0) {
+                    container.appendChild(createEmptyState('등록된 준비물이 없습니다.'));
+                    return;
+                }
+
+                const fragment = document.createDocumentFragment();
+
+                Object.entries(grouped).forEach(([category, items]) => {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+
+                    const header = document.createElement('div');
+                    header.className = 'bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-blue-800 text-sm sm:text-base border-b border-blue-100';
+                    header.textContent = category;
+                    groupDiv.appendChild(header);
+
+                    const listDiv = document.createElement('div');
+                    listDiv.className = 'divide-y divide-gray-100';
+
+                    items.forEach((item) => {
+                        const row = document.createElement('div');
+                        row.className = `p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition ${item.checked ? 'bg-gray-50' : 'hover:bg-gray-50'}`;
+
+                        const label = document.createElement('label');
+                        label.className = 'flex items-center justify-center cursor-pointer group shrink-0 mt-0.5 sm:mt-0';
+
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'custom-checkbox opacity-0 absolute h-0 w-0';
+                        checkbox.checked = item.checked;
+                        checkbox.addEventListener('change', () => {
+                            window.toggleCheck(item.originalIndex);
+                        });
+
+                        const checkboxBox = document.createElement('div');
+                        checkboxBox.className = 'checkbox-box bg-white border-2 rounded w-5 h-5 sm:w-6 sm:h-6 flex flex-shrink-0 justify-center items-center border-gray-300 group-hover:border-blue-500 transition';
+
+                        const svgNS = 'http://www.w3.org/2000/svg';
+                        const svg = document.createElementNS(svgNS, 'svg');
+                        svg.setAttribute('class', 'hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none');
+                        svg.setAttribute('viewBox', '0 0 17 12');
+                        svg.setAttribute('fill', 'none');
+                        svg.setAttribute('stroke', 'currentColor');
+                        svg.setAttribute('stroke-width', '3');
+                        svg.setAttribute('stroke-linecap', 'round');
+                        svg.setAttribute('stroke-linejoin', 'round');
+
+                        const polyline = document.createElementNS(svgNS, 'polyline');
+                        polyline.setAttribute('points', '1 5 6 10 16 1');
+                        svg.appendChild(polyline);
+                        checkboxBox.appendChild(svg);
+
+                        label.appendChild(checkbox);
+                        label.appendChild(checkboxBox);
+
+                        const desc = document.createElement('div');
+                        desc.className = `text-sm sm:text-base leading-relaxed select-none ${item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold'}`;
+                        desc.textContent = item.desc;
+                        desc.addEventListener('click', () => {
+                            window.toggleCheck(item.originalIndex);
+                        });
+
+                        row.appendChild(label);
+                        row.appendChild(desc);
+                        listDiv.appendChild(row);
+                    });
+
+                    groupDiv.appendChild(listDiv);
+                    fragment.appendChild(groupDiv);
                 });
-            } else {
-                // 이미 상세 브리핑 탭이 열려있다면 즉시 스크롤
-                executeScroll();
+
+                container.appendChild(fragment);
             }
-        };
 
-        // --- 데이터 ---
-        let expenses = [];
-        let checklist = [];
-
-        // v29: 모든 버그 수정 및 최종 일정 완벽 반영을 위한 클린 캐시 키
-        const STORAGE_KEY_EXPENSE = 'nycExpenses_v29';
-        const STORAGE_KEY_CHECK   = 'nycChecklist_v29';
-
-        const defaultExpenses = [
-            { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
-            { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
-        ];
-
-        const defaultChecklist = [
-            { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드 (교통카드 겸용)', checked: false },
-            { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드 (피터루거: 신용카드 불가, 현금/직불만 됨)', checked: false },
-            { category: '💳 결제/서류', desc: '여권, ESTA 확인증, 각종 바우처 (오프라인 캡처본)', checked: false },
-            { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 생명줄)', checked: false },
-            { category: '📱 전자기기', desc: '애플페이 세팅 (지갑 없이 편하게)', checked: false },
-            { category: '📱 전자기기', desc: '110V 돼지코 어댑터 & 넉넉한 보조배터리', checked: false },
-            { category: '📱 전자기기', desc: '필수 앱: Uber, NYC Ferry, OpenTable/Resy 예약, Circle Line 예약', checked: false },
-            { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
-            { category: '📸 의류/잡화', desc: '써밋 전망대용 바지/점프수트 (치마 절대 금지)', checked: false },
-            { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 눕방용 예쁜 돗자리', checked: false },
-            { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건 (에어컨 냉동고 대비)', checked: false },
-            { category: '🥘 식량/간식', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 (해물 베이스 반입 가능!)', checked: false },
-            { category: '🥘 식량/간식', desc: '휴대용 라면포트 (호텔에서 보글보글 끓여 먹기 위한 필수 꿀템!)', checked: false },
-            { category: '🥘 식량/간식', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반 (수화물 캔/팩 포장 필수)', checked: false }
-        ];
-
-        // --- 초기화 ---
-        function initData() {
-            try {
-                expenses = JSON.parse(localStorage.getItem(STORAGE_KEY_EXPENSE)) || [...defaultExpenses];
-            } catch { expenses = [...defaultExpenses]; }
-            try {
-                checklist = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECK)) || [...defaultChecklist];
-            } catch { checklist = [...defaultChecklist]; }
-
-            renderLedgers();
-            renderChecklist();
-        }
-
-        // --- 유틸 ---
-        function formatKrw(num) {
-            if (typeof num !== 'number' || isNaN(num)) return '0';
-            return num.toLocaleString('ko-KR');
-        }
-
-        function getCategoryBadge(cat) {
-            const map = {
-                '식비': 'bg-red-100 text-red-700',
-                '교통': 'bg-gray-200 text-gray-700',
-                '쇼핑': 'bg-purple-100 text-purple-700',
-                '간식': 'bg-yellow-100 text-yellow-700',
-                '항공': 'bg-blue-100 text-blue-700',
-                '숙소': 'bg-indigo-100 text-indigo-700',
-                '투어': 'bg-green-100 text-green-700',
+            window.toggleCheck = function toggleCheck(index) {
+                if (!Number.isInteger(index) || !checklist[index]) return;
+                checklist[index] = { ...checklist[index], checked: !checklist[index].checked };
+                persistChecklist();
+                renderChecklist();
             };
-            const cls = map[cat] || 'bg-gray-100 text-gray-700';
-            return `<span class="${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0">${cat}</span>`;
-        }
 
-        // --- 체크리스트 렌더링 (모바일 카드 레이아웃 적용) ---
-        function renderChecklist() {
-            const container = document.getElementById('checklist-body');
-            if (!container) return;
-            container.innerHTML = '';
+            window.resetChecklist = function resetChecklist() {
+                if (!confirm('모든 체크를 초기화할까요?')) return;
+                checklist = checklist.map((item) => ({ ...item, checked: false }));
+                persistChecklist();
+                renderChecklist();
+            };
 
-            const grouped = checklist.reduce((acc, item, idx) => {
-                if (!acc[item.category]) acc[item.category] = [];
-                acc[item.category].push({ ...item, originalIndex: idx });
-                return acc;
-            }, {});
+            function renderLedgers() {
+                const container = document.getElementById('expense-list');
+                if (!container) return;
+                container.replaceChildren();
 
-            if (Object.keys(grouped).length === 0) {
-                container.innerHTML = '<div class="p-6 text-center text-gray-400">등록된 준비물이 없습니다.</div>';
-                return;
-            }
+                let totalKrw = 0;
+                const grouped = expenses.reduce((acc, exp) => {
+                    const key = exp.day || '기타';
+                    if (!acc[key]) acc[key] = [];
+                    acc[key].push(exp);
+                    return acc;
+                }, {});
 
-            for (const [category, items] of Object.entries(grouped)) {
-                const groupDiv = document.createElement('div');
-                groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
-                
-                const header = document.createElement('div');
-                header.className = 'bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-blue-800 text-sm sm:text-base border-b border-blue-100';
-                header.innerText = category;
-                groupDiv.appendChild(header);
+                if (Object.keys(grouped).length === 0) {
+                    container.appendChild(createEmptyState('지출 내역이 없습니다.'));
+                    const summaryEl = document.getElementById('summary-total');
+                    if (summaryEl) summaryEl.textContent = '0';
+                    return;
+                }
 
-                const listDiv = document.createElement('div');
-                listDiv.className = 'divide-y divide-gray-100';
+                const fragment = document.createDocumentFragment();
 
-                items.forEach(item => {
-                    const row = document.createElement('div');
-                    row.className = `p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition ${item.checked ? 'bg-gray-50' : 'hover:bg-gray-50'}`;
-                    const textCls = item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold';
-                    const checkedAttr = item.checked ? 'checked' : '';
-                    
-                    row.innerHTML = `
-                        <label class="flex items-center justify-center cursor-pointer group shrink-0 mt-0.5 sm:mt-0">
-                            <input type="checkbox" class="custom-checkbox opacity-0 absolute h-0 w-0" onchange="window.toggleCheck(${item.originalIndex})" ${checkedAttr}>
-                            <div class="checkbox-box bg-white border-2 rounded w-5 h-5 sm:w-6 sm:h-6 flex flex-shrink-0 justify-center items-center border-gray-300 group-hover:border-blue-500 transition">
-                                <svg class="hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 6 10 16 1"></polyline></svg>
-                            </div>
-                        </label>
-                        <div class="text-sm sm:text-base leading-relaxed ${textCls} select-none" onclick="window.toggleCheck(${item.originalIndex})">${item.desc}</div>
-                    `;
-                    listDiv.appendChild(row);
+                Object.entries(grouped).forEach(([day, items]) => {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
+
+                    const header = document.createElement('div');
+                    header.className = 'bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200';
+                    header.textContent = day;
+                    groupDiv.appendChild(header);
+
+                    let dayTotal = 0;
+                    const listDiv = document.createElement('div');
+                    listDiv.className = 'divide-y divide-gray-100';
+
+                    items.forEach((exp) => {
+                        const amount = typeof exp.amount === 'number' && !Number.isNaN(exp.amount) ? exp.amount : 0;
+                        dayTotal += amount;
+                        totalKrw += amount;
+
+                        const row = document.createElement('div');
+                        row.className = 'p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition';
+
+                        const left = document.createElement('div');
+                        left.className = 'flex items-start sm:items-center gap-3';
+
+                        const badgeWrap = document.createElement('div');
+                        badgeWrap.className = 'shrink-0 mt-0.5 sm:mt-0';
+                        badgeWrap.appendChild(getCategoryBadgeElement(exp.category || '기타'));
+
+                        const desc = document.createElement('div');
+                        desc.className = 'text-sm sm:text-base font-semibold text-gray-800 leading-snug';
+                        desc.textContent = exp.desc;
+
+                        left.appendChild(badgeWrap);
+                        left.appendChild(desc);
+
+                        const amountEl = document.createElement('div');
+                        amountEl.className = `text-right font-mono font-bold ${amount === 0 ? 'text-gray-400' : 'text-gray-900'} text-base sm:text-lg sm:w-32 shrink-0`;
+                        amountEl.textContent = `₩${formatKrw(amount)}`;
+
+                        row.appendChild(left);
+                        row.appendChild(amountEl);
+                        listDiv.appendChild(row);
+                    });
+
+                    groupDiv.appendChild(listDiv);
+
+                    const subtotal = document.createElement('div');
+                    subtotal.className = 'p-4 sm:p-5 bg-blue-50/50 flex justify-between items-center border-t border-blue-100';
+
+                    const subtotalLabel = document.createElement('span');
+                    subtotalLabel.className = 'text-sm font-bold text-blue-800';
+                    subtotalLabel.textContent = '소계';
+
+                    const subtotalAmount = document.createElement('span');
+                    subtotalAmount.className = 'font-mono font-bold text-blue-700 text-lg';
+                    subtotalAmount.textContent = `₩${formatKrw(dayTotal)}`;
+
+                    subtotal.appendChild(subtotalLabel);
+                    subtotal.appendChild(subtotalAmount);
+                    groupDiv.appendChild(subtotal);
+
+                    fragment.appendChild(groupDiv);
                 });
-                
-                groupDiv.appendChild(listDiv);
-                container.appendChild(groupDiv);
-            }
-            localStorage.setItem(STORAGE_KEY_CHECK, JSON.stringify(checklist));
-        }
 
-        // --- 체크박스 토글 ---
-        window.toggleCheck = function(index) {
-            if (checklist[index] !== undefined) {
-                checklist[index].checked = !checklist[index].checked;
+                container.appendChild(fragment);
+
+                const summaryEl = document.getElementById('summary-total');
+                if (summaryEl) summaryEl.textContent = formatKrw(totalKrw);
+            }
+
+            function initData() {
+                expenses = readStorageArray(STORAGE_KEY_EXPENSE, defaultExpenses, normalizeExpense);
+                checklist = readStorageArray(STORAGE_KEY_CHECK, defaultChecklist, normalizeChecklistItem);
+
+                persistExpenses();
+                persistChecklist();
+                renderLedgers();
                 renderChecklist();
             }
-        };
 
-        // 초기화 기능
-        window.resetChecklist = function() {
-            if (!confirm('모든 체크를 초기화할까요?')) return;
-            checklist = checklist.map(item => ({ ...item, checked: false }));
-            renderChecklist();
-        };
-
-        // --- 장부 렌더링 (모바일 카드 레이아웃 적용) ---
-        function renderLedgers() {
-            const container = document.getElementById('expense-list');
-            if (!container) return;
-            container.innerHTML = '';
-
-            let totalKrw = 0;
-
-            const grouped = expenses.reduce((acc, exp) => {
-                const key = exp.day || '기타';
-                if (!acc[key]) acc[key] = [];
-                acc[key].push(exp);
-                return acc;
-            }, {});
-
-            if (Object.keys(grouped).length === 0) {
-                container.innerHTML = '<div class="p-6 text-center text-gray-400">지출 내역이 없습니다.</div>';
-                return;
-            }
-
-            for (const [day, items] of Object.entries(grouped)) {
-                const groupDiv = document.createElement('div');
-                groupDiv.className = 'bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6';
-                
-                const header = document.createElement('div');
-                header.className = 'bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200';
-                header.innerText = day;
-                groupDiv.appendChild(header);
-
-                let dayTotal = 0;
-                const listDiv = document.createElement('div');
-                listDiv.className = 'divide-y divide-gray-100';
-
-                items.forEach(exp => {
-                    const amount = typeof exp.amount === 'number' && !isNaN(exp.amount) ? exp.amount : 0;
-                    dayTotal += amount;
-                    totalKrw += amount;
-                    
-                    const row = document.createElement('div');
-                    row.className = 'p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition';
-                    row.innerHTML = `
-                        <div class="flex items-start sm:items-center gap-3">
-                            <div class="shrink-0 mt-0.5 sm:mt-0">${getCategoryBadge(exp.category)}</div>
-                            <div class="text-sm sm:text-base font-semibold text-gray-800 leading-snug">${exp.desc}</div>
-                        </div>
-                        <div class="text-right font-mono font-bold ${amount === 0 ? 'text-gray-400' : 'text-gray-900'} text-base sm:text-lg sm:w-32 shrink-0">₩${formatKrw(amount)}</div>
-                    `;
-                    listDiv.appendChild(row);
-                });
-
-                groupDiv.appendChild(listDiv);
-
-                const subtotal = document.createElement('div');
-                subtotal.className = 'p-4 sm:p-5 bg-blue-50/50 flex justify-between items-center border-t border-blue-100';
-                subtotal.innerHTML = `
-                    <span class="text-sm font-bold text-blue-800">소계</span>
-                    <span class="font-mono font-bold text-blue-700 text-lg">₩${formatKrw(dayTotal)}</span>
-                `;
-                groupDiv.appendChild(subtotal);
-                
-                container.appendChild(groupDiv);
-            }
-
-            const summaryEl = document.getElementById('summary-total');
-            if (summaryEl) summaryEl.innerText = formatKrw(totalKrw);
-            localStorage.setItem(STORAGE_KEY_EXPENSE, JSON.stringify(expenses));
-        }
-
-        document.addEventListener('DOMContentLoaded', initData);
+            document.addEventListener('DOMContentLoaded', initData);
+        })();
     </script>
 </body>
 </html>
