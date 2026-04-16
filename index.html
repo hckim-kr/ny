@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🗽 Chan&Seul in NY</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,8 +16,8 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .tab-btn { transition: all 0.2s ease-in-out; }
         .tab-btn.active {
-            background-color: #2563eb;
-            color: white;
+            background-color: #2563eb !important;
+            color: white !important;
             box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
             transform: translateY(-1px);
         }
@@ -53,19 +53,19 @@
             <div class="h-1 w-12 bg-gradient-to-r from-blue-500 to-pink-500 rounded-full mt-4 mb-2"></div>
         </div>
         <nav class="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-2">
-            <button onclick="switchTab('part1')" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600">
+            <button onclick="switchTab('part1')" id="btn-part1" class="tab-btn active w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🗓️</span> 한눈에 보는 일정
             </button>
-            <button onclick="switchTab('part2')" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600">
+            <button onclick="switchTab('part2')" id="btn-part2" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">📝</span> 일자별 상세 브리핑
             </button>
-            <button onclick="switchTab('part3')" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600">
+            <button onclick="switchTab('part3')" id="btn-part3" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🍽️</span> 도파민 맛집 리스트
             </button>
-            <button onclick="switchTab('part4')" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600">
+            <button onclick="switchTab('part4')" id="btn-part4" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">🎒</span> 필수 준비물 체크
             </button>
-            <button onclick="switchTab('part5')" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600">
+            <button onclick="switchTab('part5')" id="btn-part5" class="tab-btn w-full flex items-center p-3 rounded-xl text-left font-semibold text-gray-600 transition">
                 <span class="text-xl w-8 text-center mr-2">💼</span> 실시간 통합 장부
             </button>
         </nav>
@@ -95,7 +95,7 @@
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">카톡에 바로 공유하기 좋은 6박 8일 퀵 뷰!</p>
                     
                     <div class="space-y-4 sm:space-y-6">
-                        <!-- Day 1 요약 -->
+                        <!-- Day 1 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">✈️ 1일 차 (6/27, 토): [화려한 입성!] 갤러거 스테이크 첫 끼 & 선셋 야경!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -112,21 +112,21 @@
                             </ul>
                         </div>
 
-                        <!-- Day 2 요약 -->
+                        <!-- Day 2 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
-                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🖼️ 2일 차 (6/28, 일): [여유 & 럭셔리!] 미드타운 명품 동선 & 수타면 디너!</h3>
+                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🖼️ 2일 차 (6/28, 일): [여유 & 럭셔리!] 미드타운 명품 동선 & 킨스 스테이크!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:30 AM</span> <span class="leading-relaxed">🥞 카네기 다이너 (미국식 정통 팬케이크 조식)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">09:00 AM</span> <span class="leading-relaxed">🎈 써밋(SUMMIT) 전망대 (거울 방과 은빛 풍선 인생샷 - 9시 오픈런!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">11:30 AM</span> <span class="leading-relaxed">🍛 <b>대그 타이 (Dagg Thai)</b> (미드타운에서 즐기는 힙한 타이 요리 런치!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">12:30 PM</span> <span class="leading-relaxed">🛍️ 5번가 명품 거리 핵심 공략! <b>(성당, 티파니, 레고 스토어)</b></span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">03:00 PM</span> <span class="leading-relaxed">🖼️ 모마(MoMA) 미술관 (쾌적한 오후 시간대 우아한 도장 깨기)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥟 <b>쿵푸 키친 (Kungfu Kitchen)</b> (육즙 팡팡 샤오롱바오 & 수타면 디너!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥩 <b>킨스 스테이크하우스 (Keens)</b> (130년 역사, 압도적 양고기 디너!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🧸 타임스퀘어 메가 스토어 (디즈니, M&M 등 한정템 가벼운 아이쇼핑)</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 3 요약 -->
+                        <!-- Day 3 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🚢 3일 차 (6/29, 월): [크루즈 낭만] 첼시 핫플 & 콘반 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -144,9 +144,9 @@
                             </ul>
                         </div>
 
-                        <!-- Day 4 요약 -->
+                        <!-- Day 4 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
-                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🌉 4일 차 (6/30, 화): [브루클린 낭만] 페리 감성 & 전설의 피터루거!</h3>
+                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🌉 4일 차 (6/30, 화): [브루클린 낭만] 페리 감성 & 쿵푸 키친!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 AM</span> <span class="leading-relaxed">🇰🇷 아침부터 보글보글! 포트 라면으로 붓기 쫙 빼기</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 AM</span> <span class="leading-relaxed">📸 덤보(DUMBO) 오픈런! & 브루클린 브릿지 산책</span></li>
@@ -154,15 +154,16 @@
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">11:15 AM</span> <span class="leading-relaxed">🛥️ 첫 번째 페리 탑승! (강바람 맞으며 윌리엄스버그 이동)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">12:00 PM</span> <span class="leading-relaxed">🥩 피터루거 스테이크 런치! (현금/직불 필수, 전설의 솜사탕 포터하우스! 🐂)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">01:30 PM</span> <span class="leading-relaxed">🛍️ 윌리엄스버그 베드포드 힙스터 런웨이 쇼핑!</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">02:30 PM</span> <span class="leading-relaxed">🍕 <b>린더스트리 피자 (L'Industrie)</b> (윌리엄스버그 본점에서 인생 피자 길빵!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">03:30 PM</span> <span class="leading-relaxed">🛥️ 두 번째 페리 탑승! (월스트리트 다이렉트 뱃놀이!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:00 PM</span> <span class="leading-relaxed">🐂 월스트리트 황소, 트리니티 교회 & 오큘러스</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">05:00 PM</span> <span class="leading-relaxed">🖤 9/11 메모리얼 파크 (거대한 폭포 앞 추모의 시간)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 PM</span> <span class="leading-relaxed">🥩 <b>킨스 스테이크하우스 (Keens)</b> (130년 역사, 압도적 양고기 디너!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">07:00 PM</span> <span class="leading-relaxed">🥟 <b>쿵푸 키친 (Kungfu Kitchen)</b> (육즙 팡팡 샤오롱바오 & 수타면 디너!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:30 PM</span> <span class="leading-relaxed">🏨 숙소 복귀 및 꿀휴식</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 5 요약 -->
+                        <!-- Day 5 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">⛴️ 5일 차 (7/1, 수): [공중 산책 & 미식] 업타운 다이닝 & 트램, 그리고 LIC!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -178,23 +179,24 @@
                             </ul>
                         </div>
 
-                        <!-- Day 6 요약 -->
+                        <!-- Day 6 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
-                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🛍️ 6일 차 (7/2, 목): [도파민 런웨이] 기적의 오픈런 버거 & 소호 쇼핑 & 나이트 버스 피날레!</h3>
+                            <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🛍️ 6일 차 (7/2, 목): [소호 런웨이] ALD 웨이팅 & 소호 필수 브랜드 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">10:00 AM</span> <span class="leading-relaxed">🍔 메디슨 스퀘어 파크 산책 (쉑쉑버거 10:30 오픈 대기!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">10:30 AM</span> <span class="leading-relaxed">🍔 쉑쉑버거 본점 오픈런! (첫 손님으로 신선도 200% 패티 버거 흡입)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">12:00 PM</span> <span class="leading-relaxed">🍺 해리포터 스토어 (버터맥주 도파민 펌핑!) & 스트랜드 서점</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">01:00 PM</span> <span class="leading-relaxed">🍜 <b>라쿠(Raku) 우동 (소호 가기 전 쫄깃한 고기 우동으로 점심!)</b></span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">02:00 PM</span> <span class="leading-relaxed">💳 소호(SoHo) 핫플 폭풍 쇼핑 🛍️ (슈프림, ALD, KITH 등)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">03:30 PM</span> <span class="leading-relaxed">🍕 린더스트리 피자 (쇼핑 중 출출할 때 피자 한 조각 길빵!)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:30 PM</span> <span class="leading-relaxed">🍵 차차 말차 & 에일린스 치즈케이크 (힙스터 당 충전!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">01:00 PM</span> <span class="leading-relaxed">🍝 <b>Ruby's 런치 & ALD 웨이팅</b> (소호 도착 즉시 1순위!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">02:15 PM</span> <span class="leading-relaxed">☕ <b>라카브라 (La Cabra)</b> (덴마크 북유럽 감성 스페셜티 커피 수혈)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">02:45 PM</span> <span class="leading-relaxed">💳 <b>소호 핫플 폭풍 쇼핑</b> 🛍️ (스투시, KITH, Glossier, 살로몬, A.P.C 등)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:30 PM</span> <span class="leading-relaxed">🖼️ <b>MoMA 디자인 스토어</b> (감각적인 굿즈 구경 & 교양 충전!)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:00 PM</span> <span class="leading-relaxed">🥪 <b>카츠 델리 (Katz's Deli)</b> (산더미 파스트라미 샌드위치 황금 저녁!)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🚌 대망의 피날레! 빅버스 나이트 투어 (타임스퀘어 출발! 오픈탑 야경 감상 🌃)</span></li>
+                                <li class="bg-gray-50 p-2 rounded border border-gray-200 mt-1 mb-1"><span class="font-bold w-24 inline-block text-gray-600 sm:w-24 shrink-0 pt-0.5">🚨 [플랜B]</span> <span class="leading-relaxed text-gray-700">🍜 <b>라쿠 (Raku)</b> (수타 우동이 땡길 때 런치로 대체 가능!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 mt-2"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🚌 대망의 피날레! 빅버스 나이트 투어 (타임스퀘어 출발! 오픈탑 야경 감상 🌃)</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 7 요약 -->
+                        <!-- Day 7 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">👋 7일 차 (7/3, 금): [영화 피날레] 자전거 & 숨겨진 아지트 버거 & 마지막 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -238,7 +240,7 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:00 AM [뉴욕 땅에 첫발을 딛다! 🛬]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 동선: JFK 도착 ➡️ 에어트레인(AirTrain) ➡️ Jamaica 역 ➡️ 지하철 E선 ➡️ 50 St 역</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">까다로운 입국 심사를 마치고 초록색 'AirTrain' 표지판만 뚝심 있게 따라갑니다. 자메이카 역에서 E선으로 환승하면 뉴욕의 살인적인 교통체증을 피해서 타임스퀘어 앞(50 St 역)까지 다이렉트로 꽂힙니다!</p>
@@ -247,13 +249,13 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [숙소 짐 보관 & 첫 끼 장전 🏨]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 동선: 숙소(M 소셜) 짐 보관 ➡️ 도보 1분 ➡️ 갤러거 스테이크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">캐리어 끌고 다니면 여행 첫날부터 지칩니다. 무거운 짐은 로비 클로크룸에 팁 $1~2와 함께 쿨하게 맡기고, 곧바로 옆 건물 갤러거 스테이크로 향합니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:00 PM [뉴욕 1티어 런치! 갤러거 스테이크 🥩]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 갤러거 스테이크하우스 (런치 3코스 - 오후 4시까지 운영)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">도착하자마자 130년 역사의 스테이크를 썰어줍니다. 뉴욕 최고의 가성비를 자랑하는 런치 3코스로 비행의 피로를 단백질로 씻어냅니다.</p>
@@ -265,31 +267,31 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:30 PM [단짠 시차 격파! 매그놀리아 바나나 푸딩 🍌]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 갤러거 스테이크 ➡️ 도보 5분 ➡️ 매그놀리아 베이커리(록펠러 센터점)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">든든하게 배를 채운 후, 소화시킬 겸 미드타운을 걸어 록펠러 센터에 있는 매그놀리아 베이커리로 갑니다! 꾸덕하고 달콤한 바나나 푸딩을 포장해서 뉴욕의 첫 단짠 도파민을 채웁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:00 PM [센트럴파크 남단 가벼운 도보 산책 🌳🍃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 록펠러 센터 ➡️ 도보 10분 북상 ➡️ 센트럴파크 남단 (Central Park South)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">바나나 푸딩을 들고 조금만 더 걸어 올라가면 고풍스러운 마차들이 서 있는 센트럴파크 남단 입구입니다. 푸른 나무들 사이를 가볍게 걷고 벤치에 앉아 푸딩을 먹으며 시차로 찌뿌둥한 몸을 상쾌하게 풀어줍니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:00 PM [숙소 복귀 및 재정비 🏨💄]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 센트럴파크 남단 ➡️ 도보 10~15분 남하 ➡️ M 소셜 호텔</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">첫날 무리하게 걷지 않고, 다시 호텔로 슬슬 걸어 돌아옵니다. 다리도 쉬고, 예쁘게 메이크업도 고치며 화려한 타임스퀘어의 밤을 박살 낼 준비를 합니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [타임스퀘어 공식 진출 📸]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 도보 5분 ➡️ 타임스퀘어 빨간 계단(TKTS)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">숙소 바로 앞이 타임스퀘어입니다. 번쩍이는 네온사인 아래 빨간 계단 위로 올라가, 뉴욕 입성 웰컴 도파민을 제대로 맞으며 전광판 배경으로 화려한 사진을 찍습니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:30 PM [황금빛 노을 & 야경의 마법 🌇]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 타임스퀘어 ➡️ 도보 10분 ➡️ 록펠러 센터 (탑오브더락)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">6월 말 뉴욕 일몰은 8시 20분경입니다! 6시 30분에 입장하면 황금빛 노을부터 밤 야경으로 변하는 마법 같은 타임랩스 전체를 넉넉하게 즐길 수 있어요. 전망대 3층 야외 데크로 바로 올라가 엠파이어 스테이트 빌딩을 정면으로 담으세요.</p>
@@ -298,7 +300,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [할랄가이즈 포장 & 쾌속 복귀 🥙]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 탑오브더락 ➡️ 도보 3분 ➡️ 할랄가이즈 본점(53번가) ➡️ 도보 10분 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">점심에 스테이크를 먹었으니 저녁은 가벼운 뉴욕 길거리 소울푸드죠! 치킨 플래터 포장해서 숙소로 쏙 들어갑니다.</p>
@@ -307,7 +309,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:00 PM [온라인 주일 예배 & 꿀잠 기절 🙏]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 뉴욕 밤 10시 = 한국 주일 오전 11시</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">숙소에서 편한 옷으로 갈아입고 할랄가이즈를 쓱쓱 비벼 먹으면서 힐링~ 밤 10시 아이패드 예배 후 은혜 충만하게 첫날을 마무리하며 기절!</p>
@@ -324,7 +326,7 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:30 AM [뉴욕의 아침을 여는 팬케이크 🥞]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 도보 5분 ➡️ 카네기 다이너(Carnegie Diner)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">영화 속 미국식 다이너 부스에 앉아 정통 팬케이크로 우아하게 아침을 엽니다. 아침엔 덜 붐비고 클래식한 뉴욕 바이브를 느낄 수 있어요.</p>
@@ -333,7 +335,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 09:00 AM [써밋 전망대 오픈런 🎈]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 다이너 ➡️ 우버(추천, 약 8분) or 도보 20분 ➡️ 써밋(SUMMIT) 전망대</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">뉴욕 1타 전망대 써밋 9시 오픈런! 사방이 거울인 방(Air)과 은빛 풍선 룸(Affinity)에서 아침 햇살을 듬뿍 받으며 단독 화보를 건집니다.</p>
@@ -342,7 +344,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:30 AM [힙한 로컬 타이 요리, 대그 타이 런치! 🍛]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 써밋 전망대 ➡️ 도보/지하철 ➡️ 대그 타이(Dagg Thai)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">써밋 전망대 관람 후 미드타운에 위치한 가성비 좋고 힙한 로컬 맛집 '대그 타이'로 이동해 든든하게 점심을 해결합니다.</p>
@@ -351,42 +353,42 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:30 PM [5번가 명품 거리 핵심 스팟 공략! ⛪🛍️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 점심 식사 후 ➡️ 도보 이동 ➡️ 5번가(5th Ave) 명품거리</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">5번가(5th Ave)를 따라 걸으며 세계 최고의 명품 거리를 즐깁니다. 단순히 걷기만 하는 게 아니라, 핵심 스팟들을 집중 공략합니다!</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">5번가를 따라 걸으며 세계 최고의 명품 거리를 즐깁니다. 단순히 걷기만 하는 게 아니라, 핵심 스팟들을 집중 공략합니다!</p>
                                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-3 rounded text-xs sm:text-sm text-yellow-900 space-y-2">
                                         <p>💡 <b>5번가 핵심 공략 가이드:</b></p>
                                         <ul class="list-disc pl-5 font-semibold">
                                             <li><b>세인트 패트릭 대성당:</b> 무료입장! 빌딩 숲 사이 웅장한 고딕 양식과 거대한 장미창 스테인드글라스 감상.</li>
                                             <li><b>티파니앤코 (The Landmark):</b> 리뉴얼된 본점! 1층의 화려한 쥬얼리 전시와 나선형 계단을 영화 주인공처럼 둘러보기.</li>
-                                            <li><b>레고 스토어 플래그십:</b> 실물 크기 뉴욕 노란 택시 레고 탑승샷! '미니피규어 팩토리'에서 I Love NY 한정 브릭으로 커스텀 피규어 만들기. (도착 즉시 키오스크 예약 필수)</li>
+                                            <li><b>레고 스토어 플래그십:</b> 실물 크기 뉴욕 노란 택시 레고 탑승샷! '미니피규어 팩토리'에서 I Love NY 한정 브릭으로 커스텀 피규어 만들기. (도착 즉시 예약 필수)</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:00 PM [오후의 우아한 MoMA 산책 🖼️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 5번가 ➡️ 도보 5분 ➡️ 모마(MoMA) 현대미술관</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">1층 클로크룸에 쇼핑 짐을 다 던져두고 가벼운 몸으로 입장합니다. 지성인 도파민 충전 시간!</p>
                                     <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
-                                        📸 <b>필수 관람 스팟:</b> 5층부터 시작하세요! <b>빈 센트 반 고흐의 '별이 빛나는 밤'</b>, <b>모네의 '수련'</b>(거대한 파노라마 뷰), <b>마티스의 '춤'</b>이 하이라이트입니다. 날이 좋으면 1층 조각 공원에서 커피 한잔의 여유도 최고예요.
+                                        📸 <b>필수 관람 스팟:</b> 5층부터 시작하세요! <b>빈 센트 반 고흐의 '별이 빛나는 밤'</b>, <b>모네의 '수련'</b>, <b>마티스의 '춤'</b>이 하이라이트입니다. 날이 좋으면 1층 조각 공원에서 커피 한잔의 여유도 최고예요.
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [육즙 가득 딤섬 & 수타면, 쿵푸 키친 디너! 🥟🍜]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 MoMA ➡️ 도보/지하철 ➡️ 쿵푸 키친(Kungfu Kitchen) 미드타운</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">미술관 관람 후 뉴욕 한복판에서 찐 로컬들이 즐겨 찾는 중식 핫플 '쿵푸 키친'으로 향합니다! 셰프가 오픈 키친에서 직접 수타면을 뽑는 모습을 볼 수 있는 활기찬 곳입니다.</p>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [우아한 정통 디너, 킨스 스테이크 🥩]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 MoMA ➡️ 지하철(B/D/F/M 2정거장) or 우버 ➡️ 킨스(36th St)</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">130년 역사, 천장에 빼곡히 매달린 담뱃대(파이프) 감성! 고풍스러운 분위기에서 우아하고 천천히 디너를 즐겨주세요.</p>
                                     <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
-                                        🍽️ <b>추천 메뉴:</b> 육즙이 팡팡 터지는 <b>'Xiao Long Bao (샤오롱바오)'</b>와 밑면은 바삭하고 위는 촉촉한 <b>'Pan Fried Pork Buns (성젠바오)'</b>, 그리고 쫄깃한 수타면 <b>'Hand-Pulled Noodles'</b>를 꼭 드셔보세요!
+                                        🍽️ <b>추천 메뉴:</b> 이곳의 시그니처는 압도적 두께의 만화 고기 <b>'Legendary Mutton Chop (양고기)'</b>입니다! 소고기를 선호하시면 <b>'Prime Porterhouse for Two'</b>를 시키고, 에피타이저로 <b>'Thick-cut Bacon'</b>을 꼭 추가하세요. (팁은 총액의 20% 필수)
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [타임스퀘어 아이쇼핑! 디즈니 & M&M 🧸]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 미드타운 식사 후 ➡️ 타임스퀘어 상점가</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">소화도 시킬 겸 타임스퀘어로 복귀합니다. <b>디즈니 스토어</b>에서 '자유의 여신상 미니 마우스 인형'을 구경하고, <b>M&M 월드</b>에서 예쁜 뉴욕 한정 에코백과 원하는 색상 초콜릿을 담아보며 눈이 즐거운 동심의 밤으로 마무리합니다!</p>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 킨스 ➡️ 도보 10분 북상 ➡️ 타임스퀘어 상점가</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">소화도 시킬 겸 타임스퀘어를 걷습니다. <b>디즈니 스토어</b>에서 '자유의 여신상 미니 마우스 인형'을 구경하고, <b>M&M 월드</b>에서 예쁜 뉴욕 한정 에코백과 원하는 색상 초콜릿을 담아보며 눈이 즐거운 동심의 밤으로 마무리합니다!</p>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +402,7 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 09:00 AM [브로드 앤 노쉬 베이글 & 센트럴파크 피크닉 🥯🍃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 도보 10분 ➡️ 브로드 앤 노쉬 ➡️ 센트럴파크 쉽 미도우</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공주님, 오늘 아침은 센트럴파크 잔디밭 피크닉입니다! 돗자리 깔고 2시간 반 넉넉히 뒹굴거리면서 진짜 뉴요커의 여유를 만끽합니다!</p>
@@ -409,13 +411,13 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:30 AM [메트로폴리탄 미술관 가십걸 인증샷 🏛️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 쉽 미도우 ➡️ 공원 가로질러 도보 15분 ➡️ The Met 정문</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">다리 아픈 방대한 미술관 내부는 쿨하게 패스! 메트 앞 웅장한 계단에 앉아 <가십걸> 블레어 언니처럼 갓생 인증샷만 찰칵 찍고 다음 미식 코스로 넘어갑니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:30 PM [서쪽 선착장 이동 & 쾌적한 런치! 🍕🍜]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 미술관 ➡️ 🚕 우버 탑승 필수(20~30분) ➡️ Pier 83 인근 하차</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">미술관에서 서쪽 선착장(Pier 83)으로 대중교통 이동은 비효율적이니 <b>무조건 우버를 타세요!</b> 크루즈 타기 전, 선착장 근처 도보 5분 거리에 위치한 <b>Kings of Kobe</b>나 <b>Valla Table</b>에 내려 쾌적하게 점심을 해결합니다.</p>
@@ -426,13 +428,13 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:45 PM [Pier 83 도착 & 크루즈 티켓팅 🎟️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 ➡️ 도보 5분 ➡️ Pier 83 선착장</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">점심 식사 후 배부른 상태로 슬슬 걸어 나와 Pier 83 선착장으로 이동합니다. 3시 출항 크루즈 티켓팅을 미리 완료하고 여유롭게 탑승 대기를 합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:00 PM [서클라인 1.5시간 랜드마크 크루즈 탑승 ⛴️🗽]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Pier 83 ➡️ 서클라인 탑승 (오후 3시 정각 출항)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">햇살이 가장 좋은 오후 3시! '서클라인 1시간 30분 랜드마크 크루즈'를 타고 강바람을 맞으며 자유의 여신상, 원월드 무역센터, 브루클린 브릿지 등 뉴욕의 랜드마크를 여유롭게 둘러봅니다.</p>
@@ -447,19 +449,19 @@
                                     <p class="text-gray-600 leading-relaxed mb-2">크루즈 탑승 전 식사 대신 크루즈 하차 후 늦은 점심을 원하신다면? 허드슨 야드의 거대 스페인 푸드홀에서 감바스와 츄로스를 즐겨보세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:45 PM [베슬 & 행복당 흑당 버블티 🧋]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 크루즈 하차 ➡️ 도보 15분 남하 ➡️ 허드슨 야드</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">크루즈에서 내려 허드슨 야드로 걸어갑니다. 벌집 모양 베슬에서 압도적인 사진을 찍고! 쇼핑몰 1층 행복당에서 꾸덕한 흑당 펄을 현장에서 직접 볶는 버블티를 사서 혈당을 쫙 올려줍니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [달달한 하이라인 파크 공중 산책 🛤️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 허드슨 야드 2층 직결 통로 ➡️ 하이라인 진입 ➡️ 첼시 방향 남하</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">버블티 쪽쪽 빨면서, 도심 속 공중 정원 철길(하이라인)을 여유롭게 걸어 첼시 마켓 쪽으로 쭉 내려갑니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [첼시 마켓 랍스터 & 타코 털기! 🦞🌮]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 하이라인 15번가 계단 하차 ➡️ 눈 앞 첼시 마켓</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">하이라인에서 내려오면 바로 첼시 마켓! '랍스터 플레이스'에서 갓 찐 통랍스터를 버터에 푹 찍어 먹고, 뉴욕 1티어 멕시칸 '로스 타코스'의 짭짤한 아도바다 타코까지 저녁 전 에피타이저로 야무지게 부셔줍니다.</p>
@@ -468,13 +470,13 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:00 PM [구글 스토어 & 스타벅스 로스터리 도장 깨기! ☕📱]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 첼시 마켓 바로 건너편 (15th St & 9th Ave)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">첼시 마켓 정문으로 나오면 바로 길 건너편이 <b>'구글 스토어 첼시(본사)'</b>와 거대한 <b>'스타벅스 리저브 로스터리'</b>입니다. 구글 IT 기기와 뉴욕 한정 굿즈를 구경하고, 스타벅스 로스팅 공장 같은 거대한 매장에서 예쁜 리저브 텀블러를 구경합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:15 PM [겉바속촉 끝판왕, 콘반(Konban) 디너! 🍱]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 로스터리 ➡️ 도보 3분 이동 ➡️ 콘반 (311 W 17th St)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">요즘 뉴욕에서 제일 핫한 카츠(돈까스) 맛집 <b>'콘반(Konban NYC)'</b>은 스타벅스 로스터리에서 두 블록 떨어진 17번가에 있습니다. 로스터리 구경 후 도보로 단 3분만 걸어가서 겉은 바삭하고 속은 육즙이 가득한 프리미엄 카츠 정식을 즐기며 첼시 투어를 완벽하게 마무리합니다!</p>
@@ -486,7 +488,7 @@
                                     <p class="text-gray-600 leading-relaxed mb-2">카츠 대신 뜨끈한 국물로 피로를 풀고 싶다면 34번가에 위치한 '킨 라멘'으로 가서 진한 돈코츠 라멘을 즐기세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 09:30 PM [타임스퀘어 복귀 및 휴식 🌃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 콘반 ➡️ 지하철 1번 선(18 St) 등 이용 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">맛있는 저녁 식사 후, 지하철을 타고 타임스퀘어 숙소로 빠르게 복귀합니다. 내일 아침 브루클린 일정을 위해 꿀휴식!</p>
@@ -503,25 +505,25 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:00 AM [K-뷰티의 핵심! 해물라면으로 붓기 타파 🇰🇷🍜]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 호텔 방 ➡️ 휴대용 라면포트 가동!</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">브루클린 인생샷을 위해 1시간 일찍 기상! 캐리어에서 꺼낸 해물짬뽕이나 조개라면을 보글보글 끓여, 김자반 쓱쓱 비빈 햇반과 함께 흡입합니다. (사진을 위해 국물은 한 모금만!)</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 AM [덤보 오픈런 & 브루클린 브릿지 산책 📸]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소(50 St) ➡️ 1/C/E 환승 ➡️ F선 York St 역 하차 ➡️ 덤보</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">사람과 웨딩 촬영 인파가 몰리기 전, <b>Washington St & Water St 교차로</b> 덤보 포토존으로 직행! 붉은 벽돌 사이 맨해튼 브릿지 배경으로 화보를 찍고, 브루클린 브릿지 위로 올라가 상쾌한 아침 산책을 즐깁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 09:30 AM [페블 비치 물멍 & 응커피 수혈 ☕]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 다리 하산 ➡️ 덤보 강변 도보 5분 ➡️ % Arabica ➡️ 페블 비치</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">덤보 강변의 '% Arabica(일명 응커피)'에서 꼬소한 <b>교토 라떼(Kyoto Latte)</b>를 한 잔 사들고, 조약돌 해변(페블 비치)에 앉아 맨해튼 스카이라인을 바라보며 완벽한 물멍 타임을 가집니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:15 AM [첫 번째 낭만! 페리 타고 윌리엄스버그로 🛥️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 페블비치 ➡️ 덤보 선착장(Dumbo/Fulton Ferry) ➡️ NYC Ferry 탑승 ➡️ North Williamsburg 하차</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">NYC Ferry 앱으로 QR 찍고 탑승! 브루클린 브릿지 밑을 웅장하게 통과해서 윌리엄스버그로 넘어갑니다.</p>
@@ -530,7 +532,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:00 PM [전설의 솜사탕 소고기, 피터루거! 🥩🐂]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 윌리엄스버그 선착장 ➡️ 도보 15분(또는 우버 5분) ➡️ 피터루거</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">뉴욕 스테이크의 정점, 130년 전통 피터루거! 지글지글 끓는 버터 위에 등장하는 거대한 솜사탕 포터하우스를 영접합니다.</p>
@@ -542,31 +544,37 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [윌리엄스버그 베드포드 힙스터 쇼핑 🛍️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 피터루거 ➡️ 도보 10분 ➡️ 베드포드 애비뉴(Bedford Ave)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">배 터지게 먹었으니 메인 힙스터 거리인 '베드포드 애비뉴'를 걷습니다. 뉴욕에서만 살 수 있는 <b>르라보 시티 익스클루시브 향수 (Tubereuse 40)</b> 시향도 해보고, 감성 넘치는 빈티지 숍들을 털어줍니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:30 PM [린더스트리 피자 길빵 간식! 🍕]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 윌리엄스버그 쇼핑 중 ➡️ 린더스트리 피자(L'Industrie Pizzeria 본점)</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">쇼핑하다 허기질 타이밍! 뉴욕 MZ 1티어 피자집 <b>'린더스트리 피자'</b> 본점에 들릅니다. 신선한 부라타 치즈가 통째로 올라간 <b>'Burrata Slice'</b>를 시켜 길거리나 벤치에서 서서 먹는 '길빵 간식'으로 에너지를 끌어올립니다!</p>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-blue-200">
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:30 PM [두 번째 낭만! 월스트리트 직행 페리 🛥️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 North Williamsburg 선착장 ➡️ NYC Ferry ➡️ Pier 11/Wall St 하차</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">선착장으로 돌아와 다시 페리를 탑니다. 꿉꿉한 지하철 대신 강바람을 맞으며 맨해튼 다운타운(월스트리트) 심장부로 다이렉트 뱃놀이를 즐깁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:00 PM [오큘러스, 트리니티 교회 & 돌진하는 황소 🐂⛪]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Pier 11 ➡️ 도보 10분 ➡️ 황소 ➡️ 도보 5분 ➡️ 트리니티 교회 ➡️ 도보 5분 ➡️ 오큘러스</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">배에서 내리면 바로 금융가! 부자 되게 해달라고 '돌진하는 황소' 주요 부위를 야무지게 만져주고, 월스트리트 한복판의 고풍스러운 <b>'트리니티 교회(Trinity Church)'</b>를 구경합니다. 이후 새가 날아오르는 듯한 거대한 하얀 뼈대 건축물 '오큘러스' 내부로 들어가 빛이 쏟아지는 완벽한 대칭 사진을 건집니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:00 PM [9/11 메모리얼 파크 🖤]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 오큘러스 도보 1분 ➡️ 9/11 메모리얼 파크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">쌍둥이 빌딩 자리의 거대한 검은 폭포 풀(Pool)에서 끊임없이 쏟아지는 물을 바라보며, 묵직한 울림 속에서 짧은 추모의 시간을 갖습니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:00 PM [육즙 가득 딤섬 & 수타면, 쿵푸 키친 디너! 🥟🍜]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 월스트리트 ➡️ 지하철 북상 ➡️ 쿵푸 키친(Kungfu Kitchen) 미드타운</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">다운타운 일정을 마치고 미드타운으로 올라와 찐 로컬들이 즐겨 찾는 중식 핫플 '쿵푸 키친'으로 향합니다! 셰프가 오픈 키친에서 직접 수타면을 뽑는 모습을 볼 수 있는 활기찬 곳입니다.</p>
@@ -581,7 +589,7 @@
                                     <p class="text-gray-600 leading-relaxed mb-2">스테이크 대신 뜨끈한 아시안 푸드가 당긴다면? 미드타운에 갓 오픈한 핫플 '딘타이펑 뉴욕 본점'으로 가서 육즙 터지는 샤오롱바오와 매콤한 완탕을 즐겨보세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:30 PM [숙소 복귀 및 꿀휴식 🏨]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 ➡️ 도보/지하철 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">맛있는 저녁 식사 후 숙소로 복귀하여 꿀휴식을 취합니다.</p>
@@ -598,7 +606,7 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:30 AM [피콜라 쿠치나 업타운 (시칠리아 런치!) 🍝]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 지하철 E/M선 ➡️ Lexington Av/53 St 하차 ➡️ 도보 ➡️ 60번가 식당</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">오늘은 알람 끄고 늦잠 푹 주무세요! 예쁘게 단장하고 60번가의 '피콜라 쿠치나 업타운(Piccola Cucina Uptown)'으로 향합니다. 현지인들 사이에서 시끌벅적 활기찬 이탈리안 바이브를 느끼는 곳입니다.</p>
@@ -607,7 +615,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [루스벨트 아일랜드 트램웨이 🚠]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 피콜라 쿠치나 ➡️ 1블록(59번가) 도보 이동 ➡️ 트램 탑승 (OMNY 카드 가능)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">식당에서 나와 단 1블록만 걸으면 빨간색 케이블카(트램) 탑승장입니다! OMNY 카드로 띡! 찍고 타면 끝. 대낮에 타는 트램은 건물 숲을 가르며 짜릿한 공중 산책 뷰를 선사합니다.</p>
@@ -616,31 +624,31 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [루스벨트 섬 씨티바이크 낭만 라이딩 🚲]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 트램 하차 ➡️ 섬 내 씨티바이크 대여 ➡️ 포 프리덤스 파크(남단) 산책</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">루스벨트 섬은 차가 거의 없어 자전거 타기 천국입니다! 파란색 씨티바이크를 빌려 평화로운 벚꽃 산책로(강변 길)를 따라 섬 남단 '포 프리덤스 파크'까지 달립니다. 맨해튼과 퀸즈를 양옆에 두고 달리는 짜릿함!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:30 PM [루스벨트 섬 ➡️ LIC 페리 이동 ⛴️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 자전거 반납 ➡️ 섬 동쪽 선착장 ➡️ NYC Ferry(Astoria 노선) ➡️ LIC 도착</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">루스벨트 섬에서 여유를 만끽한 뒤, 섬 동쪽 선착장에서 NYC Ferry를 타고 퀸즈 롱아일랜드 시티(LIC/Hunter's Point South)로 직행합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:00 PM [갠트리 플라자 파노라마 뷰 & 힙스터 카페 🏙️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 LIC 페리 하차장 ➡️ 공원 산책 + 근처 힙스터 카페 휴식</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">LIC의 랜드마크! 거대한 빨간색 빈티지 '펩시콜라' 사인 앞에서 인생샷을 남기고, 갠트리 플라자 주립공원을 걸으며 강 건너 펼쳐지는 엠파이어 스테이트와 크라이슬러 빌딩의 완벽한 파노라마 뷰를 눈에 담습니다. 피곤하면 근처 'Sweetleaf' 커피숍에서 잠시 쉬어가도 좋아요.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [🚇 맨해튼 그리니치 빌리지 쾌속 복귀!]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 LIC(Hunters Point Ave 역) ➡️ 보라색 7번 선 탑승 ➡️ 타임스퀘어 환승 ➡️ N/R/W로 8 St-NYU 역 하차</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">LIC 스카이라인 뷰를 충분히 즐겼다면, 길 막히는 우버 대신 지하철을 타고 맨해튼 다운타운(그리니치 빌리지)으로 신나게 복귀합니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:30 PM [🍝 올리오 에 피우 (Olio e Più) 로컬 디너]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 8 St-NYU 역 하차 ➡️ 도보 5분 ➡️ 올리오 에 피우</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">워싱턴 스퀘어 파크 바로 옆, 예쁜 꽃으로 장식된 테라스가 있는 그리니치 빌리지 최고의 로컬 이탈리안 레스토랑입니다!</p>
@@ -649,7 +657,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또 🌳]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 바로 앞 ➡️ 워싱턴 스퀘어 파크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
@@ -677,17 +685,17 @@
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 6</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(7/2, 목)</span>
-                                <span class="leading-snug">쉑쉑버거 & 소호 쇼핑 & 나이트 버스 피날레! 🛍️🌃</span>
+                                <span class="leading-snug">소호 런웨이! ALD 오픈런 & 핵심 쇼핑! 🛍️🌃</span>
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:00 AM [메디슨 스퀘어 파크 산책 먼저! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 지하철 N/R/W 탑승 ➡️ 23 St 역 하차 ➡️ 메디슨 스퀘어 파크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">아침 일찍 나와 다리미 빌딩(Flatiron Building) 옆 메디슨 스퀘어 파크를 먼저 산책합니다. 쉑쉑버거 본점 <b>10시 30분 오픈</b>에 맞춰, 공원에서 푸릇푸릇한 아침 공기를 마시며 벤치에서 기다립니다. (내 빵을 노리는 비둘기 떼와 청설모 깡패 조심!)</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:30 AM [쉑쉑버거 본점 오픈런! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 메디슨 스퀘어 파크 내 쉑쉑버거 (본점)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">10시 30분 정각, 첫 손님으로 입장! 야외 본점에서만 느낄 수 있는 신선도 200% 패티의 맛을 느껴보세요.</p>
@@ -696,46 +704,47 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:00 PM [해리포터 스토어 & 스트랜드 서점 🍺📚]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 메디슨 스퀘어 파크 ➡️ 도보 2분 ➡️ 해리포터 스토어 ➡️ 도보 10분 ➡️ 스트랜드 서점</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공원 바로 옆 해리포터 스토어에서 웅장한 호그와트 굿즈를 구경하고, 안쪽 버터맥주 바에서 달달한 <b>버터맥주(Butterbeer)</b>로 도파민을 펌핑합니다! 이어서 남쪽으로 걸어 18마일 서점 '스트랜드'에 들러 뉴요커 감성 에코백을 득템합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [라쿠(Raku) 고기 우동 점심! 🍜]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 스트랜드 ➡️ 6번 선 탑승(Astor Pl) ➡️ Spring St 하차 ➡️ 라쿠(SoHo)</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">본격 쇼핑하려면 체력이 필수죠! 소호 초입 맛집 '라쿠'에서 깊고 진한 고기 국물에 쫄깃함이 미쳐버린 <b>'Niku Udon (소고기 우동)'</b>이나 새우튀김이 올라간 <b>'Ebiten Udon'</b>으로 속을 든든하게 채웁니다.</p>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [소호 입성! ALD 웨이팅 & 루비스(Ruby's) 런치 🍝]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 스트랜드 ➡️ 지하철 이동 ➡️ 소호(SoHo) 에임 레온 도르(ALD) 앞</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">소호에 도착하자마자 가장 먼저 <b>'에임 레온 도르(ALD)'</b> 매장으로 가서 태블릿에 웨이팅 이름부터 올리세요! 그리고 바로 길 건너편에 있는 호주식 브런치 맛집 <b>'루비스(Ruby's)'</b>로 직행해 브론테 버거와 쉬림프 파스타로 완벽한 런치를 즐깁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:00 PM [소호 핫플 폭풍 런웨이 쇼핑 🛍️]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 소호(SoHo) 돌바닥 거리 누비기</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공주님, 지갑 다 여셨죠? 뉴욕 패션의 심장 소호 돌바닥 거리 런웨이 시작입니다! 에임 레온 도르, 슈프림, 글로시에 싹 다 털어주세요.</p>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:15 PM [라카브라(La Cabra) 커피 수혈 ☕]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 루비스 ➡️ 도보 3분 ➡️ 라카브라 커피</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">밥 먹고 카페인이 필요할 때! 덴마크에서 온 북유럽 감성의 스페셜티 커피 명가 <b>'라카브라'</b>에서 향긋한 커피를 한 잔 테이크아웃하여 본격적인 쇼핑 전투를 준비합니다.</p>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-blue-200">
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:45 PM [소호 핫플 폭풍 런웨이 쇼핑 🛍️]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 소호(SoHo) 돌바닥 거리 ➡️ 프린스 스트릿 & 스프링 스트릿 누비기</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공주님, 지갑 다 여셨죠? 순번이 오면 <b>ALD</b> 매장을 구경하시고, 본격적으로 런웨이를 시작합니다!</p>
                                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-3 rounded text-xs sm:text-sm text-yellow-900 space-y-2">
-                                        <p>💡 <b>가이드의 소호 쇼핑 필수 동선 & 꿀팁:</b></p>
+                                        <p>💡 <b>가이드의 소호 쇼핑 필수 동선 & 화장실 꿀팁:</b></p>
                                         <ul class="list-disc pl-5 space-y-1 font-semibold break-keep">
-                                            <li><b>에임 레온 도르 (Aimé Leon Dore):</b> 모자, 스웻셔츠 필수. 매장 옆 ALD 카페에서 'Greek Freddo Cappuccino' 한 잔 마시는 게 국룰!</li>
-                                            <li><b>슈프림 & 스투시:</b> 한국보다 종류가 훨씬 다양하고 가격도 저렴합니다.</li>
-                                            <li><b>글로시에 (Glossier):</b> 핑크빛 인테리어가 예쁘고, 소호 매장 한정판 굿즈(키링, 텀블러)는 필수 구매템!</li>
-                                            <li>💸 <b>뉴욕주 세금 면제법:</b> 단품이 <b>$110 미만인 옷/신발은 무조건 '면세(Tax Free)'</b>입니다! 100달러짜리 티셔츠 3장 살 때, 한 번에 300달러 긁지 마시고 <b>각각 1장씩 따로따로 3번 결제</b>해달라고 요청해야 세금이 안 붙습니다.</li>
+                                            <li><b>스투시 & KITH:</b> 뉴욕 스트릿의 상징! 스투시 반팔과 KITH 매장을 털어줍니다.</li>
+                                            <li><b>Glossier (글로시에):</b> 핑크빛 인테리어가 예쁘고, 뉴욕 소호 한정판 굿즈(키링, 텀블러)는 필수 구매템!</li>
+                                            <li><b>살로몬 (Salomon) & A.P.C.:</b> 많이 걸어 발이 아프다면 살로몬에서 인생 편한 고프코어 신발을! 파리 감성의 A.P.C.도 놓칠 수 없죠.</li>
+                                            <li>🚽 <b>화장실 꿀팁:</b> 쇼핑하다 화장실이 급하면 <b>블루밍데일스 백화점 지하</b>나 <b>애플스토어</b>를 당당하게 이용하세요!</li>
+                                            <li>💸 <b>뉴욕주 세금 면제법:</b> 단품이 <b>$110 미만인 옷/신발은 무조건 '면세(Tax Free)'</b>입니다! 따로따로 결제해달라고 요청하세요.</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:30 PM [린더스트리 피자 길빵 간식! 🍕]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 소호 쇼핑 중 ➡️ 웨스트 빌리지 방면 도보 ➡️ 린더스트리 피자(웨스트빌리지점)</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">쇼핑하다 허기질 타이밍! 소호 서쪽 끝, 뉴욕 MZ 1티어 피자집 <b>'린더스트리 피자(L'Industrie Pizzeria)'</b>에 들릅니다. 신선한 부라타 치즈가 통째로 올라간 <b>'Burrata Slice'</b>를 시켜 길거리나 벤치에서 서서 먹는 '길빵 간식'으로 에너지를 끌어올립니다!</p>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:30 PM [MoMA 디자인 스토어 & 당 충전 🖼️🍵]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 쇼핑 중 ➡️ MoMA 디자인 스토어 ➡️ 에일린스 치즈케이크</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">옷을 너무 많이 사서 죄책감(?)이 들 때쯤, <b>MoMA 디자인 스토어</b>에 들러 교양 있는 유니크한 굿즈를 구경하며 문화인으로서의 소비를 즐깁니다. 다리가 터질 것 같을 때 꾸덕함 끝판왕 '에일린스 스페셜 치즈케이크'에 앉아 당을 충전합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:30 PM [힙스터 당 충전 타임 🍵]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 SoHo 내 도보 이동 ➡️ 카페 휴식</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">무거운 쇼핑백을 들고 다리가 터질 것 같을 때! 예쁜 핑크 감성 '차차 말차'나 꾸덕함 끝판왕 '에일린스 스페셜 치즈케이크'에 앉아 당을 충전하며 다리를 쉬어줍니다.</p>
-                                </div>
-                                <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [카츠 델리 전설의 파스트라미 샌드위치 🥪]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 SoHo ➡️ 주황색 F선(Broadway-Lafayette) ➡️ 2nd Ave 하차 ➡️ 카츠 델리</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">쇼핑을 마친 뒤 로어 이스트 사이드의 전설, '카츠 델리'로 이동해 빵보다 고기가 5배는 더 두껍게 쌓인 짭짤한 파스트라미 샌드위치를 딱 하나 시켜서 둘이 나눠 먹습니다!</p>
@@ -745,13 +754,16 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [대망의 피날레! 빅버스 나이트 투어 🚌🌃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 카츠 델리 ➡️ 🚕 우버 탑승 ➡️ 타임스퀘어 출발지 (M&M 스토어 부근)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">야간이고 무거운 쇼핑 짐도 많으니 편하게 우버를 타고 타임스퀘어 나이트 투어 출발지로 이동합니다. 2층 오픈탑 버스 맨 앞자리 명당에 편하게 앉아 찬란하게 빛나는 뉴욕의 야경을 두 눈에 가득 담으며 영화 같은 뉴욕의 마지막 밤을 만끽합니다!</p>
-                                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-2 rounded text-xs sm:text-sm text-yellow-800">
-                                        💡 <b>가이드의 꿀팁:</b> 2층 맨 앞쪽이나 오른쪽 라인 자리가 사진 찍기 좋습니다. 밤에 달리는 오픈탑 버스는 강바람, 빌딩 바람이 매우 차가우니 <b>반드시 바람막이나 가디건</b>을 챙겨 입고 타세요!
-                                    </div>
+                                </div>
+                                <!-- 플랜 B: 라쿠 -->
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
+                                    <p class="text-gray-600 leading-relaxed mb-2">버거 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 라쿠(Raku)로 가서 점심을 해결하세요!</p>
                                 </div>
                             </div>
                         </div>
@@ -765,13 +777,13 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:00 AM [여유로운 체크아웃 🧳]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 M 소셜 호텔 체크아웃 + 로비 짐 보관</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">어느새 마지막 날 아침 😭 산더미 같은 쇼핑백을 테트리스 하듯 캐리어에 꾹꾹 밟아 넣고 여유롭게 체크아웃을 마칩니다. 무거운 짐은 로비에 팁과 함께 안전히 던져두고 가벼운 몸으로 마지막 날을 불태웁니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:45 AM [숨겨진 찐맛집, 버거 조인트 도장 깨기! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 주변 ➡️ 톰슨 센트럴파크 호텔 내 버거 조인트(Burger Joint)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">갤러거 스테이크를 첫날 먹었으니, 점심엔 톰슨 센트럴파크 호텔 로비 장막 뒤에 숨겨진 힙한 아지트 감성의 <b>'버거 조인트'</b>를 털어줍니다! 숯불 향이 강하고 클래식한 햄버거 그 자체의 맛을 느낄 수 있습니다.</p>
@@ -780,25 +792,25 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [센트럴파크 씨티바이크 소화 타임 🚲]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 ➡️ 도보 10분 북상 ➡️ 센트럴파크 남단 씨티바이크 대여</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">육즙 넘치는 버거를 먹었으니 센트럴파크 길가에 즐비한 파란색 '씨티바이크(Citi Bike)'를 빌려 탑니다! 나무 사이로 쏟아지는 햇살과 상쾌한 바람을 가르며 영화 주인공처럼 라이딩 한 판 뛰어주세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:00 PM [뉴욕 공립 도서관 인증샷 🏛️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 자전거 반납 후 남하 (지하철 B/D/F/M 탑승 또는 20분 산책) ➡️ 뉴욕 공립 도서관(NYPL)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">뉴욕 공립 도서관에 들어가 영화 촬영지로 자주 쓰이는 클래식 끝판왕 3층 '로즈 메인 열람실(Rose Main Reading Room)'에서 우아하게 지성인 인증샷을 남깁니다. (도서관이니 사진 찍을 때 무음 카메라 & 쉿~ 조용히!)</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:45 PM [브라이언트 파크 눕방 피크닉 🍃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 도서관 뒷마당 ➡️ 브라이언트 파크 잔디밭</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">도서관 뒷문으로 나가면 바로 브라이언트 파크입니다. 빌딩 숲 한가운데 푸릇한 잔디밭에 눕거나 예쁜 초록 의자에 앉아 뉴요커 최고의 사치인 오후 일광욕을 즐깁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [Dallas BBQ 압도적 피날레! 🍗]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 파크 ➡️ 타임스퀘어(42nd St) 도보 10분 ➡️ Dallas BBQ ➡️ 숙소 짐 찾기</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">출국 전 아메리칸 스케일로 마지막 도파민을 터뜨립니다! 타임스퀘어 한복판의 'Dallas BBQ'에 들러 얼굴만 한 <b>'Texas-size Sticky Wings (텍사스 사이즈 윙)'</b> 또는 바비큐 폭립을 뜯으며 화려한 뉴욕을 마무리합니다!</p>
@@ -807,7 +819,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:30 PM [미국 마트 털기! 트레이더 조스 첼시점 🛒]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Dallas BBQ ➡️ 1번 선 지하철 탑승 ➡️ 23 St 하차 ➡️ 트레이더 조스 첼시점 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공항 가기 전 마지막 쇼핑 타임! 숙소(M 소셜)와 같은 1번 선 라인에 있는 **'트레이더 조스 첼시점(675 6th Ave)'**이 동선상 가장 편리합니다. 에브리띵 시즈닝과 에코백을 싹 쓸어 담고 숙소로 돌아가 캐리어에 넣습니다!</p>
@@ -819,7 +831,7 @@
                                     <p class="text-gray-600 leading-relaxed mb-2">마트 대신 디저트가 당긴다면? 숙소 근처 새벽까지 굽는 '인솜니아 쿠키'에서 따끈한 S'mores 쿠키를 입에 물고 뉴욕과 작별하세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:30 PM [JFK 공항으로 여유로운 출국 ✈️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 짐 찾기 ➡️ 🚕 우버 탑승 (귀국 짐 많으니 필수!) ➡️ JFK 공항</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">숙소에서 무거운 짐들을 찾고, 트래픽을 감안해 <b>편하게 우버(Uber)를 타고 JFK 공항으로 출동!</b> 출국 수속 후 아시아나 라운지 핫샤워로 모든 뚜벅이의 피로를 날려버립니다. 마지막으로 얼큰한 K-신라면을 먹고 비행기 탑승과 동시에 기절! 공주님의 갓생 뉴욕 6박 8일 여행, 대성공! 🇰🇷✨</p>
@@ -850,7 +862,7 @@
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">킨스 스테이크</div>
                                     <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">130년 역사, 파이프 감성. 압도적 두께의 <b>'머튼 찹(양고기)'</b>과 <b>'통베이컨'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">4일 차 저녁</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">2일 차 저녁</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4 flex items-center gap-2">피터루거 <span class="text-[10px] sm:text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold whitespace-nowrap">⚠️ 현금/직불카드</span></div>
@@ -870,10 +882,10 @@
                             </div>
                         </div>
 
-                        <!-- 🍝 분위기 양식 -->
+                        <!-- 🍝 분위기 양식 & 핫플 런치 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-blue-100 flex items-center gap-2">
-                                <span class="text-lg sm:text-xl font-black text-blue-700">🍝 분위기 양식 & 선착장 런치</span>
+                                <span class="text-lg sm:text-xl font-black text-blue-700">🍝 분위기 양식 & 핫플 런치</span>
                             </div>
                             <div class="divide-y divide-gray-100">
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
@@ -885,6 +897,11 @@
                                     <div class="font-bold text-gray-900 md:w-1/4">올리오 에 피우 <span class="text-xs text-gray-500 font-normal ml-1">(Olio e Più)</span></div>
                                     <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">공원 옆 로컬 찐 맛집! <b>메뉴판에 없는 '트러플 파스타' 필수 주문!</b> (레모네이드 추천)</div>
                                     <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">5일 차 저녁</div>
+                                </div>
+                                <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
+                                    <div class="font-bold text-gray-900 md:w-1/4">루비스 (Ruby's)</div>
+                                    <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">소호 웨이팅 핫플! 호주식 브런치 <b>'브론테 버거 & 쉬림프 파스타'</b></div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">6일 차 점심</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">Kings of Kobe <span class="text-xs text-gray-500 font-normal ml-1">or Valla Table</span></div>
@@ -902,8 +919,8 @@
                             <div class="divide-y divide-gray-100">
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">린더스트리 피자</div>
-                                    <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">뉴욕 MZ 1티어 피자! 신선한 <b>'부라타 슬라이스'</b> 길빵 간식</div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">6일 차 간식</div>
+                                    <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">뉴욕 MZ 1티어 피자! 윌리엄스버그 본점에서 신선한 <b>'부라타 슬라이스'</b> 길빵!</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">4일 차 간식</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">할랄가이즈 본점</div>
@@ -944,11 +961,6 @@
                                     <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">육즙 터지는 <b>'샤오롱바오 & 성젠바오'</b>와 셰프가 직접 뽑는 쫄깃한 수타면!</div>
                                     <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">4일 차 저녁</div>
                                 </div>
-                                <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
-                                    <div class="font-bold text-gray-900 md:w-1/4">라쿠 (Raku)</div>
-                                    <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">미친 쫄깃함의 수타면 + 깊은 고기 국물의 <b>'니꾸 우동'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">6일 차 점심</div>
-                                </div>
                             </div>
                         </div>
 
@@ -962,6 +974,11 @@
                                     <div class="font-bold text-gray-900 md:w-1/4">매그놀리아 베이커리</div>
                                     <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">시차를 파괴하는 꾸덕한 달콤함 <b>'바나나 푸딩'</b> (록펠러 센터점 이용)</div>
                                     <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">1일 차 간식</div>
+                                </div>
+                                <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
+                                    <div class="font-bold text-gray-900 md:w-1/4">라카브라 (La Cabra)</div>
+                                    <div class="text-sm text-gray-700 leading-relaxed md:w-1/2">소호 쇼핑 전 에너지 충전! 덴마크 북유럽 감성 <b>'스페셜티 커피'</b></div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">6일 차 간식</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">스타벅스 리저브 로스터리</div>
@@ -998,6 +1015,11 @@
                                     <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">언제든 대체</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
+                                    <div class="font-bold text-gray-900 md:w-1/4">라쿠 (Raku)</div>
+                                    <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">루비스 버거 대신 깊고 진한 국물의 미친 수타면 <b>'니꾸 우동'</b>이 당길 때!</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">6일 차 점심 대체</div>
+                                </div>
+                                <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">킨 라멘 (Kin Ramen)</div>
                                     <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">뚜벅이 피로 완벽 리셋! 진하고 뜨끈한 <b>'돈코츠 라멘'</b> (국물이 당길 때!)</div>
                                     <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">언제든 대체</div>
@@ -1010,22 +1032,22 @@
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">그랜드 센트럴 오이스터 바</div>
                                     <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">100년 된 아치 아래서 즐기는 <b>'클램 차우더와 신선한 굴'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">2일 차 점심 대체</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">2일 차 점심 플랜B</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">딘타이펑 (Din Tai Fung)</div>
                                     <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">미드타운 갓 오픈 핫플! 뜨끈한 <b>'샤오롱바오 & 스파이시 완탕'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">4일 차 저녁 대체</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">4일 차 저녁 플랜B</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">메르카도 리틀 스페인</div>
                                     <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">허드슨 야드 거대 푸드홀! <b>'빠에야 & 감바스 & 츄로스'</b></div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">3일 차 간식 대체</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">3일 차 간식 플랜B</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">파이브 가이즈 (Five Guys)</div>
                                     <div class="text-sm text-gray-600 leading-relaxed md:w-1/2">땅콩기름 감자튀김과 <b>'Bacon Cheeseburger'</b> (버거 조인트 대체 가능)</div>
-                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">7일 차 런치 대체</div>
+                                    <div class="text-xs font-semibold text-gray-500 mt-1 md:mt-0 md:w-1/4 md:text-right">7일 차 런치 플랜B</div>
                                 </div>
                                 <div class="p-4 sm:p-5 flex flex-col md:flex-row gap-2 md:items-center hover:bg-gray-50 transition">
                                     <div class="font-bold text-gray-900 md:w-1/4">르뱅 베이커리</div>
@@ -1172,9 +1194,9 @@
         let expenses = [];
         let checklist = [];
 
-        // v27: 모든 버그 수정 및 최종 일정 완벽 반영을 위한 클린 캐시 키
-        const STORAGE_KEY_EXPENSE = 'nycExpenses_v27';
-        const STORAGE_KEY_CHECK   = 'nycChecklist_v27';
+        // v29: 모든 버그 수정 및 최종 일정 완벽 반영을 위한 클린 캐시 키
+        const STORAGE_KEY_EXPENSE = 'nycExpenses_v29';
+        const STORAGE_KEY_CHECK   = 'nycChecklist_v29';
 
         const defaultExpenses = [
             { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
