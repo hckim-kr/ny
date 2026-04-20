@@ -1140,6 +1140,12 @@
             // 데이터 관리 상수
             const STORAGE_KEY_EXPENSE = 'nycExpenses_v45';
             const STORAGE_KEY_CHECK   = 'nycChecklist_v45';
+            
+            const defaultExpenses = [
+                { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
+                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 },
+                { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 }
+            ];
 
             const defaultChecklist = [
                 { category: '💳 결제/서류', desc: '여권 원본 및 사본 (분실 대비)', checked: false },
