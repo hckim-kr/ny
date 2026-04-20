@@ -1142,19 +1142,34 @@
             const STORAGE_KEY_CHECK   = 'nycChecklist_v43';
 
             const defaultExpenses = [
-                { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
-                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 },
-                { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 }
+                { category: '💳 결제/서류', desc: '여권 원본 및 사본 (분실 대비)', checked: false },
+                { category: '💳 결제/서류', desc: 'ESTA 승인 내역서 (프린트 및 모바일 캡처본)', checked: false },
+                { category: '💳 결제/서류', desc: '항공권 e-티켓 및 숙소 바우처 캡처본', checked: false },
+                { category: '💳 결제/서류', desc: '트래블월렛/트래블로그 실물 카드 (교통카드 OMNY 겸용)', checked: false },
+                { category: '💳 결제/서류', desc: '비상용 달러 현금 (팁 및 피터루거 등 현금 전용 식당 대비)', checked: false },
+                { category: '💳 결제/서류', desc: '투어/전망대/크루즈 예약 바우처 (써밋, 서클라인 등)', checked: false },
+                { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 필수)', checked: false },
+                { category: '📱 전자기기', desc: '애플페이 세팅 완료 (지갑 없이 편하게 결제)', checked: false },
+                { category: '📱 전자기기', desc: '110V 돼지코 어댑터 (최소 2~3개) 및 멀티탭', checked: false },
+                { category: '📱 전자기기', desc: '대용량 보조배터리 및 충전 케이블 넉넉히', checked: false },
+                { category: '📱 전자기기', desc: '필수 앱 설치 (Uber, Lyft, NYC Ferry, OpenTable, Resy)', checked: false },
+                { category: '📱 전자기기', desc: '오프라인 구글 맵 다운로드 완료', checked: false },
+                { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
+                { category: '📸 의류/잡화', desc: '써밋 전망대용 바지 (바닥 거울 반사 대비, 치마 절대 금지)', checked: false },
+                { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 피크닉용 가벼운 돗자리', checked: false },
+                { category: '📸 의류/잡화', desc: '발이 편한 런닝화/운동화 (하루 2만보 뚜벅이 필수)', checked: false },
+                { category: '📸 의류/잡화', desc: '얇은 바람막이/가디건 (에어컨 냉동고 및 빅버스 야간 투어 대비)', checked: false },
+                { category: '📸 의류/잡화', desc: '접이식 우산 (소나기 대비) 및 작은 크로스백', checked: false },
+                { category: '💊 상비약/세면', desc: '개인 상비약 (소화제, 진통제, 감기약, 지사제, 연고, 밴드)', checked: false },
+                { category: '💊 상비약/세면', desc: '휴족시간 또는 쿨링 패치 (다리 피로 회복용)', checked: false },
+                { category: '💊 상비약/세면', desc: '개인 칫솔/치약 (미국 호텔 제공 안 하는 곳 다수)', checked: false },
+                { category: '💊 상비약/세면', desc: '선크림 (자외선 차단제) 및 기초 화장품', checked: false },
+                { category: '🥘 식량/기타', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 등 (육류 스프 반입 불가, 해물 베이스만!)', checked: false },
+                { category: '🥘 식량/기타', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반', checked: false },
+                { category: '🥘 식량/기타', desc: '휴대용 라면포트 (호텔에서 끓여 먹기 위한 필수 꿀템)', checked: false },
+                { category: '🥘 식량/기타', desc: '여분의 지퍼백/비닐봉지 (남은 음식 포장 및 영수증 보관용)', checked: false }
             ];
 
-            const defaultChecklist = [
-                { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드', checked: false },
-                { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드', checked: false },
-                { category: '📱 전자기기', desc: 'e-SIM 또는 유심', checked: false },
-                { category: '📸 의류/잡화', desc: '써밋용 바지 (치마 금지)', checked: false },
-                { category: '📸 의류/잡화', desc: '선글라스 & 피크닉 돗자리', checked: false },
-                { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건', checked: false }
-            ];
 
             const state = {
                 expenses: [],
