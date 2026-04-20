@@ -1201,6 +1201,7 @@
             const defaultExpenses = [
                 { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
                 { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
+                { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 }
             ];
 
             const defaultChecklist = [
@@ -1308,6 +1309,7 @@
                     '항공': 'bg-blue-100 text-blue-700',
                     '숙소': 'bg-indigo-100 text-indigo-700',
                     '투어': 'bg-green-100 text-green-700',
+                    '서류': 'bg-teal-100 text-teal-700',
                 };
                 const cls = map[cat] || 'bg-gray-100 text-gray-700';
                 return `<span class="${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0">${escapeHTML(cat)}</span>`;
