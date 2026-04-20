@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🗽 Chan&Seul in NY</title>
-    <!-- Tailwind CSS (단일 HTML 프로토타입용 CDN 유지) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Pretendard Font -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f3f4f6; }
@@ -37,14 +34,12 @@
             outline-offset: 2px;
         }
 
-        /* 커스텀 스크롤바 및 스크롤 마진 */
+        /* 커스텀 스크롤바 */
         #content-area { scroll-behavior: smooth; }
         #content-area::-webkit-scrollbar { width: 6px; }
         #content-area::-webkit-scrollbar-track { background: transparent; }
         #content-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         #content-area::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        
-        .day-section { scroll-margin-top: 80px; } /* 헤더 높이 보정용 */
         
         /* 체크박스 상태 애니메이션 */
         .custom-checkbox:checked + .checkbox-box { background-color: #2563eb; border-color: #2563eb; }
@@ -70,11 +65,9 @@
 </head>
 <body class="h-screen flex overflow-hidden text-gray-800 break-keep">
 
-    <!-- 모바일 오버레이 -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden transition-opacity cursor-pointer" aria-hidden="true"></div>
 
-    <!-- 사이드바 네비게이션 -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션" aria-hidden="true">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션">
         <button id="btn-sidebar-close" class="absolute top-5 right-4 lg:hidden text-gray-400 hover:text-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded p-2" aria-label="메뉴 닫기">
             <i class="fas fa-times text-2xl" aria-hidden="true"></i>
         </button>
@@ -106,9 +99,7 @@
         <div class="p-4 border-t border-gray-100 text-xs text-gray-400 text-center">Designed by 남편 가이드 😎</div>
     </aside>
 
-    <!-- 메인 컨텐츠 래퍼 -->
     <div class="flex-1 flex flex-col h-screen overflow-hidden relative min-w-0">
-        <!-- 모바일 헤더 -->
         <header class="bg-white border-b border-gray-200 p-4 flex items-center justify-between lg:hidden z-20 shrink-0 shadow-sm relative">
             <div class="flex items-center gap-2">
                 <span class="text-2xl" aria-hidden="true">🗽</span>
@@ -119,17 +110,14 @@
             </button>
         </header>
 
-        <!-- 스크롤 영역 -->
         <main id="content-area" class="flex-1 overflow-y-auto bg-gray-50 scroll-smooth relative">
             <div class="max-w-4xl mx-auto p-4 sm:p-6 md:p-8 lg:p-12 pb-24">
 
-                <!-- ================== PART 1: 퀵 뷰 일정 ================== -->
                 <section id="part1" class="tab-content block animate-fade-in-up" role="tabpanel" aria-labelledby="btn-part1">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 1.</span> 한눈에 보는 일정</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">카톡에 바로 공유하기 좋은 6박 8일 퀵 뷰!</p>
                     
                     <div class="space-y-4 sm:space-y-6">
-                        <!-- Day 1 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">✈️ 1일 차 (6/27, 토): [화려한 입성!] 갤러거 스테이크 첫 끼 & 선셋 야경!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -146,7 +134,6 @@
                             </ul>
                         </div>
 
-                        <!-- Day 2 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🖼️ 2일 차 (6/28, 일): [여유 & 럭셔리!] 미드타운 명품 동선 & 킨스 스테이크 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -162,7 +149,6 @@
                             </ul>
                         </div>
 
-                        <!-- Day 3 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🚢 3일 차 (6/29, 월): [크루즈 낭만] 첼시 핫플 & 콘반 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -182,7 +168,6 @@
                             </ul>
                         </div>
 
-                        <!-- Day 4 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🌉 4일 차 (6/30, 화): [브루클린 낭만] 페리 감성 & 쿵푸 키친 디너!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -202,7 +187,6 @@
                             </ul>
                         </div>
 
-                        <!-- Day 5 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">⛴️ 5일 차 (7/1, 수): [공중 산책 & 미식] 업타운 다이닝 & 트램, 그리고 LIC!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -213,12 +197,11 @@
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">04:00 PM</span> <span class="leading-relaxed">🏙️ 갠트리 플라자 주립공원 산책 (빈티지 펩시콜라 사인 & 맨해튼 파노라마 뷰)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">05:30 PM</span> <span class="leading-relaxed">🚇 맨해튼 그리니치 빌리지로 쾌속 복귀! (지하철 탑승)</span></li>
                                 <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">06:30 PM</span> <span class="leading-relaxed">🍝 <b>올리오 에 피우 (Olio e Più)</b> (공원 옆 분위기 깡패 파스타 디너!)</span></li>
-                                <li class="bg-indigo-50 p-4 rounded-xl border border-indigo-200 mt-3 shadow-sm flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-indigo-700 shrink-0 sm:w-24 pt-0.5">👑 [플랜B]</span> <span class="leading-relaxed text-indigo-900">🦁 <b>브로드웨이 라이온킹 뮤지컬</b> (반값 로터리/TKTS 꿀팁 참고!)</span></li>
-                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 mt-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🌳 워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또</span></li>
+                                <li class="bg-indigo-50 p-2 rounded-lg border border-indigo-200 mt-1 mb-1 shadow-sm flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-indigo-700 shrink-0 sm:w-24 pt-0.5">👑 [플랜B]</span> <span class="leading-relaxed text-indigo-900">🦁 <b>브로드웨이 라이온킹 뮤지컬</b> (반값 로터리/TKTS 꿀팁 참고!)</span></li>
+                                <li class="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3"><span class="font-bold text-blue-600 shrink-0 sm:w-24 pt-0.5">08:00 PM</span> <span class="leading-relaxed">🌳 워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또</span></li>
                             </ul>
                         </div>
 
-                        <!-- Day 6 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">🛍️ 6일 차 (7/2, 목): [소호 런웨이] ALD 웨이팅 & 소호 필수 브랜드 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -235,7 +218,6 @@
                             </ul>
                         </div>
 
-                        <!-- Day 7 요약 -->
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 hover:shadow-md transition">
                             <h3 class="text-lg sm:text-xl font-bold border-b border-gray-100 pb-3 mb-4 text-gray-800 leading-snug">👋 7일 차 (7/3, 금): [영화 피날레] 자전거 & 숨겨진 아지트 버거 & 마지막 쇼핑!</h3>
                             <ul class="space-y-3 text-sm sm:text-base text-gray-700">
@@ -255,12 +237,10 @@
                     </div>
                 </section>
 
-                <!-- ================== PART 2: 일자별 상세 브리핑 ================== -->
                 <section id="part2" class="tab-content hidden relative" role="tabpanel" aria-labelledby="btn-part2">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 2.</span> 일자별 상세 브리핑</h2>
-                    <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">어디서 뭘 시켜야 하는지, 동선은 어떻게 타야 꿀인지 싹 다 정리한 현장 밀착 가이드북!</p>
+                    <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">현장에서 바로 꺼내보는 시간대별 완벽 가이드북!</p>
 
-                    <!-- 일자별 퀵 네비게이션 (Scroll Spy) -->
                     <div id="sticky-day-nav" class="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-md py-3 mb-6 sm:mb-8 -mx-4 px-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-gray-200">
                         <button type="button" data-day-target="day1" class="day-btn active-day shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 1</button>
                         <button type="button" data-day-target="day2" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 2</button>
@@ -272,7 +252,6 @@
                     </div>
 
                     <div class="space-y-12">
-                        <!-- Day 1 Detail -->
                         <div id="day1" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 1</span>
@@ -358,7 +337,6 @@
                             </div>
                         </div>
 
-                        <!-- Day 2 Detail -->
                         <div id="day2" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 2</span>
@@ -424,7 +402,6 @@
                                         🍽️ <b>추천 메뉴:</b> 이곳의 시그니처는 압도적 두께의 만화 고기 <b>'Legendary Mutton Chop (양고기)'</b>입니다! 소고기를 선호하시면 <b>'Prime Porterhouse for Two'</b>를 시키고, 에피타이저로 <b>'Thick-cut Bacon'</b>을 꼭 추가하세요. (팁은 총액의 20% 필수)
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 북창동 순두부 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
                                     <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 버터 위장 완벽 리셋! 북창동 순두부 🥘</h4>
@@ -439,7 +416,6 @@
                             </div>
                         </div>
 
-                        <!-- Day 3 Detail -->
                         <div id="day3" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 3</span>
@@ -488,7 +464,6 @@
                                         💡 <b>가이드의 꿀팁:</b> 배 진행 방향 기준 <b>'오른쪽 창가'</b>에 앉아야 자유의 여신상이 가장 잘 보입니다! 바람 엄청 부니까 <b>선글라스</b> 필수!
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 메르카도 리틀 스페인 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
                                     <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 메르카도 리틀 스페인 🥘</h4>
@@ -527,7 +502,6 @@
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 로스터리 ➡️ 도보 3분 이동 ➡️ 콘반 (311 W 17th St)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">요즘 뉴욕에서 제일 핫한 카츠(돈까스) 맛집 <b>'콘반(Konban NYC)'</b>은 스타벅스 로스터리에서 두 블록 떨어진 17번가에 있습니다. 로스터리 구경 후 도보로 단 3분만 걸어가서 겉은 바삭하고 속은 육즙이 가득한 프리미엄 카츠 정식을 즐기며 첼시 투어를 완벽하게 마무리합니다!</p>
                                 </div>
-                                <!-- 플랜 B: 킨 라멘 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
                                     <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 피로를 녹이는 뜨끈한 국물, 킨 라멘 🍜</h4>
@@ -542,7 +516,6 @@
                             </div>
                         </div>
 
-                        <!-- Day 4 Detail -->
                         <div id="day4" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 4</span>
@@ -628,7 +601,6 @@
                                         🍽️ <b>추천 메뉴:</b> 육즙이 팡팡 터지는 <b>'Xiao Long Bao (샤오롱바오)'</b>와 밑면은 바삭하고 위는 촉촉한 <b>'Pan Fried Pork Buns (성젠바오)'</b>, 그리고 쫄깃한 수타면 <b>'Hand-Pulled Noodles'</b>를 꼭 드셔보세요!
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 딘타이펑 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
                                     <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 딘타이펑 (Din Tai Fung) 🥟</h4>
@@ -643,7 +615,6 @@
                             </div>
                         </div>
 
-                        <!-- Day 5 Detail -->
                         <div id="day5" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 5</span>
@@ -709,7 +680,6 @@
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
                                 </div>
                                 
-                                <!-- 👑 플랜 B: 라이온킹 (독특한 테마 적용) -->
                                 <div class="relative pl-6 border-l-2 border-indigo-400 mt-8 bg-indigo-50/50 p-4 sm:p-5 rounded-r-xl border border-indigo-100">
                                     <div class="absolute w-4 h-4 bg-indigo-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
                                     <h4 class="text-base sm:text-lg font-extrabold text-indigo-800 flex items-center gap-2">👑 [플랜 B] 07:00 PM 브로드웨이 뮤지컬 관람</h4>
@@ -726,7 +696,6 @@
                             </div>
                         </div>
 
-                        <!-- Day 6 Detail -->
                         <div id="day6" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 6</span>
@@ -760,6 +729,11 @@
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [소호 입성! ALD 웨이팅 & 루비스(Ruby's) 런치 🍝]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 스트랜드 ➡️ 지하철 이동 ➡️ 소호(SoHo) 에임 레온 도르(ALD) 앞</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">소호에 도착하자마자 가장 먼저 <b>'에임 레온 도르(ALD)'</b> 매장으로 가서 태블릿에 웨이팅 이름부터 올리세요! 그리고 바로 길 건너편에 있는 호주식 브런치 맛집 <b>'루비스(Ruby's)'</b>로 직행해 브론테 버거와 쉬림프 파스타로 완벽한 런치를 즐깁니다.</p>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
@@ -808,16 +782,9 @@
                                         💡 <b>가이드의 꿀팁:</b> 2층 맨 앞쪽이나 오른쪽 라인 자리가 사진 찍기 좋습니다. 밤에 달리는 오픈탑 버스는 강바람, 빌딩 바람이 매우 차가우니 <b>반드시 바람막이나 가디건</b>을 챙겨 입고 타세요!
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 라쿠 -->
-                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
-                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Day 7 Detail -->
                         <div id="day7" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 7</span>
@@ -839,6 +806,11 @@
                                     <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
                                         🍽️ <b>주문 꿀팁:</b> 기본 <b>'Cheeseburger'</b>에 <b>"The Works"</b>(모든 토핑 추가)로 주문하세요!
                                     </div>
+                                </div>
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 파이브 가이즈 (Five Guys) 🍟</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">버거 조인트 대신 땅콩기름 감자튀김과 육즙 가득한 클래식 버거가 당긴다면? 점심은 가까운 '파이브 가이즈(Five Guys)'로 바꿔 가볍게 해결하세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
@@ -873,31 +845,28 @@
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Dallas BBQ ➡️ 1번 선 지하철 탑승 ➡️ 23 St 하차 ➡️ 트레이더 조스 첼시점 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공항 가기 전 마지막 쇼핑 타임! 숙소(M 소셜)와 같은 1번 선 라인에 있는 **'트레이더 조스 첼시점(675 6th Ave)'**이 동선상 가장 편리합니다. 에브리띵 시즈닝과 에코백을 싹 쓸어 담고 숙소로 돌아가 캐리어에 넣습니다!</p>
                                 </div>
-                                <!-- 플랜 B: 파이브가이즈 / 조스 피자 / 인솜니아 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 굿바이 도파민, 파이브 가이즈 & 조스 피자 & 인솜니아</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">마트 대신 먹방으로 피날레를 장식하고 싶다면? 땅콩기름 감자튀김 '파이브 가이즈', 스파이더맨 '조스 피자', 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 마지막 도파민을 터뜨리세요!</p>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 조스 피자 & 인솜니아 쿠키 🍕🍪</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">트레이더 조스 쇼핑 대신 마지막 먹방으로 마무리하고 싶다면? 스파이더맨으로 유명한 '조스 피자' 한 조각과, 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 출국 전 도파민을 한 번 더 채우세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:30 PM [JFK 공항으로 여유로운 출국 ✈️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 짐 찾기 ➡️ 🚕 우버 탑승 (귀국 짐 많으니 필수!) ➡️ JFK 공항</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">숙소에서 무거운 짐들을 찾고, 트래픽을 감안해 <b>편하게 우버(Uber)를 타고 JFK 공항으로 출동!</b> 출국 수속 후 아시아나 라운지 핫샤워로 모든 뚜벅이의 피로를 날려버립니다. 마지막으로 얼큰한 K-신라면을 먹고 비행기 탑승과 동시에 기절! 공주님의 갓생 뉴욕 6박 8일 여행, 대성공! 🇰🇷✨</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">숙소에서 무거운 짐들을 찾고, 트래픽을 감안해 <b>편하게 우버(Uber)를 타고 JFK 공항으로 출동!</b> 출국 수속 후 아시아나 라운지 핫샤워로 모든 뚜벅이의 피로를 날려버립니다. 마지막으로 얼큰한 K-신라면을 먹고 비행기 탑승과 동시에 기절! 갓생 뉴욕 6박 8일 여행, 대성공! 🇰🇷✨</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- ================== PART 3: 도파민 맛집 리스트 ================== -->
                 <section id="part3" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part3">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 3.</span> 도파민 맛집 리스트</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">알콜 0%, 도파민 100%! 카테고리별 완벽 정리.</p>
                     
                     <div class="space-y-6 sm:space-y-8">
                         
-                        <!-- 🥩 육식 제패 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-red-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-red-100 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-red-700">🥩 육식 제패</span>
@@ -931,7 +900,6 @@
                             </div>
                         </div>
 
-                        <!-- 🍝 분위기 양식 & 핫플 런치 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-blue-100 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-blue-700">🍝 분위기 양식 & 핫플 런치</span>
@@ -960,7 +928,6 @@
                             </div>
                         </div>
 
-                        <!-- 🍕 힙스터 스트릿 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-orange-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-orange-100 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-orange-700">🍕 힙스터 스트릿</span>
@@ -989,7 +956,6 @@
                             </div>
                         </div>
 
-                        <!-- 🍜 아시안 미식 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-green-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-green-100 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-green-700">🍜 아시안 미식</span>
@@ -1013,7 +979,6 @@
                             </div>
                         </div>
 
-                        <!-- 🍩 달달 도파민 -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-pink-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-pink-100 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-pink-700">🍩 달달 도파민</span>
@@ -1052,7 +1017,6 @@
                             </div>
                         </div>
 
-                        <!-- 🚨 비장의 플랜B -->
                         <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                             <div class="bg-gray-200 px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-300 flex items-center gap-2">
                                 <span class="text-lg sm:text-xl font-black text-gray-700">🚨 비장의 플랜B</span>
@@ -1114,16 +1078,13 @@
                     </div>
                 </section>
 
-                <!-- ================== PART 4: 필수 준비물 체크 ================== -->
                 <section id="part4" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part4">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 4.</span> 필수 준비물 체크</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6">가방 싸실 때 핸드폰으로 편하게 톡톡 눌러서 체크하세요!</p>
                     
-                    <!-- JS 렌더링 컨테이너 (모바일 카드 레이아웃 적용) -->
                     <div id="checklist-body" class="space-y-4"></div>
                 </section>
 
-                <!-- ================== PART 5: 실시간 통합 장부 ================== -->
                 <section id="part5" class="tab-content hidden animate-fade-in-up relative" role="tabpanel" aria-labelledby="btn-part5">
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 5.</span> 실시간 통합 장부</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8">모든 지출을 원화(KRW)로 기록하는 공주님 전용 통합 장부!</p>
@@ -1147,7 +1108,6 @@
                         <h3 class="text-lg sm:text-xl font-bold text-gray-800"><span class="text-xl sm:text-2xl mr-2">💸</span> 상세 지출 내역서</h3>
                     </div>
                     
-                    <!-- JS 렌더링 컨테이너 (모바일 카드 레이아웃 적용) -->
                     <div id="expense-list" class="space-y-4"></div>
                 </section>
 
@@ -1178,8 +1138,8 @@
             };
 
             // 데이터 관리 상수
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_v42';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_v42';
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_v43';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_v43';
 
             const defaultExpenses = [
                 { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
@@ -1188,20 +1148,12 @@
             ];
 
             const defaultChecklist = [
-                { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드 (교통카드 겸용)', checked: false },
-                { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드 (피터루거: 신용카드 불가, 현금/직불만 됨)', checked: false },
-                { category: '💳 결제/서류', desc: '여권, ESTA 확인증, 각종 바우처 (오프라인 캡처본)', checked: false },
-                { category: '📱 전자기기', desc: 'e-SIM 또는 유심 (데이터 생명줄)', checked: false },
-                { category: '📱 전자기기', desc: '애플페이 세팅 (지갑 없이 편하게)', checked: false },
-                { category: '📱 전자기기', desc: '110V 돼지코 어댑터 & 넉넉한 보조배터리', checked: false },
-                { category: '📱 전자기기', desc: '필수 앱: Uber, NYC Ferry, OpenTable/Resy 예약, Circle Line 예약', checked: false },
-                { category: '📸 의류/잡화', desc: '선글라스 (전망대 눈부심 & 크루즈 강바람 대비)', checked: false },
-                { category: '📸 의류/잡화', desc: '써밋 전망대용 바지/점프수트 (치마 절대 금지)', checked: false },
-                { category: '📸 의류/잡화', desc: '센트럴파크 잔디밭 눕방용 예쁜 돗자리', checked: false },
-                { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건 (에어컨 냉동고 대비)', checked: false },
-                { category: '🥘 식량/간식', desc: '오뚜기 해물짬뽕, 맵탱 조개라면 (해물 베이스 반입 가능!)', checked: false },
-                { category: '🥘 식량/간식', desc: '휴대용 라면포트 (호텔에서 보글보글 끓여 먹기 위한 필수 꿀템!)', checked: false },
-                { category: '🥘 식량/간식', desc: '햇반, 깻잎 통조림, 고추참치, 볶음김치, 김자반 (수화물 캔/팩 포장 필수)', checked: false }
+                { category: '💳 결제/서류', desc: '트래블월렛 / 트래블로그 실물 카드', checked: false },
+                { category: '💳 결제/서류', desc: '비상용 달러 현금 + 직불카드', checked: false },
+                { category: '📱 전자기기', desc: 'e-SIM 또는 유심', checked: false },
+                { category: '📸 의류/잡화', desc: '써밋용 바지 (치마 금지)', checked: false },
+                { category: '📸 의류/잡화', desc: '선글라스 & 피크닉 돗자리', checked: false },
+                { category: '💊 상비약/기타', desc: '상비약 & 얇은 가디건', checked: false }
             ];
 
             const state = {
@@ -1314,7 +1266,6 @@
                 
                 if (targetTab && targetBtn) {
                     targetTab.classList.remove('hidden');
-                    
                     targetBtn.classList.add('active');
                     targetBtn.setAttribute('aria-selected', 'true');
                     targetBtn.setAttribute('tabindex', '0');
