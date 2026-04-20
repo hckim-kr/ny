@@ -37,11 +37,14 @@
             outline-offset: 2px;
         }
 
-        /* 커스텀 스크롤바 */
+        /* 커스텀 스크롤바 및 스크롤 마진 */
+        #content-area { scroll-behavior: smooth; }
         #content-area::-webkit-scrollbar { width: 6px; }
         #content-area::-webkit-scrollbar-track { background: transparent; }
         #content-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         #content-area::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .day-section { scroll-margin-top: 80px; } /* 헤더 높이 보정용 */
         
         /* 체크박스 상태 애니메이션 */
         .custom-checkbox:checked + .checkbox-box { background-color: #2563eb; border-color: #2563eb; }
@@ -71,7 +74,7 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-gray-900/50 z-30 hidden lg:hidden transition-opacity cursor-pointer" aria-hidden="true"></div>
 
     <!-- 사이드바 네비게이션 -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 w-72 bg-white shadow-2xl z-40 transform -translate-x-full transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0 flex flex-col h-full flex-shrink-0" aria-label="메인 네비게이션" aria-hidden="true">
         <button id="btn-sidebar-close" class="absolute top-5 right-4 lg:hidden text-gray-400 hover:text-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded p-2" aria-label="메뉴 닫기">
             <i class="fas fa-times text-2xl" aria-hidden="true"></i>
         </button>
@@ -257,20 +260,20 @@
                     <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 2.</span> 일자별 상세 브리핑</h2>
                     <p class="text-sm sm:text-base text-gray-500 mb-4 sm:mb-6">어디서 뭘 시켜야 하는지, 동선은 어떻게 타야 꿀인지 싹 다 정리한 현장 밀착 가이드북!</p>
 
-                    <!-- 버튼 영역 (Scroll Spy 연동) -->
+                    <!-- 일자별 퀵 네비게이션 (Scroll Spy) -->
                     <div id="sticky-day-nav" class="sticky top-0 z-20 bg-gray-50/95 backdrop-blur-md py-3 mb-6 sm:mb-8 -mx-4 px-4 flex gap-2 overflow-x-auto hide-scrollbar border-b border-gray-200">
-                        <button type="button" data-day-target="day1" class="day-btn active-day shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 1</button>
-                        <button type="button" data-day-target="day2" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 2</button>
-                        <button type="button" data-day-target="day3" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 3</button>
-                        <button type="button" data-day-target="day4" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 4</button>
-                        <button type="button" data-day-target="day5" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 5</button>
-                        <button type="button" data-day-target="day6" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 6</button>
-                        <button type="button" data-day-target="day7" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Day 7</button>
+                        <button type="button" data-day-target="day1" class="day-btn active-day shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 1</button>
+                        <button type="button" data-day-target="day2" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 2</button>
+                        <button type="button" data-day-target="day3" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 3</button>
+                        <button type="button" data-day-target="day4" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 4</button>
+                        <button type="button" data-day-target="day5" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 5</button>
+                        <button type="button" data-day-target="day6" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 6</button>
+                        <button type="button" data-day-target="day7" class="day-btn shrink-0 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm font-bold text-xs sm:text-sm text-gray-700 hover:bg-blue-600 hover:text-white transition focus:outline-none">Day 7</button>
                     </div>
 
                     <div class="space-y-12">
                         <!-- Day 1 Detail -->
-                        <div id="day1" class="day-section scroll-mt-24">
+                        <div id="day1" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 1</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(6/27, 토)</span>
@@ -356,11 +359,11 @@
                         </div>
 
                         <!-- Day 2 Detail -->
-                        <div id="day2" class="day-section scroll-mt-24">
+                        <div id="day2" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 2</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(6/28, 일)</span>
-                                <span class="leading-snug">미드타운 명품 산책과 동심의 밤!</span>
+                                <span class="leading-snug">미드타운 명품 산책과 킨스 디너</span>
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
@@ -383,20 +386,14 @@
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:30 AM [힙한 로컬 타이 요리, 대그 타이 런치! 🍛]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 써밋 전망대 ➡️ 도보/지하철 ➡️ 대그 타이(Dagg Thai)</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">써밋 전망대 관람 후 미드타운에 위치한 가성비 좋고 힙한 로컬 맛집 '대그 타이'로 이동해 든든하게 점심을 해결합니다.</p>
-                                    <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
-                                        🍽️ <b>추천 메뉴:</b> 기본기에 충실한 <b>'Pad Thai(팟타이)'</b>와 짭조름한 <b>'Pineapple Fried Rice(파인애플 볶음밥)'</b> 조합을 추천합니다!
+                                    <h4 class="text-lg font-bold text-blue-700">⏰ 11:30 AM [대그 타이 런치 or 오이스터 바 🦪]</h4>
+                                    <p class="text-sm text-gray-600 leading-relaxed mb-2">써밋 관람 후 점심 식사! 가성비 힙플 <b>대그 타이</b>에서 즐거운 점심을 하거나, 해산물이 당긴다면 100년 역사의 <b>그랜드 센트럴 오이스터 바</b>를 추천합니다.</p>
+                                    <div class="bg-gray-100 p-3 rounded-lg border border-gray-200 text-xs sm:text-sm flex flex-col gap-1">
+                                        <span class="font-bold text-red-600">🚨 플랜 B: 그랜드 센트럴 오이스터 바</span>
+                                        <span>그랜드 센트럴 터미널 지하 위치. 웅장한 아치 천장 아래서 신선한 굴과 진한 클램 차우더를 맛보세요.</span>
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 오이스터 바 추가 반영 완료 -->
-                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
-                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 그랜드 센트럴 오이스터 바 🦪</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">타이 요리 대신 해산물이 당기신다면? 써밋 건물 지하(그랜드 센트럴 터미널 직결)에 있는 100년 된 아치 아래 '오이스터 바'에서 진한 클램 차우더와 신선한 굴을 즐겨보세요!</p>
-                                </div>
-                                <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
+                                <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:30 PM [5번가 명품 거리 핵심 스팟 공략! ⛪🛍️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 점심 식사 후 ➡️ 도보 이동 ➡️ 5번가(5th Ave) 명품거리</p>
@@ -421,9 +418,8 @@
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
                                     <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [우아한 정통 디너, 킨스 스테이크 🥩]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 MoMA ➡️ 지하철(B/D/F/M 선 등) ➡️ 36th St 하차 ➡️ 킨스 스테이크</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">미술관 관람을 마치고 미드타운으로 이동해 130년 역사의 '킨스 스테이크하우스'로 향합니다! 천장에 빼곡히 매달린 담뱃대(파이프) 감성과 고풍스러운 분위기 속에서 우아한 저녁을 즐깁니다.</p>
+                                    <h4 class="text-lg font-bold text-blue-700">⏰ 06:00 PM [우아한 정통 디너, 킨스 스테이크 🥩]</h4>
+                                    <p class="text-sm text-gray-600 leading-relaxed mb-2">미술관 관람을 마치고 미드타운으로 이동해 130년 역사의 '킨스 스테이크하우스'로 향합니다! 천장에 빼곡히 매달린 담뱃대(파이프) 감성과 고풍스러운 분위기 속에서 우아한 저녁을 즐깁니다.</p>
                                     <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mt-2 rounded text-xs sm:text-sm text-blue-900">
                                         🍽️ <b>추천 메뉴:</b> 이곳의 시그니처는 압도적 두께의 만화 고기 <b>'Legendary Mutton Chop (양고기)'</b>입니다! 소고기를 선호하시면 <b>'Prime Porterhouse for Two'</b>를 시키고, 에피타이저로 <b>'Thick-cut Bacon'</b>을 꼭 추가하세요. (팁은 총액의 20% 필수)
                                     </div>
@@ -444,7 +440,7 @@
                         </div>
 
                         <!-- Day 3 Detail -->
-                        <div id="day3" class="day-section scroll-mt-24">
+                        <div id="day3" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 3</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(6/29, 월)</span>
@@ -547,7 +543,7 @@
                         </div>
 
                         <!-- Day 4 Detail -->
-                        <div id="day4" class="day-section scroll-mt-24">
+                        <div id="day4" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 4</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(6/30, 화)</span>
@@ -648,7 +644,7 @@
                         </div>
 
                         <!-- Day 5 Detail -->
-                        <div id="day5" class="day-section scroll-mt-24">
+                        <div id="day5" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 5</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(7/1, 수)</span>
@@ -656,7 +652,7 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:30 AM [피콜라 쿠치나 업타운 (시칠리아 런치!) 🍝]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 지하철 E/M선 ➡️ Lexington Av/53 St 하차 ➡️ 도보 ➡️ 60번가 식당</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">오늘은 알람 끄고 늦잠 푹 주무세요! 예쁘게 단장하고 60번가의 '피콜라 쿠치나 업타운(Piccola Cucina Uptown)'으로 향합니다. 현지인들 사이에서 시끌벅적 활기찬 이탈리안 바이브를 느끼는 곳입니다.</p>
@@ -665,7 +661,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [루스벨트 아일랜드 트램웨이 🚠]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 피콜라 쿠치나 ➡️ 1블록(59번가) 도보 이동 ➡️ 트램 탑승 (OMNY 카드 가능)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">식당에서 나와 단 1블록만 걸으면 빨간색 케이블카(트램) 탑승장입니다! OMNY 카드로 띡! 찍고 타면 끝. 대낮에 타는 트램은 건물 숲을 가르며 짜릿한 공중 산책 뷰를 선사합니다.</p>
@@ -674,31 +670,31 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [루스벨트 섬 씨티바이크 낭만 라이딩 🚲]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 트램 하차 ➡️ 섬 내 씨티바이크 대여 ➡️ 포 프리덤스 파크(남단) 산책</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">루스벨트 섬은 차가 거의 없어 자전거 타기 천국입니다! 파란색 씨티바이크를 빌려 평화로운 벚꽃 산책로(강변 길)를 따라 섬 남단 '포 프리덤스 파크'까지 달립니다. 맨해튼과 퀸즈를 양옆에 두고 달리는 짜릿함!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:30 PM [루스벨트 섬 ➡️ LIC 페리 이동 ⛴️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 자전거 반납 ➡️ 섬 동쪽 선착장 ➡️ NYC Ferry(Astoria 노선) ➡️ LIC 도착</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed">루스벨트 섬에서 여유를 만끽한 뒤, 섬 동쪽 선착장에서 NYC Ferry를 타고 퀸즈 롱아일랜드 시티(LIC/Hunter's Point South)로 직행합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:00 PM [갠트리 플라자 파노라마 뷰 & 힙스터 카페 🏙️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 LIC 페리 하차장 ➡️ 공원 산책 + 근처 힙스터 카페 휴식</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">LIC의 랜드마크! 거대한 빨간색 빈티지 '펩시콜라' 사인 앞에서 인생샷을 남기고, 갠트리 플라자 주립공원을 걸으며 강 건너 펼쳐지는 엠파이어 스테이트와 크라이슬러 빌딩의 완벽한 파노라마 뷰를 눈에 담습니다. 피곤하면 근처 'Sweetleaf' 커피숍에서 잠시 쉬어가도 좋아요.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [🚇 맨해튼 그리니치 빌리지 쾌속 복귀!]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 LIC(Hunters Point Ave 역) ➡️ 보라색 7번 선 탑승 ➡️ 타임스퀘어 환승 ➡️ N/R/W로 8 St-NYU 역 하차</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">LIC 스카이라인 뷰를 충분히 즐겼다면, 길 막히는 우버 대신 지하철을 타고 맨해튼 다운타운(그리니치 빌리지)으로 신나게 복귀합니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:30 PM [🍝 올리오 에 피우 (Olio e Più) 로컬 디너]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 8 St-NYU 역 하차 ➡️ 도보 5분 ➡️ 올리오 에 피우</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">워싱턴 스퀘어 파크 바로 옆, 예쁜 꽃으로 장식된 테라스가 있는 그리니치 빌리지 최고의 로컬 이탈리안 레스토랑입니다!</p>
@@ -706,6 +702,13 @@
                                         🍽️ <b>주문 꿀팁:</b> 메뉴판에는 없지만 <b>'Secret Menu'로 트러플 파스타(Truffle Pasta)</b>를 주문할 수 있습니다! 무조건 시켜보세요. 화덕에서 갓 구운 <b>'Margherita Pizza'</b>와 함께라면 예술입니다. 술을 시키지 않고 시원한 레모네이드나 소다만 곁들여도 분위기 내기 완벽한 곳입니다! (팁 20%)
                                     </div>
                                 </div>
+                                <div class="relative pl-6 border-l-2 border-blue-200">
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
+                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또 🌳]</h4>
+                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 바로 앞 ➡️ 워싱턴 스퀘어 파크</p>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
+                                </div>
+                                
                                 <!-- 👑 플랜 B: 라이온킹 (독특한 테마 적용) -->
                                 <div class="relative pl-6 border-l-2 border-indigo-400 mt-8 bg-indigo-50/50 p-4 sm:p-5 rounded-r-xl border border-indigo-100">
                                     <div class="absolute w-4 h-4 bg-indigo-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
@@ -720,18 +723,11 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
-                                    <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [워싱턴 스퀘어 파크 야간 산책 & Venchi 젤라또 🌳]</h4>
-                                    <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 바로 앞 ➡️ 워싱턴 스퀘어 파크</p>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">대형 아치 아래서 영화처럼 낭만적인 버스킹을 구경하면서 고급진 'Venchi' 젤라또 하나 입에 물면, 공주님 거기가 바로 천국입니다.</p>
-                                </div>
-                                
                             </div>
                         </div>
 
                         <!-- Day 6 Detail -->
-                        <div id="day6" class="day-section scroll-mt-24">
+                        <div id="day6" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 6</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(7/2, 목)</span>
@@ -739,13 +735,13 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:00 AM [메디슨 스퀘어 파크 산책 먼저! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 ➡️ 지하철 N/R/W 탑승 ➡️ 23 St 역 하차 ➡️ 메디슨 스퀘어 파크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">아침 일찍 나와 다리미 빌딩(Flatiron Building) 옆 메디슨 스퀘어 파크를 먼저 산책합니다. 쉑쉑버거 본점 <b>10시 30분 오픈</b>에 맞춰, 공원에서 푸릇푸릇한 아침 공기를 마시며 벤치에서 기다립니다. (내 빵을 노리는 비둘기 떼와 청설모 깡패 조심!)</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 10:30 AM [쉑쉑버거 본점 오픈런! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 메디슨 스퀘어 파크 내 쉑쉑버거 (본점)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">10시 30분 정각, 첫 손님으로 입장! 야외 본점에서만 느낄 수 있는 신선도 200% 패티의 맛을 느껴보세요.</p>
@@ -754,31 +750,25 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 12:00 PM [해리포터 스토어 & 스트랜드 서점 🍺📚]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 메디슨 스퀘어 파크 ➡️ 도보 2분 ➡️ 해리포터 스토어 ➡️ 도보 10분 ➡️ 스트랜드 서점</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공원 바로 옆 해리포터 스토어에서 웅장한 호그와트 굿즈를 구경하고, 안쪽 버터맥주 바에서 달달한 <b>버터맥주(Butterbeer)</b>로 도파민을 펌핑합니다! 이어서 남쪽으로 걸어 18마일 서점 '스트랜드'에 들러 뉴요커 감성 에코백을 득템합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:00 PM [소호 입성! ALD 웨이팅 & 루비스(Ruby's) 런치 🍝]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 스트랜드 ➡️ 지하철 이동 ➡️ 소호(SoHo) 에임 레온 도르(ALD) 앞</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">소호에 도착하자마자 가장 먼저 <b>'에임 레온 도르(ALD)'</b> 매장으로 가서 태블릿에 웨이팅 이름부터 올리세요! 그리고 바로 길 건너편에 있는 호주식 브런치 맛집 <b>'루비스(Ruby's)'</b>로 직행해 브론테 버거와 쉬림프 파스타로 완벽한 런치를 즐깁니다.</p>
                                 </div>
-                                <!-- 플랜 B: 라쿠 -->
-                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
-                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
-                                </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:15 PM [라카브라(La Cabra) 커피 수혈 ☕]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 루비스 ➡️ 도보 3분 ➡️ 라카브라 커피</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">밥 먹고 카페인이 필요할 때! 덴마크에서 온 북유럽 감성의 스페셜티 커피 명가 <b>'라카브라'</b>에서 향긋한 커피를 한 잔 테이크아웃하여 본격적인 쇼핑 전투를 준비합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 02:45 PM [소호 핫플 폭풍 런웨이 쇼핑 🛍️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 소호(SoHo) 돌바닥 거리 ➡️ 프린스 스트릿 & 스프링 스트릿 누비기</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공주님, 지갑 다 여셨죠? 순번이 오면 <b>ALD</b> 매장을 구경하시고, 본격적으로 런웨이를 시작합니다!</p>
@@ -794,13 +784,13 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 04:30 PM [MoMA 디자인 스토어 & 당 충전 🖼️🍵]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 쇼핑 중 ➡️ MoMA 디자인 스토어 ➡️ 에일린스 치즈케이크</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">옷을 너무 많이 사서 죄책감(?)이 들 때쯤, <b>MoMA 디자인 스토어</b>에 들러 교양 있는 유니크한 굿즈를 구경하며 문화인으로서의 소비를 즐깁니다. 다리가 터질 것 같을 때 꾸덕함 끝판왕 '에일린스 스페셜 치즈케이크'에 앉아 당을 충전합니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 06:00 PM [카츠 델리 전설의 파스트라미 샌드위치 🥪]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 SoHo ➡️ 주황색 F선(Broadway-Lafayette) ➡️ 2nd Ave 하차 ➡️ 카츠 델리</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">쇼핑을 마친 뒤 로어 이스트 사이드의 전설, '카츠 델리'로 이동해 빵보다 고기가 5배는 더 두껍게 쌓인 짭짤한 파스트라미 샌드위치를 딱 하나 시켜서 둘이 나눠 먹습니다!</p>
@@ -810,7 +800,7 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:00 PM [대망의 피날레! 빅버스 나이트 투어 🚌🌃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 카츠 델리 ➡️ 🚕 우버 탑승 ➡️ 타임스퀘어 출발지 (M&M 스토어 부근)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">야간이고 무거운 쇼핑 짐도 많으니 편하게 우버를 타고 타임스퀘어 나이트 투어 출발지로 이동합니다. 2층 오픈탑 버스 맨 앞자리 명당에 편하게 앉아 찬란하게 빛나는 뉴욕의 야경을 두 눈에 가득 담으며 영화 같은 뉴욕의 마지막 밤을 만끽합니다!</p>
@@ -818,11 +808,17 @@
                                         💡 <b>가이드의 꿀팁:</b> 2층 맨 앞쪽이나 오른쪽 라인 자리가 사진 찍기 좋습니다. 밤에 달리는 오픈탑 버스는 강바람, 빌딩 바람이 매우 차가우니 <b>반드시 바람막이나 가디건</b>을 챙겨 입고 타세요!
                                     </div>
                                 </div>
+                                <!-- 플랜 B: 라쿠 -->
+                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
+                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 라쿠 (Raku) 🍜</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">루비스 브런치 대신 깊고 진한 고기 국물과 미친 쫄깃함의 수타 우동이 당긴다면 소호 초입의 라쿠(Raku)로 가서 점심을 해결하세요!</p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Day 7 Detail -->
-                        <div id="day7" class="day-section scroll-mt-24">
+                        <div id="day7" class="day-section">
                             <h3 class="text-xl md:text-2xl font-bold border-b-2 border-gray-800 pb-3 mb-6 flex flex-wrap items-center gap-2">
                                 <span class="bg-gray-800 text-white text-sm px-3 py-1 rounded-full shrink-0">Day 7</span>
                                 <span class="text-blue-600 shrink-0 text-base sm:text-xl">(7/3, 금)</span>
@@ -830,13 +826,13 @@
                             </h3>
                             <div class="space-y-6">
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:00 AM [여유로운 체크아웃 🧳]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 M 소셜 호텔 체크아웃 + 로비 짐 보관</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">어느새 마지막 날 아침 😭 산더미 같은 쇼핑백을 테트리스 하듯 캐리어에 꾹꾹 밟아 넣고 여유롭게 체크아웃을 마칩니다. 무거운 짐은 로비에 팁과 함께 안전히 던져두고 가벼운 몸으로 마지막 날을 불태웁니다!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 11:45 AM [숨겨진 찐맛집, 버거 조인트 도장 깨기! 🍔]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 주변 ➡️ 톰슨 센트럴파크 호텔 내 버거 조인트(Burger Joint)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">갤러거 스테이크를 첫날 먹었으니, 점심엔 톰슨 센트럴파크 호텔 로비 장막 뒤에 숨겨진 힙한 아지트 감성의 <b>'버거 조인트'</b>를 털어줍니다! 숯불 향이 강하고 클래식한 햄버거 그 자체의 맛을 느낄 수 있습니다.</p>
@@ -844,32 +840,26 @@
                                         🍽️ <b>주문 꿀팁:</b> 기본 <b>'Cheeseburger'</b>에 <b>"The Works"</b>(모든 토핑 추가)로 주문하세요!
                                     </div>
                                 </div>
-                                <!-- 플랜 B: 파이브 가이즈 -->
-                                <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
-                                    <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 파이브 가이즈 (Five Guys) 🍟</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">버거 조인트 대신 땅콩기름 감자튀김과 육즙 가득한 클래식 버거가 당긴다면? 점심은 가까운 '파이브 가이즈(Five Guys)'로 바꿔 가볍게 해결하세요!</p>
-                                </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 01:30 PM [센트럴파크 씨티바이크 소화 타임 🚲]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 식당 ➡️ 도보 10분 북상 ➡️ 센트럴파크 남단 씨티바이크 대여</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">육즙 넘치는 버거를 먹었으니 센트럴파크 길가에 즐비한 파란색 '씨티바이크(Citi Bike)'를 빌려 탑니다! 나무 사이로 쏟아지는 햇살과 상쾌한 바람을 가르며 영화 주인공처럼 라이딩 한 판 뛰어주세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:00 PM [뉴욕 공립 도서관 인증샷 🏛️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 자전거 반납 후 남하 (지하철 B/D/F/M 탑승 또는 20분 산책) ➡️ 뉴욕 공립 도서관(NYPL)</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">뉴욕 공립 도서관에 들어가 영화 촬영지로 자주 쓰이는 클래식 끝판왕 3층 '로즈 메인 열람실(Rose Main Reading Room)'에서 우아하게 지성인 인증샷을 남깁니다. (도서관이니 사진 찍을 때 무음 카메라 & 쉿~ 조용히!)</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 03:45 PM [브라이언트 파크 눕방 피크닉 🍃]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 도서관 뒷마당 ➡️ 브라이언트 파크 잔디밭</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">도서관 뒷문으로 나가면 바로 브라이언트 파크입니다. 빌딩 숲 한가운데 푸릇한 잔디밭에 눕거나 예쁜 초록 의자에 앉아 뉴요커 최고의 사치인 오후 일광욕을 즐깁니다.</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 05:30 PM [Dallas BBQ 압도적 피날레! 🍗]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 파크 ➡️ 타임스퀘어(42nd St) 도보 10분 ➡️ Dallas BBQ ➡️ 숙소 짐 찾기</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">출국 전 아메리칸 스케일로 마지막 도파민을 터뜨립니다! 타임스퀘어 한복판의 'Dallas BBQ'에 들러 얼굴만 한 <b>'Texas-size Sticky Wings (텍사스 사이즈 윙)'</b> 또는 바비큐 폭립을 뜯으며 화려한 뉴욕을 마무리합니다!</p>
@@ -878,20 +868,19 @@
                                     </div>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 07:30 PM [미국 마트 털기! 트레이더 조스 첼시점 🛒]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 Dallas BBQ ➡️ 1번 선 지하철 탑승 ➡️ 23 St 하차 ➡️ 트레이더 조스 첼시점 ➡️ 숙소</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">공항 가기 전 마지막 쇼핑 타임! 숙소(M 소셜)와 같은 1번 선 라인에 있는 **'트레이더 조스 첼시점(675 6th Ave)'**이 동선상 가장 편리합니다. 에브리띵 시즈닝과 에코백을 싹 쓸어 담고 숙소로 돌아가 캐리어에 넣습니다!</p>
                                 </div>
-
-                                <!-- 플랜 B: 조스 피자 / 인솜니아 -->
+                                <!-- 플랜 B: 파이브가이즈 / 조스 피자 / 인솜니아 -->
                                 <div class="relative pl-6 border-l-2 border-gray-400 mt-4 bg-gray-50 p-4 rounded-r-xl border border-gray-200">
                                     <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] top-4 shadow-[0_0_0_4px_white]"></div>
-                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 조스 피자 & 인솜니아 쿠키 🍕🍪</h4>
-                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">트레이더 조스 쇼핑 대신 마지막 먹방으로 마무리하고 싶다면? 스파이더맨으로 유명한 '조스 피자' 한 조각과, 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 출국 전 도파민을 한 번 더 채우세요!</p>
+                                    <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">🚨 [플랜 B] 굿바이 도파민, 파이브 가이즈 & 조스 피자 & 인솜니아</h4>
+                                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">마트 대신 먹방으로 피날레를 장식하고 싶다면? 땅콩기름 감자튀김 '파이브 가이즈', 스파이더맨 '조스 피자', 새벽까지 굽는 따끈한 '인솜니아 쿠키'로 마지막 도파민을 터뜨리세요!</p>
                                 </div>
                                 <div class="relative pl-6 border-l-2 border-blue-200 mt-6">
-                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[5px] top-2"></div>
+                                    <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[7px] top-2"></div>
                                     <h4 class="text-base sm:text-lg font-bold text-blue-700">⏰ 08:30 PM [JFK 공항으로 여유로운 출국 ✈️]</h4>
                                     <p class="text-sm sm:text-base text-gray-900 font-semibold my-2">🚩 숙소 짐 찾기 ➡️ 🚕 우버 탑승 (귀국 짐 많으니 필수!) ➡️ JFK 공항</p>
                                     <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-2">숙소에서 무거운 짐들을 찾고, 트래픽을 감안해 <b>편하게 우버(Uber)를 타고 JFK 공항으로 출동!</b> 출국 수속 후 아시아나 라운지 핫샤워로 모든 뚜벅이의 피로를 날려버립니다. 마지막으로 얼큰한 K-신라면을 먹고 비행기 탑승과 동시에 기절! 공주님의 갓생 뉴욕 6박 8일 여행, 대성공! 🇰🇷✨</p>
@@ -1167,40 +1156,34 @@
     </div>
 
     <script>
-        // 전역 네임스페이스 오염을 막기 위한 즉시 실행 함수(IIFE)
+        // 전역 스코프 오염을 방지하는 즉시 실행 함수(IIFE)
         (() => {
             'use strict';
 
-            // --- XSS 방지 이스케이프 함수 ---
-            function escapeHTML(str) {
+            // --- XSS 방지 유틸리티 ---
+            const escapeHTML = (str) => {
                 if (typeof str !== 'string') return str;
-                return str.replace(/[&<>'"]/g, 
-                    tag => ({
-                        '&': '&amp;',
-                        '<': '&lt;',
-                        '>': '&gt;',
-                        "'": '&#39;',
-                        '"': '&quot;'
-                    }[tag] || tag)
-                );
-            }
+                return str.replace(/[&<>'"]/g, tag => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+                }[tag] || tag));
+            };
 
-            // --- 안전한 스토리지 저장 함수 ---
-            function safeSetStorage(key, data) {
+            // --- 스토리지 유틸리티 ---
+            const safeSetStorage = (key, data) => {
                 try {
                     localStorage.setItem(key, JSON.stringify(data));
                 } catch (e) {
-                    console.error("스토리지 저장 실패 (용량 초과 또는 브라우저 보안 설정 문제):", e);
+                    console.error("Storage save failed:", e);
                 }
-            }
+            };
 
-            // --- 상수 및 데이터 세팅 (최종 버그 수정판 캐시 키) ---
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_v38';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_v38';
+            // 데이터 관리 상수
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_v42';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_v42';
 
             const defaultExpenses = [
                 { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
-                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 }
+                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2896754 },
                 { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 }
             ];
 
@@ -1227,11 +1210,10 @@
                 lastFocused: null
             };
 
-            // --- DOM 캐싱 ---
             const DOM = {};
 
+            // --- 초기화 ---
             document.addEventListener('DOMContentLoaded', () => {
-                // DOM 요소 매핑
                 DOM.sidebar = document.getElementById('sidebar');
                 DOM.sidebarOverlay = document.getElementById('sidebar-overlay');
                 DOM.btnSidebarOpen = document.getElementById('btn-sidebar-open');
@@ -1239,68 +1221,49 @@
                 DOM.mainNav = document.getElementById('main-nav');
                 DOM.stickyDayNav = document.getElementById('sticky-day-nav');
                 DOM.contentArea = document.getElementById('content-area');
-                DOM.tabContents = document.querySelectorAll('.tab-content');
-                DOM.tabBtns = document.querySelectorAll('.tab-btn');
-                DOM.dayBtns = document.querySelectorAll('.day-btn');
                 DOM.checklistBody = document.getElementById('checklist-body');
                 DOM.expenseList = document.getElementById('expense-list');
                 DOM.summaryTotal = document.getElementById('summary-total');
+                DOM.tabContents = document.querySelectorAll('.tab-content');
+                DOM.tabBtns = document.querySelectorAll('.tab-btn');
+                DOM.dayBtns = document.querySelectorAll('.day-btn');
                 DOM.part2Tab = document.getElementById('part2');
 
+                initSidebarA11y();
                 initData();
-                handleViewportChange();
                 attachEventListeners();
                 initScrollSpy();
             });
 
-            // --- 데이터 유효성 검사 (엄격한 스키마 검증) ---
-            function validateExpenses(data) {
-                if (!Array.isArray(data)) return null;
-                const validated = data.map(exp => ({
-                    day: String(exp?.day || '기타'),
-                    category: String(exp?.category || '기타'),
-                    desc: String(exp?.desc || ''),
-                    amount: Number(exp?.amount) || 0
-                }));
-                return validated.length > 0 ? validated : null;
-            }
+            // 화면 크기에 따른 사이드바 접근성 초기화
+            const initSidebarA11y = () => {
+                const isDesktop = window.innerWidth >= 1024;
+                if (DOM.sidebar) DOM.sidebar.setAttribute('aria-hidden', isDesktop ? 'false' : 'true');
+            };
 
-            function validateChecklist(data) {
-                if (!Array.isArray(data)) return null;
-                const validated = data.map(item => ({
-                    category: String(item?.category || '기타'),
-                    desc: String(item?.desc || ''),
-                    checked: Boolean(item?.checked)
-                }));
-                return validated.length > 0 ? validated : null;
-            }
-
-            // --- 초기화 (Deep Copy 적용) ---
-            function initData() {
+            // 데이터 유효성 검사 및 로드
+            const initData = () => {
                 try {
-                    const expData = JSON.parse(localStorage.getItem(STORAGE_KEY_EXPENSE));
-                    state.expenses = validateExpenses(expData) || JSON.parse(JSON.stringify(defaultExpenses));
-                } catch { 
-                    state.expenses = JSON.parse(JSON.stringify(defaultExpenses)); 
+                    const expRaw = JSON.parse(localStorage.getItem(STORAGE_KEY_EXPENSE));
+                    state.expenses = Array.isArray(expRaw) ? expRaw : JSON.parse(JSON.stringify(defaultExpenses));
+                } catch {
+                    state.expenses = JSON.parse(JSON.stringify(defaultExpenses));
                 }
                 
                 try {
-                    const chkData = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECK));
-                    state.checklist = validateChecklist(chkData) || JSON.parse(JSON.stringify(defaultChecklist));
-                } catch { 
-                    state.checklist = JSON.parse(JSON.stringify(defaultChecklist)); 
+                    const chkRaw = JSON.parse(localStorage.getItem(STORAGE_KEY_CHECK));
+                    state.checklist = Array.isArray(chkRaw) ? chkRaw : JSON.parse(JSON.stringify(defaultChecklist));
+                } catch {
+                    state.checklist = JSON.parse(JSON.stringify(defaultChecklist));
                 }
-
-                renderLedgers();
                 renderChecklist();
-            }
+                renderLedgers();
+            };
 
             // --- UI 렌더링 로직 ---
-            function formatKrw(num) {
-                return num.toLocaleString('ko-KR');
-            }
+            const formatKrw = (num) => num.toLocaleString('ko-KR');
 
-            function getCategoryBadge(cat) {
+            const getCategoryBadge = (cat) => {
                 const map = {
                     '식비': 'bg-red-100 text-red-700',
                     '교통': 'bg-gray-200 text-gray-700',
@@ -1313,61 +1276,119 @@
                 };
                 const cls = map[cat] || 'bg-gray-100 text-gray-700';
                 return `<span class="${cls} px-2 py-1 rounded text-[10px] sm:text-xs font-bold shrink-0">${escapeHTML(cat)}</span>`;
-            }
+            };
 
-            function renderChecklist() {
-                if (!DOM.checklistBody) return;
+            // --- 사이드바 제어 로직 ---
+            const openSidebar = () => {
+                if (!DOM.sidebar || window.innerWidth >= 1024) return;
                 
+                state.lastFocused = document.activeElement;
+                DOM.sidebar.classList.remove('-translate-x-full');
+                DOM.sidebarOverlay.classList.remove('hidden');
+                DOM.sidebar.setAttribute('aria-hidden', 'false');
+                DOM.btnSidebarOpen.setAttribute('aria-expanded', 'true');
+                DOM.btnSidebarClose.focus(); // 포커스 이동
+            };
+
+            const closeSidebar = () => {
+                if (!DOM.sidebar || window.innerWidth >= 1024) return;
+
+                DOM.sidebar.classList.add('-translate-x-full');
+                DOM.sidebarOverlay.classList.add('hidden');
+                DOM.sidebar.setAttribute('aria-hidden', 'true');
+                DOM.btnSidebarOpen.setAttribute('aria-expanded', 'false');
+                if (state.lastFocused) state.lastFocused.focus(); // 포커스 복원
+            };
+
+            // --- 탭 전환 로직 ---
+            const switchTab = (tabId) => {
+                DOM.tabContents.forEach(el => el.classList.add('hidden'));
+                DOM.tabBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                    btn.setAttribute('tabindex', '-1');
+                });
+
+                const targetTab = document.getElementById(tabId);
+                const targetBtn = document.querySelector(`.tab-btn[data-tab-target="${tabId}"]`);
+                
+                if (targetTab && targetBtn) {
+                    targetTab.classList.remove('hidden');
+                    
+                    targetBtn.classList.add('active');
+                    targetBtn.setAttribute('aria-selected', 'true');
+                    targetBtn.setAttribute('tabindex', '0');
+                }
+
+                if (DOM.contentArea) DOM.contentArea.scrollTop = 0;
+                
+                // 모바일 환경에서 탭 전환 시 사이드바 닫기
+                if (window.innerWidth < 1024 && !DOM.sidebar.classList.contains('-translate-x-full')) {
+                    closeSidebar();
+                }
+            };
+
+            // --- 시간 의존성을 제거한 스크롤 이동 ---
+            const scrollToDay = (dayId) => {
+                if (!DOM.contentArea || !DOM.part2Tab) return;
+
+                const executeScroll = () => {
+                    const el = document.getElementById(dayId);
+                    if (el) {
+                        // scroll-margin-top CSS와 연동하여 정확한 위치로 부드러운 스크롤
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                };
+
+                if (DOM.part2Tab.classList.contains('hidden')) {
+                    switchTab('part2');
+                    // setTimeout 대신 double requestAnimationFrame을 사용하여 
+                    // display block 레이아웃 트리가 완전히 생성된 후 스크롤 실행 보장
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(executeScroll);
+                    });
+                } else {
+                    executeScroll();
+                }
+            };
+
+            // --- 렌더링 로직 ---
+            const renderChecklist = () => {
+                if (!DOM.checklistBody) return;
                 const grouped = state.checklist.reduce((acc, item, idx) => {
                     if (!acc[item.category]) acc[item.category] = [];
                     acc[item.category].push({ ...item, originalIndex: idx });
                     return acc;
                 }, {});
 
-                if (Object.keys(grouped).length === 0) {
-                    DOM.checklistBody.innerHTML = '<div class="p-6 text-center text-gray-400">등록된 준비물이 없습니다.</div>';
-                    return;
-                }
-
-                let htmlString = '';
-                for (const [category, items] of Object.entries(grouped)) {
-                    let itemsHtml = '';
+                let html = '';
+                for (const [cat, items] of Object.entries(grouped)) {
+                    html += `<div class="bg-white rounded-xl shadow-sm border mb-6 overflow-hidden">
+                        <div class="bg-blue-50 px-4 py-3 font-bold border-b text-blue-800">${escapeHTML(cat)}</div>
+                        <div class="divide-y">`;
                     items.forEach(item => {
-                        const rowBgCls = item.checked ? 'bg-gray-50' : '';
-                        const textCls = item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold';
                         const checkedAttr = item.checked ? 'checked' : '';
-                        const escapedDesc = escapeHTML(item.desc);
+                        const rowCls = item.checked ? 'bg-gray-50' : '';
+                        const textCls = item.checked ? 'text-gray-400 line-through' : 'text-gray-800 font-semibold';
                         
-                        itemsHtml += `
-                            <div class="check-row p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition hover:bg-gray-50 ${rowBgCls}">
+                        html += `
+                            <div class="check-row p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition hover:bg-gray-50 ${rowCls}">
                                 <label class="flex items-center justify-center cursor-pointer group shrink-0 mt-0.5 sm:mt-0 relative">
                                     <input type="checkbox" class="peer sr-only custom-checkbox" data-index="${item.originalIndex}" ${checkedAttr}>
                                     <div class="checkbox-box bg-white border-2 rounded w-5 h-5 sm:w-6 sm:h-6 flex flex-shrink-0 justify-center items-center border-gray-300 group-hover:border-blue-500 transition peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-blue-500">
-                                        <svg class="hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 5 6 10 16 1"></polyline></svg>
+                                        <svg class="hidden w-3 h-3 sm:w-4 sm:h-4 text-white pointer-events-none" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="1 5 6 10 16 1"></polyline></svg>
                                     </div>
                                 </label>
-                                <div class="check-text text-sm sm:text-base leading-relaxed ${textCls} select-none cursor-pointer" data-index="${item.originalIndex}">${escapedDesc}</div>
+                                <div class="check-text text-sm sm:text-base leading-relaxed ${textCls} select-none cursor-pointer">${escapeHTML(item.desc)}</div>
                             </div>
                         `;
                     });
-
-                    htmlString += `
-                        <div class="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6">
-                            <div class="bg-blue-50 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-blue-800 text-sm sm:text-base border-b border-blue-100">
-                                ${escapeHTML(category)}
-                            </div>
-                            <div class="divide-y divide-gray-100">
-                                ${itemsHtml}
-                            </div>
-                        </div>
-                    `;
+                    html += `</div></div>`;
                 }
-                
-                // 단 1번의 삽입으로 렌더링 비용 극대화
-                DOM.checklistBody.innerHTML = htmlString;
-            }
+                DOM.checklistBody.innerHTML = html;
+            };
 
-            function renderLedgers() {
+            const renderLedgers = () => {
                 if (!DOM.expenseList) return;
 
                 let totalKrw = 0;
@@ -1378,13 +1399,7 @@
                     return acc;
                 }, {});
 
-                if (Object.keys(grouped).length === 0) {
-                    DOM.expenseList.innerHTML = '<div class="p-6 text-center text-gray-400">지출 내역이 없습니다.</div>';
-                    if (DOM.summaryTotal) DOM.summaryTotal.innerText = '0';
-                    return;
-                }
-
-                let htmlString = '';
+                let html = '';
                 for (const [day, items] of Object.entries(grouped)) {
                     let dayTotal = 0;
                     let itemsHtml = '';
@@ -1405,7 +1420,7 @@
                         `;
                     });
 
-                    htmlString += `
+                    html += `
                         <div class="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6">
                             <div class="bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200">
                                 ${escapeHTML(day)}
@@ -1420,239 +1435,113 @@
                         </div>
                     `;
                 }
-
-                DOM.expenseList.innerHTML = htmlString;
+                DOM.expenseList.innerHTML = html;
                 if (DOM.summaryTotal) DOM.summaryTotal.innerText = formatKrw(totalKrw);
-            }
+            };
 
-            function isMobileViewport() {
-                return window.innerWidth < 1024;
-            }
-
-            function isSidebarOpen() {
-                return DOM.sidebar ? !DOM.sidebar.classList.contains('-translate-x-full') : false;
-            }
-
-            function getFocusableSidebarElements() {
-                if (!DOM.sidebar) return [];
-                return Array.from(DOM.sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
-                    .filter(el => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
-            }
-
-            function syncSidebarAccessibility() {
-                if (!DOM.sidebar) return;
-                const mobile = isMobileViewport();
-                const open = isSidebarOpen();
-
-                if (mobile) {
-                    DOM.sidebar.setAttribute('aria-hidden', open ? 'false' : 'true');
-                    if (DOM.sidebarOverlay) {
-                        DOM.sidebarOverlay.classList.toggle('hidden', !open);
-                        DOM.sidebarOverlay.setAttribute('aria-hidden', open ? 'false' : 'true');
-                    }
-                    if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.setAttribute('aria-expanded', open ? 'true' : 'false');
-                } else {
-                    DOM.sidebar.classList.remove('-translate-x-full');
-                    DOM.sidebar.setAttribute('aria-hidden', 'false');
-                    if (DOM.sidebarOverlay) {
-                        DOM.sidebarOverlay.classList.add('hidden');
-                        DOM.sidebarOverlay.setAttribute('aria-hidden', 'true');
-                    }
-                    if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.setAttribute('aria-expanded', 'false');
-                }
-            }
-
-            function handleViewportChange() {
-                syncSidebarAccessibility();
-            }
-
-            function openSidebar() {
-                if (!DOM.sidebar || !isMobileViewport()) return;
-                state.lastFocused = document.activeElement;
-                DOM.sidebar.classList.remove('-translate-x-full');
-                syncSidebarAccessibility();
-                requestAnimationFrame(() => {
-                    const focusables = getFocusableSidebarElements();
-                    if (focusables.length) focusables[0].focus();
-                });
-            }
-
-            function closeSidebar({ restoreFocus = true } = {}) {
-                if (!DOM.sidebar || !isMobileViewport()) return;
-                DOM.sidebar.classList.add('-translate-x-full');
-                syncSidebarAccessibility();
-                if (restoreFocus && state.lastFocused && typeof state.lastFocused.focus === 'function') {
-                    requestAnimationFrame(() => state.lastFocused.focus());
-                }
-            }
-
-            function trapSidebarFocus(event) {
-                if (!isMobileViewport() || !isSidebarOpen() || event.key !== 'Tab') return;
-                const focusables = getFocusableSidebarElements();
-                if (!focusables.length) return;
-
-                const first = focusables[0];
-                const last = focusables[focusables.length - 1];
-                if (event.shiftKey && document.activeElement === first) {
-                    last.focus();
-                    event.preventDefault();
-                } else if (!event.shiftKey && document.activeElement === last) {
-                    first.focus();
-                    event.preventDefault();
-                }
-            }
-
-            // --- 상호작용 로직 ---
-            function toggleSidebar() {
-                if (!isMobileViewport()) return;
-                if (isSidebarOpen()) {
-                    closeSidebar();
-                } else {
-                    openSidebar();
-                }
-            }
-
-            function switchTab(tabId) {
-                DOM.tabContents.forEach(el => {
-                    el.classList.add('hidden');
-                    el.classList.remove('block');
-                });
-
-                DOM.tabBtns.forEach(el => {
-                    el.classList.remove('active');
-                    el.setAttribute('aria-selected', 'false');
-                    el.setAttribute('tabindex', '-1');
-                });
-
-                const targetTab = document.getElementById(tabId);
-                if (targetTab) {
-                    targetTab.classList.remove('hidden');
-                    targetTab.classList.add('block');
-                }
-
-                const targetBtn = document.querySelector(`.tab-btn[data-tab-target="${tabId}"]`);
-                if (targetBtn) {
-                    targetBtn.classList.add('active');
-                    targetBtn.setAttribute('aria-selected', 'true');
-                    targetBtn.setAttribute('tabindex', '0');
-                }
-
-                if (DOM.contentArea) DOM.contentArea.scrollTop = 0;
-
-                if (isMobileViewport() && isSidebarOpen()) {
-                    closeSidebar();
-                }
-            }
-
-            // Scroll Spy 구현: 화면에 보이는 Day를 감지하여 네비게이션 버튼 스타일 변경
-            function initScrollSpy() {
+            const initScrollSpy = () => {
                 if (!DOM.contentArea || !DOM.part2Tab) return;
                 
                 const daySections = document.querySelectorAll('.day-section');
-                
                 const observerOptions = {
                     root: DOM.contentArea,
-                    rootMargin: '-80px 0px -60% 0px', // 헤더 및 하단 여백 보정
+                    rootMargin: '-80px 0px -60% 0px',
                     threshold: 0
                 };
 
                 const observer = new IntersectionObserver((entries) => {
-                    // 상세 브리핑 탭이 활성화된 경우에만 작동
                     if (DOM.part2Tab.classList.contains('hidden')) return;
 
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const activeId = entry.target.id;
                             DOM.dayBtns.forEach(btn => {
-                                if (btn.dataset.dayTarget === activeId) {
-                                    btn.classList.add('active-day');
-                                } else {
-                                    btn.classList.remove('active-day');
-                                }
+                                btn.classList.toggle('active-day', btn.dataset.dayTarget === activeId);
                             });
                         }
                     });
                 }, observerOptions);
 
                 daySections.forEach(section => observer.observe(section));
-            }
-
-            function scrollToDay(dayId) {
-                if (!DOM.contentArea || !DOM.part2Tab) return;
-
-                const executeScroll = () => {
-                    const el = document.getElementById(dayId);
-                    if (el) {
-                        const headerOffset = 70;
-                        const elementPosition = el.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + DOM.contentArea.scrollTop - DOM.contentArea.getBoundingClientRect().top - headerOffset;
-                        DOM.contentArea.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                    }
-                };
-
-                DOM.dayBtns.forEach(btn => {
-                    btn.classList.toggle('active-day', btn.dataset.dayTarget === dayId);
-                });
-
-                if (DOM.part2Tab.classList.contains('hidden')) {
-                    switchTab('part2');
-                    requestAnimationFrame(() => requestAnimationFrame(executeScroll));
-                } else {
-                    executeScroll();
-                }
-            }
+            };
 
             // --- 이벤트 리스너 통합 관리 ---
-            function attachEventListeners() {
-                if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.addEventListener('click', openSidebar);
-                if (DOM.btnSidebarClose) DOM.btnSidebarClose.addEventListener('click', () => closeSidebar());
-                if (DOM.sidebarOverlay) DOM.sidebarOverlay.addEventListener('click', () => closeSidebar());
+            const attachEventListeners = () => {
+                window.addEventListener('resize', initSidebarA11y);
 
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && isMobileViewport() && isSidebarOpen()) {
-                        closeSidebar();
+                if (DOM.btnSidebarOpen) DOM.btnSidebarOpen.addEventListener('click', openSidebar);
+                if (DOM.btnSidebarClose) DOM.btnSidebarClose.addEventListener('click', closeSidebar);
+                if (DOM.sidebarOverlay) DOM.sidebarOverlay.addEventListener('click', closeSidebar);
+
+                // 모바일 포커스 트랩 & Esc 키 제어
+                document.addEventListener('keydown', e => {
+                    const isMobile = window.innerWidth < 1024;
+                    const isSidebarOpen = DOM.sidebar && !DOM.sidebar.classList.contains('-translate-x-full');
+
+                    if (isMobile && isSidebarOpen) {
+                        if (e.key === 'Escape') {
+                            closeSidebar();
+                            e.preventDefault();
+                        } else if (e.key === 'Tab') {
+                            const focusables = Array.from(DOM.sidebar.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+                                .filter(el => !el.hasAttribute('disabled'));
+                            if (!focusables.length) return;
+                            
+                            const first = focusables[0];
+                            const last = focusables[focusables.length - 1];
+
+                            if (e.shiftKey && document.activeElement === first) {
+                                last.focus();
+                                e.preventDefault();
+                            } else if (!e.shiftKey && document.activeElement === last) {
+                                first.focus();
+                                e.preventDefault();
+                            }
+                        }
                     }
-                    trapSidebarFocus(e);
                 });
 
-                window.addEventListener('resize', handleViewportChange);
-
+                // 메인 탭 클릭 네비게이션
                 if (DOM.mainNav) {
-                    DOM.mainNav.addEventListener('click', (e) => {
+                    DOM.mainNav.addEventListener('click', e => {
                         const btn = e.target.closest('.tab-btn');
                         if (btn && btn.dataset.tabTarget) {
                             switchTab(btn.dataset.tabTarget);
                         }
                     });
 
-                    DOM.mainNav.addEventListener('keydown', (e) => {
-                        const buttons = Array.from(DOM.tabBtns);
-                        const currentIndex = buttons.indexOf(document.activeElement);
-                        if (currentIndex === -1) return;
+                    // 탭 완벽 키보드 네비게이션 (화살표, 홈, 엔드)
+                    DOM.mainNav.addEventListener('keydown', e => {
+                        const btns = Array.from(DOM.tabBtns);
+                        const idx = btns.indexOf(document.activeElement);
+                        if (idx === -1) return;
 
-                        let nextIndex = null;
-                        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
-                        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
-                        if (e.key === 'Home') nextIndex = 0;
-                        if (e.key === 'End') nextIndex = buttons.length - 1;
+                        let nextIdx = idx;
+                        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                            nextIdx = (idx + 1) % btns.length;
+                        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                            nextIdx = (idx - 1 + btns.length) % btns.length;
+                        } else if (e.key === 'Home') {
+                            nextIdx = 0;
+                        } else if (e.key === 'End') {
+                            nextIdx = btns.length - 1;
+                        }
 
-                        if (nextIndex !== null) {
-                            buttons[nextIndex].focus();
+                        if (nextIdx !== idx) {
                             e.preventDefault();
+                            btns[nextIdx].focus();
                         }
 
                         if (e.key === 'Enter' || e.key === ' ') {
-                            const btn = document.activeElement.closest('.tab-btn');
-                            if (btn && btn.dataset.tabTarget) {
-                                switchTab(btn.dataset.tabTarget);
-                                e.preventDefault();
-                            }
+                            e.preventDefault();
+                            switchTab(btns[idx].dataset.tabTarget);
                         }
                     });
                 }
 
+                // 일자별 상단 스크롤 네비게이션
                 if (DOM.stickyDayNav) {
-                    DOM.stickyDayNav.addEventListener('click', (e) => {
+                    DOM.stickyDayNav.addEventListener('click', e => {
                         const btn = e.target.closest('button');
                         if (btn && btn.dataset.dayTarget) {
                             scrollToDay(btn.dataset.dayTarget);
@@ -1660,48 +1549,38 @@
                     });
                 }
 
+                // 체크리스트 상호작용 (해당 행(Row)으로 탐색 범위 최소화)
                 if (DOM.checklistBody) {
-                    DOM.checklistBody.addEventListener('change', (e) => {
-                        if (e.target.matches('.custom-checkbox')) {
-                            const index = parseInt(e.target.dataset.index, 10);
+                    DOM.checklistBody.addEventListener('click', e => {
+                        const row = e.target.closest('.check-row');
+                        if (!row) return;
+
+                        const checkbox = row.querySelector('.custom-checkbox');
+                        const text = row.querySelector('.check-text');
+                        
+                        // 텍스트 영역 클릭 시 체크박스 상태 전환
+                        if (e.target.closest('.check-text') && checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                        }
+
+                        if (checkbox && text) {
+                            const index = parseInt(checkbox.dataset.index, 10);
+                            const isChecked = checkbox.checked;
+                            
                             if (!isNaN(index) && state.checklist[index]) {
-                                const isChecked = e.target.checked;
                                 state.checklist[index].checked = isChecked;
                                 safeSetStorage(STORAGE_KEY_CHECK, state.checklist);
-
-                                const rowDiv = e.target.closest('.check-row');
-                                if (rowDiv) {
-                                    const textDiv = rowDiv.querySelector('.check-text');
-                                    if (textDiv) {
-                                        if (isChecked) {
-                                            textDiv.classList.add('text-gray-400', 'line-through');
-                                            textDiv.classList.remove('text-gray-800', 'font-semibold');
-                                            rowDiv.classList.add('bg-gray-50');
-                                        } else {
-                                            textDiv.classList.remove('text-gray-400', 'line-through');
-                                            textDiv.classList.add('text-gray-800', 'font-semibold');
-                                            rowDiv.classList.remove('bg-gray-50');
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-
-                    DOM.checklistBody.addEventListener('click', (e) => {
-                        if (e.target.matches('.check-text')) {
-                            const rowDiv = e.target.closest('.check-row');
-                            if(rowDiv) {
-                                const checkbox = rowDiv.querySelector('.custom-checkbox');
-                                if (checkbox) {
-                                    checkbox.checked = !checkbox.checked;
-                                    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
-                                }
+                                
+                                row.classList.toggle('bg-gray-50', isChecked);
+                                text.classList.toggle('text-gray-400', isChecked);
+                                text.classList.toggle('line-through', isChecked);
+                                text.classList.toggle('text-gray-800', !isChecked);
+                                text.classList.toggle('font-semibold', !isChecked);
                             }
                         }
                     });
                 }
-            }
+            };
         })();
     </script>
 </body>
