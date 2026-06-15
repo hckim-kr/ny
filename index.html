@@ -1504,17 +1504,14 @@
                 }));
             };
             // 데이터 관리 상수: 기록용 최종본 전용 키를 사용해 이전 테스트 장부와 충돌 방지
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v2';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v2';
-
-            const UPDATED_HOTEL_DESC = 'M 소셜 타임스퀘어 6박';
-            const UPDATED_HOTEL_AMOUNT = 2347766;
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v3';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v3';
 
             // 초기 기본 지출 내역: 실제 결제/확정된 비용만 기본값으로 등록
             // 암트랙/우버는 미확정 또는 사전 결제 가능성이 있으므로 기본 장부에서 제외
             const defaultExpenses = [
                 { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
-                { day: '사전 결제', category: '숙소', desc: UPDATED_HOTEL_DESC, amount: UPDATED_HOTEL_AMOUNT },
+                { day: '사전 결제', category: '숙소', desc: 'M 소셜 타임스퀘어 6박', amount: 2347766 },
                 { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 },
                 { day: '사전 결제', category: '투어', desc: '탑오브더락 전망대', amount: 122100 },
                 { day: '사전 결제', category: '투어', desc: '랜드마크 크루즈(32$)', amount: 48980 }
