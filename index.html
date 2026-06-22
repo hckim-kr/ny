@@ -1661,8 +1661,8 @@
                 return normalized.length ? normalized : cloneData(defaultChecklist).map((v, i) => ({...v, id: `def_chk_${i}`}));
             };
             // 데이터 관리 상수: 기록용 최종본 전용 키를 사용해 이전 테스트 장부와 충돌 방지
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v2';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v2';
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v3';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v3';
 
             // 초기 기본 지출 내역: 실제 결제/확정된 비용만 기본값으로 등록
             // 암트랙/우버는 미확정 또는 사전 결제 가능성이 있으므로 기본 장부에는 넣지 않음
@@ -1673,6 +1673,7 @@
                 { day: '사전 결제', category: '투어', desc: '탑오브더락 전망대', amount: 122100 },
                 { day: '사전 결제', category: '투어', desc: '랜드마크 크루즈(32$)', amount: 48980 },
                 { day: '사전 결제', category: '기타', desc: '600$ 환전', amount: 920628 }
+                { day: '사전 결제', category: '기타', desc: 'e-sim(2명)', amount: 27580 }
             ];
 
             const defaultChecklist = [
