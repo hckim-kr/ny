@@ -157,6 +157,12 @@
                 scroll-behavior: auto !important;
             }
         }
+
+
+        /* 메뉴 클릭 안정화: 오버레이/탭 버튼이 클릭을 막지 않도록 보강 */
+        #sidebar-overlay.hidden { display: none !important; pointer-events: none !important; }
+        #main-nav .tab-btn, #btn-sidebar-open, #btn-sidebar-close { cursor: pointer; pointer-events: auto; }
+        #sidebar { pointer-events: auto; }
     </style>
 </head>
 <body class="h-screen flex overflow-hidden text-gray-800 break-keep">
@@ -1661,8 +1667,8 @@
                 return normalized.length ? normalized : cloneData(defaultChecklist).map((v, i) => ({...v, id: `def_chk_${i}`}));
             };
             // 데이터 관리 상수: 기록용 최종본 전용 키를 사용해 이전 테스트 장부와 충돌 방지
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v4';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v4';
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v1';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v1';
 
             // 초기 기본 지출 내역: 실제 결제/확정된 비용만 기본값으로 등록
             // 암트랙/우버는 미확정 또는 사전 결제 가능성이 있으므로 기본 장부에는 넣지 않음
@@ -2293,6 +2299,129 @@
                     });
                 }
             };
+        })();
+    </script>
+
+
+    <script>
+        // 좌측 메뉴 클릭 안정화 보조 스크립트
+        // 메인 스크립트가 저장소/브라우저 환경 문제로 중간에 멈춰도 탭 전환은 계속 작동하도록 한다.
+        (() => {
+            'use strict';
+            if (window.__nycMenuFallbackReady) return;
+            window.__nycMenuFallbackReady = true;
+
+            const qs = (selector, root = document) => root.querySelector(selector);
+            const qsa = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+            const closeMobileSidebar = () => {
+                const sidebar = qs('#sidebar');
+                const overlay = qs('#sidebar-overlay');
+                const openBtn = qs('#btn-sidebar-open');
+                if (!sidebar || window.innerWidth >= 1024) return;
+                sidebar.classList.add('-translate-x-full');
+                sidebar.setAttribute('inert', '');
+                sidebar.setAttribute('aria-hidden', 'true');
+                overlay?.classList.add('hidden');
+                openBtn?.setAttribute('aria-expanded', 'false');
+            };
+
+            const openMobileSidebar = () => {
+                const sidebar = qs('#sidebar');
+                const overlay = qs('#sidebar-overlay');
+                const openBtn = qs('#btn-sidebar-open');
+                if (!sidebar || window.innerWidth >= 1024) return;
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.removeAttribute('inert');
+                sidebar.setAttribute('aria-hidden', 'false');
+                overlay?.classList.remove('hidden');
+                openBtn?.setAttribute('aria-expanded', 'true');
+                qs('#btn-sidebar-close')?.focus();
+            };
+
+            const syncDesktopSidebar = () => {
+                const sidebar = qs('#sidebar');
+                const overlay = qs('#sidebar-overlay');
+                const openBtn = qs('#btn-sidebar-open');
+                if (!sidebar) return;
+                if (window.innerWidth >= 1024) {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.removeAttribute('inert');
+                    sidebar.setAttribute('aria-hidden', 'false');
+                    overlay?.classList.add('hidden');
+                    openBtn?.setAttribute('aria-expanded', 'false');
+                } else if (!openBtn || openBtn.getAttribute('aria-expanded') !== 'true') {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.setAttribute('inert', '');
+                    sidebar.setAttribute('aria-hidden', 'true');
+                    overlay?.classList.add('hidden');
+                }
+            };
+
+            const activateTab = (tabId) => {
+                const target = qs(`#${CSS.escape(tabId)}`);
+                const targetBtn = qs(`.tab-btn[data-tab-target="${CSS.escape(tabId)}"]`);
+                const contentArea = qs('#content-area');
+                if (!target || !targetBtn) return;
+
+                qsa('.tab-content').forEach(section => {
+                    section.classList.add('hidden');
+                    section.setAttribute('hidden', '');
+                });
+                qsa('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                    btn.setAttribute('tabindex', '-1');
+                });
+
+                target.classList.remove('hidden');
+                target.removeAttribute('hidden');
+                targetBtn.classList.add('active');
+                targetBtn.setAttribute('aria-selected', 'true');
+                targetBtn.setAttribute('tabindex', '0');
+                if (contentArea) contentArea.scrollTop = 0;
+                closeMobileSidebar();
+            };
+
+            document.addEventListener('click', (event) => {
+                const tabBtn = event.target.closest?.('.tab-btn');
+                if (tabBtn && tabBtn.dataset.tabTarget) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    activateTab(tabBtn.dataset.tabTarget);
+                    return;
+                }
+
+                if (event.target.closest?.('#btn-sidebar-open')) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    openMobileSidebar();
+                    return;
+                }
+
+                if (event.target.closest?.('#btn-sidebar-close, #sidebar-overlay')) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    closeMobileSidebar();
+                }
+            }, true);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeMobileSidebar();
+                const activeTab = document.activeElement?.closest?.('.tab-btn');
+                if (!activeTab) return;
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    activateTab(activeTab.dataset.tabTarget);
+                }
+            }, true);
+
+            window.addEventListener('resize', syncDesktopSidebar);
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', syncDesktopSidebar, { once: true });
+            } else {
+                syncDesktopSidebar();
+            }
         })();
     </script>
 </body>
