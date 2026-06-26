@@ -1284,29 +1284,7 @@
 <!-- ================== PART 4: 필수 준비물 리스트 ================== -->
 <section aria-labelledby="btn-part4" class="tab-content hidden animate-fade-in-up relative" id="part4" role="tabpanel">
 <h2 class="text-2xl sm:text-3xl font-bold mb-2 flex items-center"><span class="text-blue-600 mr-2">PART 4.</span> 필수 준비물 리스트</h2>
-<p class="text-sm sm:text-base text-gray-500 mb-6">체크박스 없이 단순 목록으로 보고, 필요한 물품은 직접 추가하거나 삭제할 수 있습니다.</p>
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5 mb-6">
-<form aria-label="준비물 추가 폼" class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end" id="checklist-form">
-<div class="md:col-span-3">
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="checklist-category">분류</label>
-<select class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 bg-gray-50 border" id="checklist-category">
-<option value="💳 결제/서류">💳 결제/서류</option>
-<option value="📱 전자기기">📱 전자기기</option>
-<option value="📸 의류/잡화">📸 의류/잡화</option>
-<option value="💊 상비약/세면">💊 상비약/세면</option>
-<option value="🥘 식량/기타">🥘 식량/기타</option>
-</select>
-</div>
-<div class="md:col-span-6">
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="checklist-desc">추가할 준비물</label>
-<input autocomplete="off" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 bg-gray-50 border" id="checklist-desc" placeholder="예: 여분 보조배터리 케이블" type="text"/>
-</div>
-<div class="md:col-span-3 grid grid-cols-2 gap-2">
-<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-lg shadow transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" type="submit">추가</button>
-<button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 px-4 rounded-lg border border-gray-200 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" id="btn-checklist-reset" type="button">기본 복원</button>
-</div>
-</form>
-</div>
+<p class="text-sm sm:text-base text-gray-500 mb-6">출발 전 확인용으로 정리한 기록용 목록입니다. 추가/삭제 기능 없이 최종본으로 보관합니다.</p>
 <!-- JS 렌더링 컨테이너 -->
 <div class="space-y-4" id="checklist-body"></div>
 </section>
@@ -1328,63 +1306,6 @@
 </span>
 </div>
 </div>
-</div>
-<!-- 기록 입력 폼 -->
-<div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 sm:p-6 mb-8">
-<h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center"><i class="fas fa-plus-circle text-blue-600 mr-2"></i>새 지출 기록 추가</h3>
-<form class="space-y-4" id="expense-form">
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="expense-day">일차/구분</label>
-<select class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 bg-gray-50 border" id="expense-day">
-<option value="사전 결제">사전 결제</option>
-<option value="Day 1">Day 1 (토)</option>
-<option value="Day 2">Day 2 (일)</option>
-<option value="Day 3">Day 3 (월)</option>
-<option value="Day 4">Day 4 (화)</option>
-<option value="Day 5">Day 5 (수)</option>
-<option value="Day 6">Day 6 (목)</option>
-<option value="Day 7">Day 7 (금)</option>
-<option value="기타">기타</option>
-</select>
-</div>
-<div>
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="expense-category">카테고리</label>
-<select class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 bg-gray-50 border" id="expense-category">
-<option value="식비">식비</option>
-<option value="교통">교통</option>
-<option value="쇼핑">쇼핑</option>
-<option value="간식">간식</option>
-<option value="항공">항공</option>
-<option value="숙소">숙소</option>
-<option value="투어">투어</option>
-<option value="서류">서류</option>
-<option value="기타">기타</option>
-</select>
-</div>
-<div class="sm:col-span-2">
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="expense-desc">내역 (어디서 무엇을?)</label>
-<input autocomplete="off" class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border" id="expense-desc" placeholder="예: 갤러거 스테이크 런치" required="" type="text"/>
-</div>
-<div class="sm:col-span-2">
-<label class="block text-sm font-semibold text-gray-700 mb-1" for="expense-amount">금액 (원화 KRW)</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-<span class="text-gray-500 sm:text-sm">₩</span>
-</div>
-<input autocomplete="off" class="w-full pl-8 border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2.5 border font-mono text-lg" id="expense-amount" min="0" placeholder="0" required="" type="number"/>
-</div>
-</div>
-</div>
-<div class="flex gap-3 pt-2">
-<button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-sm transition transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" type="submit">
-                                    장부에 기록하기
-                                </button>
-<button class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition focus:outline-none focus:ring-2 focus:ring-gray-400" id="btn-expense-reset" type="button">
-                                    기본 내역 복원
-                                </button>
-</div>
-</form>
 </div>
 <div class="mb-4">
 <h3 class="text-lg sm:text-xl font-bold text-gray-800"><span class="text-xl sm:text-2xl mr-2">🧾</span> 상세 지출 기록 리스트</h3>
@@ -1470,7 +1391,8 @@
                 { day: '사전 결제', category: '서류', desc: 'ESTA 발급 (2명)', amount: 120350 },
                 { day: '사전 결제', category: '투어', desc: '탑오브더락 전망대', amount: 122100 },
                 { day: '사전 결제', category: '투어', desc: '랜드마크 크루즈(32$)', amount: 48980 },
-                { day: '사전 결제', category: '기타', desc: '600$ 환전', amount: 920628 }
+                { day: '사전 결제', category: '기타', desc: '600$ 환전', amount: 920628 },
+                { day: '사전 결제', category: '카드충전', desc: '여행카드 600$ 충전', amount: 929280 }
             ];
 
             const defaultChecklist = [
@@ -1522,20 +1444,10 @@
                 DOM.stickyDayNav = document.getElementById('sticky-day-nav');
                 DOM.contentArea = document.getElementById('content-area');
                 DOM.checklistBody = document.getElementById('checklist-body');
-                DOM.checklistForm = document.getElementById('checklist-form');
-                DOM.checklistCategory = document.getElementById('checklist-category');
-                DOM.checklistDesc = document.getElementById('checklist-desc');
-                DOM.btnChecklistReset = document.getElementById('btn-checklist-reset');
                 
                 // 가계부 DOM 캐싱
                 DOM.expenseList = document.getElementById('expense-list');
                 DOM.summaryTotal = document.getElementById('summary-total');
-                DOM.expenseForm = document.getElementById('expense-form');
-                DOM.expenseDay = document.getElementById('expense-day');
-                DOM.expenseCategory = document.getElementById('expense-category');
-                DOM.expenseDesc = document.getElementById('expense-desc');
-                DOM.expenseAmount = document.getElementById('expense-amount');
-                DOM.btnExpenseReset = document.getElementById('btn-expense-reset');
 
                 DOM.tabContents = document.querySelectorAll('.tab-content');
                 DOM.tabBtns = document.querySelectorAll('.tab-btn');
@@ -1580,7 +1492,8 @@
             const applyExpenseRevision = (items) => {
                 const requiredEntries = [
                     { day: '사전 결제', category: '통신', desc: 'e-SIM (2명)', amount: 27580 },
-                    { day: '사전 결제', category: '기타', desc: '600$ 환전', amount: 920628 }
+                    { day: '사전 결제', category: '기타', desc: '600$ 환전', amount: 920628 },
+                    { day: '사전 결제', category: '카드충전', desc: '여행카드 600$ 충전', amount: 929280 }
                 ];
                 let revised = Array.isArray(items) ? [...items] : [];
                 requiredEntries.forEach((entry, idx) => {
@@ -1646,11 +1559,10 @@
 
             // 데이터 유효성 검사 및 로드
             const initData = () => {
-                state.expenses = applyExpenseRevision(normalizeExpenses(loadStoredArray(STORAGE_KEY_EXPENSE, defaultExpenses)));
-                state.checklist = applyChecklistRevision(normalizeChecklist(loadStoredArray(STORAGE_KEY_CHECK, defaultChecklist)));
-
-                safeSetStorage(STORAGE_KEY_EXPENSE, state.expenses);
-                safeSetStorage(STORAGE_KEY_CHECK, state.checklist);
+                // 기록용 최종본: 브라우저 저장소의 과거 추가/삭제 기록을 불러오지 않고
+                // HTML에 고정된 기본 목록만 표시합니다.
+                state.expenses = applyExpenseRevision(normalizeExpenses(defaultExpenses));
+                state.checklist = applyChecklistRevision(normalizeChecklist(defaultChecklist));
 
                 renderChecklist();
                 renderLedgers();
@@ -1779,9 +1691,7 @@
                                     <span class="mt-2 w-2 h-2 rounded-full bg-blue-500 shrink-0" aria-hidden="true"></span>
                                     <div class="text-sm sm:text-base leading-relaxed text-gray-800 font-semibold break-keep">${escapeHTML(item.desc)}</div>
                                 </div>
-                                <button type="button" class="delete-checklist shrink-0 text-gray-300 hover:text-red-500 focus:text-red-500 transition p-2 sm:p-1 focus:outline-none rounded" data-id="${escapeHTML(item.id)}" aria-label="이 준비물 항목 삭제">
-                                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
-                                </button>
+
                             </div>
                         `;
                     });
@@ -1789,7 +1699,7 @@
                 }
 
                 if (html === '') {
-                    html = '<div class="text-center p-8 text-gray-400 bg-white rounded-2xl border border-dashed border-gray-300">등록된 준비물이 없습니다. 위 입력창에서 항목을 추가하세요.</div>';
+                    html = '<div class="text-center p-8 text-gray-400 bg-white rounded-2xl border border-dashed border-gray-300">등록된 준비물이 없습니다.</div>';
                 }
                 DOM.checklistBody.innerHTML = html;
             };
@@ -1831,9 +1741,7 @@
                                 </div>
                                 <div class="flex items-center justify-end gap-3 sm:w-40 shrink-0">
                                     <div class="text-right font-mono font-bold ${textCls} text-base sm:text-lg">₩${formatKrw(exp.amount)}</div>
-                                    <button type="button" class="delete-expense text-gray-300 hover:text-red-500 focus:text-red-500 transition p-2 sm:p-1 focus:outline-none rounded" data-id="${escapeHTML(exp.id)}" aria-label="이 지출 항목 삭제">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
+
                                 </div>
                             </div>
                         `;
@@ -1887,62 +1795,6 @@
                 }, observerOptions);
 
                 daySections.forEach(section => observer.observe(section));
-            };
-
-            // 준비물 항목 추가 처리
-            const handleAddChecklist = (e) => {
-                e.preventDefault();
-                const category = DOM.checklistCategory?.value || '기타';
-                const desc = DOM.checklistDesc?.value.trim() || '';
-
-                if (!desc) {
-                    alert('추가할 준비물을 입력해주세요.');
-                    DOM.checklistDesc?.focus();
-                    return;
-                }
-
-                state.checklist.push({
-                    id: `chk_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-                    category,
-                    desc
-                });
-                safeSetStorage(STORAGE_KEY_CHECK, state.checklist);
-
-                DOM.checklistDesc.value = '';
-                DOM.checklistDesc.focus();
-                renderChecklist();
-            };
-
-            // 가계부 내역 추가 처리
-            const handleAddExpense = (e) => {
-                e.preventDefault();
-                const day = DOM.expenseDay.value;
-                const category = DOM.expenseCategory.value;
-                const desc = DOM.expenseDesc.value.trim();
-                const amount = Math.max(0, Math.round(toFiniteNumber(DOM.expenseAmount.value, 0)));
-
-                if (!desc) {
-                    alert("내역을 입력해주세요.");
-                    DOM.expenseDesc.focus();
-                    return;
-                }
-
-                const newExpense = {
-                    id: `exp_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-                    day,
-                    category,
-                    desc,
-                    amount
-                };
-
-                state.expenses.push(newExpense);
-                safeSetStorage(STORAGE_KEY_EXPENSE, state.expenses);
-                
-                DOM.expenseDesc.value = '';
-                DOM.expenseAmount.value = '';
-                DOM.expenseDesc.focus();
-                
-                renderLedgers();
             };
 
             // --- 이벤트 리스너 통합 관리 ---
@@ -2028,61 +1880,7 @@
                     });
                 }
 
-                // 준비물 리스트 추가/삭제/기본 복원
-                if (DOM.checklistForm) {
-                    DOM.checklistForm.addEventListener('submit', handleAddChecklist);
-                }
-
-                if (DOM.btnChecklistReset) {
-                    DOM.btnChecklistReset.addEventListener('click', () => {
-                        if (confirm('준비물 목록을 기본값으로 복원하시겠습니까?\n추가/삭제한 항목은 초기화됩니다.')) {
-                            state.checklist = cloneData(defaultChecklist).map((v, i) => ({...v, id: `def_chk_${i}`}));
-                            safeSetStorage(STORAGE_KEY_CHECK, state.checklist);
-                            renderChecklist();
-                        }
-                    });
-                }
-
-                if (DOM.checklistBody) {
-                    DOM.checklistBody.addEventListener('click', e => {
-                        const btn = e.target.closest('.delete-checklist');
-                        if (btn) {
-                            const id = btn.dataset.id;
-                            state.checklist = state.checklist.filter(item => item.id !== id);
-                            safeSetStorage(STORAGE_KEY_CHECK, state.checklist);
-                            renderChecklist();
-                        }
-                    });
-                }
-
-                // 가계부 추가 폼 이벤트
-                if (DOM.expenseForm) {
-                    DOM.expenseForm.addEventListener('submit', handleAddExpense);
-                }
-
-                // 가계부 기본 내역 복원 버튼
-                if (DOM.btnExpenseReset) {
-                    DOM.btnExpenseReset.addEventListener('click', () => {
-                        if (confirm('기본 내역으로 복원하시겠습니까?\n추가하신 모든 내역이 삭제됩니다.')) {
-                            state.expenses = cloneData(defaultExpenses).map((v, i) => ({...v, id: `def_${i}`}));
-                            safeSetStorage(STORAGE_KEY_EXPENSE, state.expenses);
-                            renderLedgers();
-                        }
-                    });
-                }
-
-                // 가계부 개별 삭제 이벤트 (이벤트 위임)
-                if (DOM.expenseList) {
-                    DOM.expenseList.addEventListener('click', e => {
-                        const btn = e.target.closest('.delete-expense');
-                        if (btn) {
-                            const id = btn.dataset.id;
-                            state.expenses = state.expenses.filter(exp => exp.id !== id);
-                            safeSetStorage(STORAGE_KEY_EXPENSE, state.expenses);
-                            renderLedgers();
-                        }
-                    });
-                }
+                // 기록용 최종본: 준비물/지출 추가·삭제·복원 이벤트는 사용하지 않습니다.
             };
         })();
     </script>
