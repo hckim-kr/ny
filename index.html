@@ -1380,8 +1380,8 @@
                 return normalized.length ? normalized : cloneData(defaultChecklist).map((v, i) => ({...v, id: `def_chk_${i}`}));
             };
             // 데이터 관리 상수: 기록용 최종본 전용 키를 사용해 이전 테스트 장부와 충돌 방지
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v7';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v7';
+            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v10';
+            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v10';
 
             // 초기 기본 지출 내역: 실제 결제/확정된 비용만 기본값으로 등록
             const defaultExpenses = [
