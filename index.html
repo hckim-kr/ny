@@ -1329,26 +1329,10 @@
                 }[tag] || tag));
             };
 
-            // --- 스토리지 유틸리티 ---
-            const safeSetStorage = (key, data) => {
-                try {
-                    localStorage.setItem(key, JSON.stringify(data));
-                } catch (e) {
-                    console.error('Storage save failed:', e);
-                }
-            };
-
+            // --- 데이터 유틸리티 ---
+            // 기록용 정적 파일: 브라우저 저장소(localStorage)를 사용하지 않습니다.
+            // 따라서 HTML 안의 defaultExpenses/defaultChecklist를 수정하면 새로고침 시 바로 반영됩니다.
             const cloneData = (data) => JSON.parse(JSON.stringify(data));
-
-            const loadStoredArray = (key, fallback) => {
-                try {
-                    const raw = JSON.parse(localStorage.getItem(key));
-                    return Array.isArray(raw) ? raw : cloneData(fallback);
-                } catch (e) {
-                    console.warn('Storage load failed. Defaults will be used:', e);
-                    return cloneData(fallback);
-                }
-            };
 
             const toFiniteNumber = (value, fallback = 0) => {
                 const num = Number(value);
@@ -1379,10 +1363,6 @@
                     }));
                 return normalized.length ? normalized : cloneData(defaultChecklist).map((v, i) => ({...v, id: `def_chk_${i}`}));
             };
-            // 데이터 관리 상수: 기록용 최종본 전용 키를 사용해 이전 테스트 장부와 충돌 방지
-            const STORAGE_KEY_EXPENSE = 'nycExpenses_record_final_v10';
-            const STORAGE_KEY_CHECK   = 'nycChecklist_record_final_v10';
-
             // 초기 기본 지출 내역: 실제 결제/확정된 비용만 기본값으로 등록
             const defaultExpenses = [
                 { day: '사전 결제', category: '항공', desc: '아시아나 비즈니스 (2인)', amount: 8889800 },
