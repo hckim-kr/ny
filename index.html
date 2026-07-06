@@ -1384,7 +1384,11 @@
                 { day: '6일차', category: '야식', desc: '할랄가이즈 야식 (11.98$)', amount: 18699 },
                 { day: '6일차', category: '숙소', desc: '숙소 1박 추가', amount: 338334 },
                 { day: '6일차', category: '쇼핑', desc: 'BAGGU 가방 쇼핑 (104.52$)', amount: 163835 },
-                { day: '7일차', category: '카드충전', desc: '여행카드 300$ 추가 충전', amount: 459510 }
+                { day: '7일차', category: '카드충전', desc: '여행카드 300$ 추가 충전', amount: 459510 },
+                { day: '7일차', category: '쇼핑/선물', desc: '모마 디자인스토어 (13.08$)', amount: 20146 },
+                { day: '7일차', category: '교통', desc: '공항 이동 택시 (109$)', amount: 170138 },
+                { day: '7일차', category: '숙소', desc: '숙소 추가비용·데스티네이션피 (324.68$)', amount: 509748 },
+                { day: '7일차', category: '교통/주차', desc: '인천공항 주차비', amount: 60000 }
             ];
 
             const defaultChecklist = [
@@ -1704,6 +1708,21 @@
                 
                 // 순서 배열 정의
                 const dayOrder = ['사전 결제', 'Day 1', '2일차', 'Day 2', '3일차', 'Day 3', '4일차', 'Day 4', '5일차', 'Day 5', '6일차', 'Day 6', '7일차', 'Day 7', '기타'];
+                const dayLabelMap = {
+                    'Day 1': '1일차(6/27)',
+                    '2일차': '2일차(6/28)',
+                    'Day 2': '2일차(6/28)',
+                    '3일차': '3일차(6/29)',
+                    'Day 3': '3일차(6/29)',
+                    '4일차': '4일차(6/30)',
+                    'Day 4': '4일차(6/30)',
+                    '5일차': '5일차(7/1)',
+                    'Day 5': '5일차(7/1)',
+                    '6일차': '6일차(7/2)',
+                    'Day 6': '6일차(7/2)',
+                    '7일차': '7일차(7/3)',
+                    'Day 7': '7일차(7/3)'
+                };
                 
                 const grouped = state.expenses.reduce((acc, exp) => {
                     const key = exp.day || '기타';
@@ -1743,7 +1762,7 @@
                     html += `
                         <div class="bg-white border border-gray-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden mb-6">
                             <div class="bg-gray-100 px-4 py-3 sm:px-6 sm:py-4 font-extrabold text-gray-700 text-xs sm:text-sm uppercase tracking-wider border-b border-gray-200">
-                                ${escapeHTML(day)}
+                                ${escapeHTML(dayLabelMap[day] || day)}
                             </div>
                             <div class="divide-y divide-gray-100">
                                 ${itemsHtml}
